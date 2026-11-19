@@ -8,6 +8,14 @@
   <b>SCENARIO 6 (Register Numbers: 06, 36, 66, 96)</b>
 </p>
 
+<p align="center">
+  <a href="https://ahashkk6-ctrl.github.io/Students-Event-Management/"><img src="https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-blue?style=for-the-badge&logo=github" alt="Live Demo"></a>
+  <a href="https://github.com/ahashkk6-ctrl/Students-Event-Management"><img src="https://img.shields.io/badge/Repository-GitHub-black?style=for-the-badge&logo=github" alt="GitHub Repo"></a>
+</p>
+
+### 🌐 Live Web Application Access:
+**Live Link**: **[https://ahashkk6-ctrl.github.io/Students-Event-Management/](https://ahashkk6-ctrl.github.io/Students-Event-Management/)**
+
 ---
 
 ## 📋 Table of Contents
