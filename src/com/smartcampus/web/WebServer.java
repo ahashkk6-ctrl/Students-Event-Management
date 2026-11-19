@@ -64,7 +64,13 @@ public class WebServer {
                 return;
             }
 
-            String html = getDashboardHtml();
+            String html;
+            File indexFile = new File("index.html");
+            if (indexFile.exists()) {
+                html = Files.readString(indexFile.toPath(), StandardCharsets.UTF_8);
+            } else {
+                html = getDashboardHtml();
+            }
             byte[] bytes = html.getBytes(StandardCharsets.UTF_8);
             exchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
             exchange.sendResponseHeaders(200, bytes.length);

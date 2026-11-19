@@ -1,86 +1,679 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smart Campus Event Management & Participation System | VCET IT</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5 & Font Awesome 6 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
   <style>
-    body { background-color: #f8fafc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    .header-banner { background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: white; padding: 25px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-    .nav-tabs .nav-link { color: #475569; font-weight: 600; padding: 12px 20px; border-radius: 8px 8px 0 0; }
-    .nav-tabs .nav-link.active { color: #1e3a8a; border-bottom: 3px solid #2563eb; font-weight: 700; background: white; }
-    .card { border: none; border-radius: 12px; box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1); }
-    .chart-card { transition: transform 0.2s; cursor: pointer; }
-    .chart-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+    /* ==========================================================================
+       1. THEME VARIABLES (LIGHT & DARK MODE)
+       ========================================================================== */
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+      --primary-subtle: #eef2ff;
+      --primary-text: #3730a3;
+      
+      --secondary: #0ea5e9;
+      --secondary-subtle: #e0f2fe;
+      
+      --accent-success: #10b981;
+      --accent-success-subtle: #d1fae5;
+      --accent-warning: #f59e0b;
+      --accent-warning-subtle: #fef3c7;
+      --accent-danger: #ef4444;
+      --accent-danger-subtle: #fee2e2;
+      
+      --bg-page: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --bg-input: #ffffff;
+      
+      --text-main: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      
+      --border-color: #e2e8f0;
+      --border-focus: #6366f1;
+      
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --card-shadow-hover: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+      --header-bg: linear-gradient(135deg, #0f172a 0%, #1e1b4b 45%, #312e81 100%);
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-pill: 9999px;
+      
+      --transition-fast: 0.15s ease;
+      --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+      --primary-subtle: #1e1b4b;
+      --primary-text: #c7d2fe;
+      
+      --secondary: #38bdf8;
+      --secondary-subtle: #082f49;
+      
+      --accent-success: #34d399;
+      --accent-success-subtle: #064e3b;
+      --accent-warning: #fbbf24;
+      --accent-warning-subtle: #451a03;
+      --accent-danger: #f87171;
+      --accent-danger-subtle: #450a0a;
+      
+      --bg-page: #090d16;
+      --bg-surface: #111827;
+      --bg-surface-elevated: #1f2937;
+      --bg-input: #1a2234;
+      
+      --text-main: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      
+      --border-color: #242f44;
+      --border-focus: #818cf8;
+      
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+      --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+      --header-bg: linear-gradient(135deg, #030712 0%, #0b1120 50%, #1e1b4b 100%);
+    }
+
+    /* ==========================================================================
+       2. TYPOGRAPHY & BASE STYLES
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      transition: background-color var(--transition-normal), border-color var(--transition-normal);
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 0.925rem;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6, .fw-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    /* ==========================================================================
+       3. HEADER & HERO BANNER
+       ========================================================================== */
+    .header-banner {
+      background: var(--header-bg);
+      color: #ffffff;
+      padding: 24px 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-banner::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(99, 102, 241, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .college-logo-badge {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #a5b4fc;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #10b981;
+      margin-right: 6px;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 2s infinite;
+    }
+
+    @keyframes pulseGreen {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .theme-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       4. NAVIGATION TABS
+       ========================================================================== */
+    .custom-nav-tabs {
+      border-bottom: 2px solid var(--border-color);
+      gap: 6px;
+      padding-bottom: 0;
+      margin-bottom: 28px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scrollbar-width: none;
+    }
+
+    .custom-nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .custom-nav-tabs .nav-link {
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      padding: 12px 18px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      white-space: nowrap;
+      transition: all var(--transition-fast);
+    }
+
+    .custom-nav-tabs .nav-link:hover {
+      color: var(--primary);
+      background-color: var(--primary-subtle);
+    }
+
+    .custom-nav-tabs .nav-link.active {
+      color: var(--primary);
+      background: transparent;
+      font-weight: 700;
+    }
+
+    .custom-nav-tabs .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary-gradient);
+      border-radius: 3px 3px 0 0;
+    }
+
+    /* ==========================================================================
+       5. CARDS, FORMS & BUTTONS
+       ========================================================================== */
+    .app-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+      height: 100%;
+    }
+
+    .app-card:hover {
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .card-header-styled {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .card-header-styled h5, .card-header-styled h6 {
+      margin: 0;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-header-styled .icon-square {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-subtle);
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    /* Form Inputs */
+    .form-label {
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .form-control, .form-select {
+      background-color: var(--bg-input);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: var(--radius-md);
+      padding: 9px 14px;
+      font-size: 0.9rem;
+      transition: all var(--transition-fast);
+    }
+
+    .form-control:focus, .form-select:focus {
+      background-color: var(--bg-input);
+      border-color: var(--border-focus);
+      color: var(--text-main);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+      outline: none;
+    }
+
+    .form-control::placeholder {
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    /* Buttons */
+    .btn-brand-primary {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 10px 18px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .btn-brand-primary:hover {
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.35);
+      filter: brightness(1.05);
+    }
+
+    .btn-brand-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-brand-success {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 10px 18px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+      transition: all var(--transition-fast);
+    }
+
+    .btn-brand-success:hover {
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-brand-secondary {
+      background-color: var(--bg-surface-elevated);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-brand-secondary:hover {
+      background-color: var(--border-color);
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       6. TABLES & DATA LISTS
+       ========================================================================== */
+    .table-container {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background-color: var(--bg-surface);
+    }
+
+    .custom-table {
+      margin-bottom: 0;
+      width: 100%;
+      color: var(--text-main);
+    }
+
+    .custom-table thead th {
+      background-color: var(--bg-surface-elevated);
+      color: var(--text-secondary);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px 16px;
+      border-bottom: 1.5px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .custom-table tbody tr {
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color var(--transition-fast);
+    }
+
+    .custom-table tbody tr:hover {
+      background-color: var(--primary-subtle);
+    }
+
+    .custom-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .custom-table td {
+      padding: 13px 16px;
+      vertical-align: middle;
+      font-size: 0.88rem;
+    }
+
+    /* Badges */
+    .badge-modern {
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-primary-soft { background-color: var(--primary-subtle); color: var(--primary); }
+    .badge-success-soft { background-color: var(--accent-success-subtle); color: var(--accent-success); }
+    .badge-warning-soft { background-color: var(--accent-warning-subtle); color: var(--accent-warning); }
+    .badge-danger-soft { background-color: var(--accent-danger-subtle); color: var(--accent-danger); }
+    .badge-info-soft { background-color: var(--secondary-subtle); color: var(--secondary); }
+    .badge-neutral-soft { background-color: var(--bg-surface-elevated); color: var(--text-secondary); }
+
+    /* Progress Bar */
+    .progress-custom {
+      height: 7px;
+      background-color: var(--bg-surface-elevated);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+
+    .progress-custom .progress-bar {
+      border-radius: var(--radius-pill);
+      background: var(--primary-gradient);
+    }
+
+    /* Chart Cards */
+    .chart-box {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-surface);
+      box-shadow: var(--card-shadow);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    }
+
+    .chart-box:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .chart-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .chart-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--bg-surface);
+    }
+
+    /* Alerts */
+    .alert-custom {
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
-  <!-- Header Banner -->
-  <div class="header-banner mb-4">
+
+  <!-- ========================================================================
+       TOP HEADER & NAVIGATION
+       ======================================================================== -->
+  <header class="header-banner">
     <div class="container-fluid">
       <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
-        <div>
-          <h3 class="fw-bold mb-1"><i class="fa-solid fa-graduation-cap me-2"></i>VELALAR COLLEGE OF ENGINEERING AND TECHNOLOGY</h3>
-          <p class="mb-0 text-slate-300">Department of Information Technology | Scenario 6: Smart Campus Event Management & Student Participation Analysis</p>
+        <!-- Brand Info -->
+        <div class="d-flex align-items-center gap-3">
+          <div class="college-logo-badge">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div>
+            <h4 class="fw-bold mb-0 text-white">VELALAR COLLEGE OF ENGINEERING AND TECHNOLOGY</h4>
+            <div class="d-flex align-items-center gap-2 mt-1">
+              <span class="badge bg-white bg-opacity-10 text-white-50 px-2 py-1 text-xs">Autonomous</span>
+              <span class="text-white-50 small">Department of Information Technology</span>
+              <span class="text-white-50 small d-none d-md-inline">•</span>
+              <span class="badge bg-indigo-500 bg-opacity-25 text-info px-2 py-1 text-xs d-none d-md-inline">Scenario 6: Smart Campus</span>
+            </div>
+          </div>
         </div>
-        <div class="d-flex gap-2">
-          <span class="badge bg-success px-3 py-2 fs-6"><i class="fa-solid fa-globe me-1"></i> Live Web App</span>
-          <a href="https://github.com/ahashkk6-ctrl/Students-Event-Management" target="_blank" class="btn btn-outline-light btn-sm fw-bold px-3">
-            <i class="fa-brands fa-github me-1"></i> View Repository
+
+        <!-- Controls: Theme Toggle & Repo Link -->
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge bg-success bg-opacity-25 text-emerald border border-success border-opacity-25 px-3 py-2 text-xs d-flex align-items-center">
+            <span class="pulse-dot"></span> System Live
+          </span>
+          <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon"></i> <span>Dark Mode</span>
+          </button>
+          <a href="https://github.com/ahashkk6-ctrl/Students-Event-Management" target="_blank" class="theme-toggle-btn text-decoration-none">
+            <i class="fa-brands fa-github"></i> <span class="d-none d-sm-inline">GitHub</span>
           </a>
         </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <div class="container-fluid px-4">
+  <!-- ========================================================================
+       MAIN APP CONTAINER
+       ======================================================================== -->
+  <main class="container-fluid px-3 px-md-4 py-4">
+
     <!-- Navigation Tabs -->
-    <ul class="nav nav-tabs mb-4" id="mainTabs" role="tablist">
-      <li class="nav-item"><button class="nav-link active" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button"><i class="fa-solid fa-users me-2"></i>Students</button></li>
-      <li class="nav-item"><button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button"><i class="fa-solid fa-calendar-days me-2"></i>Campus Events</button></li>
-      <li class="nav-item"><button class="nav-link" id="reg-tab" data-bs-toggle="tab" data-bs-target="#registration" type="button"><i class="fa-solid fa-clipboard-check me-2"></i>Event Registration</button></li>
-      <li class="nav-item"><button class="nav-link" id="att-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button"><i class="fa-solid fa-user-check me-2"></i>Attendance & Feedback</button></li>
-      <li class="nav-item"><button class="nav-link" id="rep-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button"><i class="fa-solid fa-chart-pie me-2"></i>Reports & Visuals</button></li>
+    <ul class="nav custom-nav-tabs" id="mainTabs" role="tablist">
+      <li class="nav-item">
+        <button class="nav-link active" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button">
+          <i class="fa-solid fa-user-graduate"></i> Students
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button">
+          <i class="fa-solid fa-calendar-check"></i> Campus Events
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" id="reg-tab" data-bs-toggle="tab" data-bs-target="#registration" type="button">
+          <i class="fa-solid fa-id-card-clip"></i> Event Registration
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" id="att-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button">
+          <i class="fa-solid fa-clipboard-user"></i> Attendance & Feedback
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" id="rep-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button">
+          <i class="fa-solid fa-chart-pie"></i> Reports & Visuals
+        </button>
+      </li>
     </ul>
 
     <!-- Tab Contents -->
     <div class="tab-content" id="tabContent">
-      <!-- TAB 1: STUDENTS -->
+
+      <!-- ====================================================================
+           TAB 1: STUDENTS MANAGEMENT
+           ==================================================================== -->
       <div class="tab-pane fade show active" id="students" role="tabpanel">
         <div class="row g-4">
+          <!-- Left: Add Student Form -->
           <div class="col-lg-4">
-            <div class="card p-4">
-              <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-user-plus me-2"></i>Register New Student</h5>
+            <div class="app-card">
+              <div class="card-header-styled">
+                <h5><span class="icon-square"><i class="fa-solid fa-user-plus"></i></span> Register Student</h5>
+              </div>
               <form id="studentForm">
-                <div class="mb-2"><label class="form-label fw-semibold">Student ID</label><input type="text" class="form-control" id="stuId" placeholder="e.g. 25IT010" required></div>
-                <div class="mb-2"><label class="form-label fw-semibold">Full Name</label><input type="text" class="form-control" id="stuName" placeholder="Student Name" required></div>
-                <div class="mb-2"><label class="form-label fw-semibold">Department</label>
+                <div class="mb-3">
+                  <label class="form-label">Student ID</label>
+                  <input type="text" class="form-control" id="stuId" placeholder="e.g. 25IT010" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="stuName" placeholder="Enter student name" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Department</label>
                   <select class="form-select" id="stuDept">
-                    <option>Information Technology</option><option>Computer Science</option>
-                    <option>Artificial Intelligence & Data Science</option><option>Electronics and Communication</option>
-                    <option>Mechanical Engineering</option><option>Civil Engineering</option>
+                    <option>Information Technology</option>
+                    <option>Computer Science</option>
+                    <option>Artificial Intelligence & Data Science</option>
+                    <option>Electronics and Communication</option>
+                    <option>Mechanical Engineering</option>
+                    <option>Civil Engineering</option>
                   </select>
                 </div>
-                <div class="mb-2"><label class="form-label fw-semibold">Year of Study</label>
-                  <select class="form-select" id="stuYear"><option value="1">1st Year</option><option value="2">2nd Year</option><option value="3" selected>3rd Year</option><option value="4">4th Year</option></select>
+                <div class="mb-3">
+                  <label class="form-label">Year of Study</label>
+                  <select class="form-select" id="stuYear">
+                    <option value="1">1st Year (Freshman)</option>
+                    <option value="2">2nd Year (Sophomore)</option>
+                    <option value="3" selected>3rd Year (Junior)</option>
+                    <option value="4">4th Year (Senior)</option>
+                  </select>
                 </div>
-                <div class="mb-2"><label class="form-label fw-semibold">Email Address</label><input type="email" class="form-control" id="stuEmail" placeholder="name@vcet.ac.in" required></div>
-                <div class="mb-3"><label class="form-label fw-semibold">Phone Number</label><input type="text" class="form-control" id="stuPhone" placeholder="9876543210" required></div>
-                <button type="submit" class="btn btn-primary w-100 fw-bold"><i class="fa-solid fa-save me-1"></i> Register Student</button>
+                <div class="mb-3">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" class="form-control" id="stuEmail" placeholder="student@vcet.ac.in" required>
+                </div>
+                <div class="mb-4">
+                  <label class="form-label">Phone Number</label>
+                  <input type="text" class="form-control" id="stuPhone" placeholder="9876543210" required>
+                </div>
+                <button type="submit" class="btn-brand-primary w-100">
+                  <i class="fa-solid fa-check"></i> Save Student Profile
+                </button>
               </form>
             </div>
           </div>
+
+          <!-- Right: Enrolled Students List -->
           <div class="col-lg-8">
-            <div class="card p-4">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="fw-bold mb-0"><i class="fa-solid fa-address-book me-2"></i>Enrolled Students List</h5>
-                <span id="studentCountBadge" class="badge bg-primary fs-6">20 Students</span>
+            <div class="app-card">
+              <div class="card-header-styled">
+                <h5><span class="icon-square"><i class="fa-solid fa-users"></i></span> Enrolled Students</h5>
+                <span id="studentCountBadge" class="badge-modern badge-primary-soft">20 Students</span>
               </div>
-              <div class="table-responsive" style="max-height: 520px;">
-                <table class="table table-hover align-middle">
-                  <thead class="table-light"><tr><th>ID</th><th>Name</th><th>Department</th><th>Year</th><th>Email</th><th>Phone</th></tr></thead>
+              <div class="table-container table-responsive" style="max-height: 540px;">
+                <table class="custom-table table-hover">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Full Name</th>
+                      <th>Department</th>
+                      <th>Year</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                    </tr>
+                  </thead>
                   <tbody id="studentTableBody"></tbody>
                 </table>
               </div>
@@ -89,37 +682,77 @@
         </div>
       </div>
 
-      <!-- TAB 2: EVENTS -->
+      <!-- ====================================================================
+           TAB 2: CAMPUS EVENTS
+           ==================================================================== -->
       <div class="tab-pane fade" id="events" role="tabpanel">
         <div class="row g-4">
+          <!-- Left: Add Event Form -->
           <div class="col-lg-4">
-            <div class="card p-4">
-              <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-calendar-plus me-2"></i>Create Campus Event</h5>
+            <div class="app-card">
+              <div class="card-header-styled">
+                <h5><span class="icon-square"><i class="fa-solid fa-calendar-plus"></i></span> Create Event</h5>
+              </div>
               <form id="eventForm">
-                <div class="mb-2"><label class="form-label fw-semibold">Event ID</label><input type="text" class="form-control" id="evId" placeholder="e.g. EVT108" required></div>
-                <div class="mb-2"><label class="form-label fw-semibold">Event Name</label><input type="text" class="form-control" id="evName" placeholder="Event Title" required></div>
-                <div class="mb-2"><label class="form-label fw-semibold">Category</label>
+                <div class="mb-3">
+                  <label class="form-label">Event ID</label>
+                  <input type="text" class="form-control" id="evId" placeholder="e.g. EVT108" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Event Title</label>
+                  <input type="text" class="form-control" id="evName" placeholder="e.g. AI Prompt Challenge" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Category</label>
                   <select class="form-select" id="evType">
-                    <option>Technical</option><option>Workshop</option><option>Seminar</option><option>Cultural</option>
+                    <option>Technical</option>
+                    <option>Workshop</option>
+                    <option>Seminar</option>
+                    <option>Cultural</option>
                   </select>
                 </div>
-                <div class="mb-2"><label class="form-label fw-semibold">Event Date</label><input type="date" class="form-control" id="evDate" value="2026-12-05" required></div>
-                <div class="mb-2"><label class="form-label fw-semibold">Venue</label><input type="text" class="form-control" id="evVenue" placeholder="Hall / Lab" required></div>
-                <div class="mb-2"><label class="form-label fw-semibold">Max Capacity</label><input type="number" class="form-control" id="evMax" min="1" max="500" value="20" required></div>
-                <div class="mb-3"><label class="form-label fw-semibold">Description</label><textarea class="form-control" id="evDesc" rows="2"></textarea></div>
-                <button type="submit" class="btn btn-primary w-100 fw-bold"><i class="fa-solid fa-plus-circle me-1"></i> Add Event</button>
+                <div class="mb-3">
+                  <label class="form-label">Event Date</label>
+                  <input type="date" class="form-control" id="evDate" value="2026-12-05" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Venue</label>
+                  <input type="text" class="form-control" id="evVenue" placeholder="Hall / Lab room" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Maximum Capacity</label>
+                  <input type="number" class="form-control" id="evMax" min="1" max="500" value="20" required>
+                </div>
+                <div class="mb-4">
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" id="evDesc" rows="2" placeholder="Brief overview of event"></textarea>
+                </div>
+                <button type="submit" class="btn-brand-primary w-100">
+                  <i class="fa-solid fa-plus-circle"></i> Create Campus Event
+                </button>
               </form>
             </div>
           </div>
+
+          <!-- Right: Scheduled Events Table -->
           <div class="col-lg-8">
-            <div class="card p-4">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="fw-bold mb-0"><i class="fa-solid fa-calendar-check me-2"></i>Scheduled Campus Events</h5>
-                <span id="eventCountBadge" class="badge bg-primary fs-6">6 Events</span>
+            <div class="app-card">
+              <div class="card-header-styled">
+                <h5><span class="icon-square"><i class="fa-solid fa-calendar-days"></i></span> Scheduled Campus Events</h5>
+                <span id="eventCountBadge" class="badge-modern badge-primary-soft">6 Events</span>
               </div>
-              <div class="table-responsive" style="max-height: 520px;">
-                <table class="table table-hover align-middle">
-                  <thead class="table-light"><tr><th>ID</th><th>Event Name</th><th>Category</th><th>Date</th><th>Venue</th><th>Capacity Utilization</th></tr></thead>
+              <div class="table-container table-responsive" style="max-height: 540px;">
+                <table class="custom-table table-hover">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Event Title</th>
+                      <th>Category</th>
+                      <th>Date</th>
+                      <th>Venue</th>
+                      <th>Capacity Utilization</th>
+                    </tr>
+                  </thead>
                   <tbody id="eventTableBody"></tbody>
                 </table>
               </div>
@@ -128,80 +761,175 @@
         </div>
       </div>
 
-      <!-- TAB 3: REGISTRATION -->
+      <!-- ====================================================================
+           TAB 3: EVENT REGISTRATION (DUPLICATE PREVENTING)
+           ==================================================================== -->
       <div class="tab-pane fade" id="registration" role="tabpanel">
-        <div class="card p-4 mb-4">
-          <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-shield-halved me-2"></i>Student Event Registration (Duplicate-Protected)</h5>
+        <div class="app-card mb-4">
+          <div class="card-header-styled">
+            <h5><span class="icon-square"><i class="fa-solid fa-shield-halved"></i></span> Register Student for Event (Duplicate-Protected)</h5>
+          </div>
           <form id="regForm" class="row g-3 align-items-end">
-            <div class="col-md-5"><label class="form-label fw-semibold">Select Student</label><select class="form-select" id="regStuSelect" required></select></div>
-            <div class="col-md-5"><label class="form-label fw-semibold">Select Event</label><select class="form-select" id="regEvSelect" required></select></div>
-            <div class="col-md-2"><button type="submit" class="btn btn-success w-100 fw-bold"><i class="fa-solid fa-user-plus me-1"></i> Register</button></div>
+            <div class="col-md-5">
+              <label class="form-label">Select Student</label>
+              <select class="form-select" id="regStuSelect" required></select>
+            </div>
+            <div class="col-md-5">
+              <label class="form-label">Select Event</label>
+              <select class="form-select" id="regEvSelect" required></select>
+            </div>
+            <div class="col-md-2">
+              <button type="submit" class="btn-brand-success w-100">
+                <i class="fa-solid fa-user-plus"></i> Register
+              </button>
+            </div>
           </form>
           <div id="regAlert" class="mt-3 d-none"></div>
         </div>
-        <div class="card p-4">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="d-flex align-items-center gap-2">
-              <h5 class="fw-bold mb-0">Registered Participants for:</h5>
-              <select class="form-select form-select-sm" id="filterEventSelect" style="width: 320px;" onchange="renderRegistrations()"></select>
+
+        <div class="app-card">
+          <div class="card-header-styled">
+            <div class="d-flex align-items-center gap-3">
+              <h5><span class="icon-square"><i class="fa-solid fa-list-check"></i></span> Registered Participants for:</h5>
+              <select class="form-select form-select-sm" id="filterEventSelect" style="max-width: 320px;" onchange="renderRegistrations()"></select>
             </div>
-            <span id="regCountBadge" class="badge bg-secondary"></span>
+            <span id="regCountBadge" class="badge-modern badge-neutral-soft">0 Participants</span>
           </div>
-          <div class="table-responsive" style="max-height: 400px;">
-            <table class="table table-hover align-middle">
-              <thead class="table-light"><tr><th>Reg ID</th><th>Student ID</th><th>Name</th><th>Department</th><th>Date</th><th>Status</th></tr></thead>
+          <div class="table-container table-responsive" style="max-height: 420px;">
+            <table class="custom-table table-hover">
+              <thead>
+                <tr>
+                  <th>Reg ID</th>
+                  <th>Student ID</th>
+                  <th>Student Name</th>
+                  <th>Department</th>
+                  <th>Registration Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
               <tbody id="regTableBody"></tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- TAB 4: ATTENDANCE -->
+      <!-- ====================================================================
+           TAB 4: ATTENDANCE & FEEDBACK
+           ==================================================================== -->
       <div class="tab-pane fade" id="attendance" role="tabpanel">
-        <div class="card p-4 mb-4">
-          <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-clipboard-user me-2"></i>Record Student Attendance & Feedback</h5>
+        <div class="app-card mb-4">
+          <div class="card-header-styled">
+            <h5><span class="icon-square"><i class="fa-solid fa-user-check"></i></span> Mark Attendance & Student Feedback</h5>
+          </div>
           <form id="attForm" class="row g-3 align-items-end">
-            <div class="col-md-3"><label class="form-label fw-semibold">Select Event</label><select class="form-select" id="attEvSelect" onchange="onAttEventChange()" required></select></div>
-            <div class="col-md-3"><label class="form-label fw-semibold">Participant</label><select class="form-select" id="attRegSelect" required></select></div>
-            <div class="col-md-2"><label class="form-label fw-semibold">Status</label><select class="form-select" id="attStatusSelect"><option value="Present">Present</option><option value="Absent">Absent</option></select></div>
-            <div class="col-md-2"><label class="form-label fw-semibold">Rating</label><select class="form-select" id="attRatingSelect"><option value="5">5 - Outstanding</option><option value="4">4 - Very Good</option><option value="3">3 - Good</option><option value="2">2 - Fair</option><option value="1">1 - Poor</option></select></div>
-            <div class="col-md-2"><button type="submit" class="btn btn-primary w-100 fw-bold"><i class="fa-solid fa-check me-1"></i> Save</button></div>
-            <div class="col-12"><input type="text" class="form-control" id="attRemarks" placeholder="Optional feedback remarks or reason for absence" value="Active participant"></div>
+            <div class="col-md-3">
+              <label class="form-label">Event</label>
+              <select class="form-select" id="attEvSelect" onchange="onAttEventChange()" required></select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Participant</label>
+              <select class="form-select" id="attRegSelect" required></select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Attendance Status</label>
+              <select class="form-select" id="attStatusSelect">
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Rating</label>
+              <select class="form-select" id="attRatingSelect">
+                <option value="5">5 ★ (Outstanding)</option>
+                <option value="4">4 ★ (Very Good)</option>
+                <option value="3">3 ★ (Good)</option>
+                <option value="2">2 ★ (Fair)</option>
+                <option value="1">1 ★ (Poor)</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <button type="submit" class="btn-brand-primary w-100">
+                <i class="fa-solid fa-floppy-disk"></i> Save Record
+              </button>
+            </div>
+            <div class="col-12 mt-2">
+              <input type="text" class="form-control" id="attRemarks" placeholder="Feedback remarks or reason for absence" value="Active participant in workshop sessions">
+            </div>
           </form>
           <div id="attAlert" class="mt-3 d-none"></div>
         </div>
-        <div class="card p-4">
-          <h5 class="fw-bold mb-3"><i class="fa-solid fa-list-check me-2"></i>Attendance Verification Sheet</h5>
-          <div class="table-responsive" style="max-height: 400px;">
-            <table class="table table-hover align-middle">
-              <thead class="table-light"><tr><th>Att ID</th><th>Reg ID</th><th>Student ID</th><th>Name</th><th>Status</th><th>Rating</th><th>Remarks</th><th>Marked At</th></tr></thead>
+
+        <div class="app-card">
+          <div class="card-header-styled">
+            <h5><span class="icon-square"><i class="fa-solid fa-clipboard-check"></i></span> Verified Attendance Sheet</h5>
+          </div>
+          <div class="table-container table-responsive" style="max-height: 420px;">
+            <table class="custom-table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Reg ID</th>
+                  <th>Student ID</th>
+                  <th>Name</th>
+                  <th>Attendance Status</th>
+                  <th>Rating</th>
+                  <th>Remarks</th>
+                  <th>Marked At</th>
+                </tr>
+              </thead>
               <tbody id="attTableBody"></tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- TAB 5: REPORTS & VISUALS -->
+      <!-- ====================================================================
+           TAB 5: REPORTS & VISUALIZATIONS
+           ==================================================================== -->
       <div class="tab-pane fade" id="reports" role="tabpanel">
-        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-chart-line me-2"></i>Institutional Participation Reports & Visual Analytics</h5>
+        <div class="card-header-styled mb-3">
+          <h5><span class="icon-square"><i class="fa-solid fa-chart-line"></i></span> Institutional Participation Reports & Visual Analytics</h5>
+        </div>
+
         <div class="row g-4 mb-4">
+          <!-- Event-Wise Summary -->
           <div class="col-lg-8">
-            <div class="card p-4 h-100">
+            <div class="app-card">
               <h6 class="fw-bold mb-3 text-secondary">Event-Wise Participation Performance</h6>
-              <div class="table-responsive">
-                <table class="table table-sm table-bordered align-middle">
-                  <thead class="table-light"><tr><th>Event ID</th><th>Event Name</th><th>Category</th><th>Registered</th><th>Present</th><th>Absent</th><th>Att Rate</th><th>Avg Rating</th></tr></thead>
+              <div class="table-container table-responsive">
+                <table class="custom-table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Event ID</th>
+                      <th>Event Name</th>
+                      <th>Category</th>
+                      <th>Registered</th>
+                      <th>Present</th>
+                      <th>Absent</th>
+                      <th>Att Rate</th>
+                      <th>Avg Rating</th>
+                    </tr>
+                  </thead>
                   <tbody id="repEventTableBody"></tbody>
                 </table>
               </div>
             </div>
           </div>
+
+          <!-- Department-Wise Distribution -->
           <div class="col-lg-4">
-            <div class="card p-4 h-100">
+            <div class="app-card">
               <h6 class="fw-bold mb-3 text-secondary">Department-Wise Distribution</h6>
-              <div class="table-responsive">
-                <table class="table table-sm table-hover align-middle">
-                  <thead class="table-light"><tr><th>Department</th><th>Students</th><th>Registrations</th><th>Attended</th></tr></thead>
+              <div class="table-container table-responsive">
+                <table class="custom-table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Department</th>
+                      <th>Students</th>
+                      <th>Registrations</th>
+                      <th>Attended</th>
+                    </tr>
+                  </thead>
                   <tbody id="repDeptTableBody"></tbody>
                 </table>
               </div>
@@ -209,23 +937,104 @@
           </div>
         </div>
 
-        <!-- Visualizations Gallery -->
-        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-chart-column me-2"></i>Python Data Science Visualizations Suite (25ITC31)</h5>
+        <!-- Python Visualizations Gallery -->
+        <div class="card-header-styled mb-3">
+          <h5><span class="icon-square"><i class="fa-solid fa-images"></i></span> Python Data Science Visualizations (Matplotlib & Seaborn)</h5>
+        </div>
         <div class="row g-4 mb-5" id="visGallery">
-          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">1. Department-Wise Participation</h6><img src="data_analysis/visualizations/01_department_participation_barchart.png" class="img-fluid rounded" alt="Chart 1"></div></div>
-          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">2. Capacity vs Attendance</h6><img src="data_analysis/visualizations/02_event_attendance_comparison.png" class="img-fluid rounded" alt="Chart 2"></div></div>
-          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">3. Event Type Distribution</h6><img src="data_analysis/visualizations/03_event_type_distribution_piechart.png" class="img-fluid rounded" alt="Chart 3"></div></div>
-          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">4. Year of Study Participation</h6><img src="data_analysis/visualizations/04_year_wise_participation_countplot.png" class="img-fluid rounded" alt="Chart 4"></div></div>
-          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">5. Feedback Ratings by Event Type</h6><img src="data_analysis/visualizations/05_feedback_rating_boxplot.png" class="img-fluid rounded" alt="Chart 5"></div></div>
-          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">6. Participation Correlation Matrix</h6><img src="data_analysis/visualizations/06_participation_correlation_heatmap.png" class="img-fluid rounded" alt="Chart 6"></div></div>
+          <div class="col-md-6 col-lg-4">
+            <div class="chart-box">
+              <div class="chart-header">
+                <span class="fw-bold small">1. Department Participation</span>
+                <span class="badge-modern badge-primary-soft">Bar Chart</span>
+              </div>
+              <img src="data_analysis/visualizations/01_department_participation_barchart.png" alt="Department Participation">
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="chart-box">
+              <div class="chart-header">
+                <span class="fw-bold small">2. Capacity vs Attendance</span>
+                <span class="badge-modern badge-success-soft">Grouped Bar</span>
+              </div>
+              <img src="data_analysis/visualizations/02_event_attendance_comparison.png" alt="Capacity vs Attendance">
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="chart-box">
+              <div class="chart-header">
+                <span class="fw-bold small">3. Event Type Distribution</span>
+                <span class="badge-modern badge-info-soft">Pie Chart</span>
+              </div>
+              <img src="data_analysis/visualizations/03_event_type_distribution_piechart.png" alt="Event Type Share">
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="chart-box">
+              <div class="chart-header">
+                <span class="fw-bold small">4. Year of Study Breakdown</span>
+                <span class="badge-modern badge-warning-soft">Count Plot</span>
+              </div>
+              <img src="data_analysis/visualizations/04_year_wise_participation_countplot.png" alt="Year-wise Participation">
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="chart-box">
+              <div class="chart-header">
+                <span class="fw-bold small">5. Student Feedback Scores</span>
+                <span class="badge-modern badge-danger-soft">Box Plot</span>
+              </div>
+              <img src="data_analysis/visualizations/05_feedback_rating_boxplot.png" alt="Feedback Boxplot">
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="chart-box">
+              <div class="chart-header">
+                <span class="fw-bold small">6. Feature Correlation Matrix</span>
+                <span class="badge-modern badge-neutral-soft">Heatmap</span>
+              </div>
+              <img src="data_analysis/visualizations/06_participation_correlation_heatmap.png" alt="Correlation Matrix">
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Initial Seed Data (persisted in localStorage for live demo)
+    // ========================================================================
+    // THEME CONTROLLER (LIGHT / DARK MODE)
+    // ========================================================================
+    function initTheme() {
+      const savedTheme = localStorage.getItem('vcet_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeButton(savedTheme);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('vcet_theme', next);
+      updateThemeButton(next);
+    }
+
+    function updateThemeButton(theme) {
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        if (theme === 'dark') {
+          btn.innerHTML = '<i class="fa-solid fa-sun text-warning"></i> <span>Light Mode</span>';
+        } else {
+          btn.innerHTML = '<i class="fa-solid fa-moon"></i> <span>Dark Mode</span>';
+        }
+      }
+    }
+
+    // ========================================================================
+    // SEED DATA & LOCAL PERSISTENCE
+    // ========================================================================
     const initialStudents = [
       { id: "25IT001", name: "Aarav Sharma", dept: "Information Technology", year: 3, email: "aarav.it@vcet.ac.in", phone: "9876543210" },
       { id: "25IT002", name: "Bhavana Ramesh", dept: "Information Technology", year: 3, email: "bhavana.it@vcet.ac.in", phone: "9876543211" },
@@ -274,7 +1083,7 @@
     ];
 
     const initialAttendance = [
-      { attId: 1, regId: 1, status: "Present", rating: 5, remarks: "Exceptional coding experience", date: "2026-09-15" },
+      { regId: 1, status: "Present", rating: 5, remarks: "Exceptional coding experience", date: "2026-09-15" },
       { regId: 2, status: "Present", rating: 5, remarks: "Great team collaboration", date: "2026-09-15" },
       { regId: 3, status: "Present", rating: 4, remarks: "Very well organized", date: "2026-09-15" },
       { regId: 4, status: "Absent", rating: null, remarks: "Medical leave notified", date: "2026-09-15" },
@@ -296,15 +1105,35 @@
       localStorage.setItem('smart_attendance', JSON.stringify(attendance));
     }
 
+    // ========================================================================
+    // RENDER FUNCTIONS
+    // ========================================================================
     function renderStudents() {
       const tbody = document.getElementById('studentTableBody');
       tbody.innerHTML = '';
       const regStu = document.getElementById('regStuSelect');
       regStu.innerHTML = '';
+
       students.forEach(s => {
-        tbody.innerHTML += `<tr><td class="fw-bold">${s.id}</td><td>${s.name}</td><td>${s.dept}</td><td><span class="badge bg-secondary">Year ${s.year}</span></td><td>${s.email}</td><td>${s.phone}</td></tr>`;
+        const yearBadges = {
+          1: '<span class="badge-modern badge-neutral-soft">Year 1</span>',
+          2: '<span class="badge-modern badge-info-soft">Year 2</span>',
+          3: '<span class="badge-modern badge-primary-soft">Year 3</span>',
+          4: '<span class="badge-modern badge-warning-soft">Year 4</span>'
+        };
+        tbody.innerHTML += `
+          <tr>
+            <td class="fw-bold font-monospace text-primary">${s.id}</td>
+            <td class="fw-semibold">${s.name}</td>
+            <td>${s.dept}</td>
+            <td>${yearBadges[s.year] || s.year}</td>
+            <td class="text-secondary">${s.email}</td>
+            <td class="text-secondary">${s.phone}</td>
+          </tr>
+        `;
         regStu.innerHTML += `<option value="${s.id}">${s.id} - ${s.name} (${s.dept})</option>`;
       });
+
       document.getElementById('studentCountBadge').textContent = `${students.length} Students`;
     }
 
@@ -316,15 +1145,40 @@
       const attEv = document.getElementById('attEvSelect');
       regEv.innerHTML = ''; filterEv.innerHTML = ''; attEv.innerHTML = '';
 
+      const typeBadges = {
+        'Technical': '<span class="badge-modern badge-primary-soft"><i class="fa-solid fa-code text-xs"></i> Technical</span>',
+        'Workshop': '<span class="badge-modern badge-info-soft"><i class="fa-solid fa-screwdriver-wrench text-xs"></i> Workshop</span>',
+        'Seminar': '<span class="badge-modern badge-warning-soft"><i class="fa-solid fa-chalkboard-user text-xs"></i> Seminar</span>',
+        'Cultural': '<span class="badge-modern badge-danger-soft"><i class="fa-solid fa-masks-theater text-xs"></i> Cultural</span>'
+      };
+
       events.forEach(e => {
         const count = registrations.filter(r => r.eventId === e.id && r.status === 'Confirmed').length;
         const pct = Math.min(100, Math.round((count / e.max) * 100));
-        tbody.innerHTML += `<tr><td class="fw-bold">${e.id}</td><td>${e.name}</td><td><span class="badge bg-info text-dark">${e.type}</span></td><td>${e.date}</td><td>${e.venue}</td><td><div class="d-flex align-items-center gap-2"><div class="progress flex-grow-1" style="height: 8px;"><div class="progress-bar bg-success" style="width: ${pct}%;"></div></div><small class="fw-bold">${count}/${e.max}</small></div></td></tr>`;
+        
+        tbody.innerHTML += `
+          <tr>
+            <td class="fw-bold font-monospace text-primary">${e.id}</td>
+            <td class="fw-semibold">${e.name}</td>
+            <td>${typeBadges[e.type] || e.type}</td>
+            <td class="text-secondary">${e.date}</td>
+            <td class="text-secondary">${e.venue}</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="progress-custom flex-grow-1">
+                  <div class="progress-bar" style="width: ${pct}%;"></div>
+                </div>
+                <small class="fw-bold text-nowrap">${count}/${e.max}</small>
+              </div>
+            </td>
+          </tr>
+        `;
         const opt = `<option value="${e.id}">${e.id} - ${e.name}</option>`;
         regEv.innerHTML += opt;
         filterEv.innerHTML += opt;
         attEv.innerHTML += opt;
       });
+
       document.getElementById('eventCountBadge').textContent = `${events.length} Events`;
       renderRegistrations();
       onAttEventChange();
@@ -336,10 +1190,21 @@
       const list = registrations.filter(r => r.eventId === evId);
       const tbody = document.getElementById('regTableBody');
       tbody.innerHTML = '';
+
       list.forEach(r => {
         const stu = students.find(s => s.id === r.studentId) || { name: r.studentId, dept: 'N/A' };
-        tbody.innerHTML += `<tr><td>${r.regId}</td><td class="fw-bold">${r.studentId}</td><td>${stu.name}</td><td>${stu.dept}</td><td>${r.date}</td><td><span class="badge bg-success">${r.status}</span></td></tr>`;
+        tbody.innerHTML += `
+          <tr>
+            <td class="font-monospace text-muted">#${r.regId}</td>
+            <td class="fw-bold font-monospace text-primary">${r.studentId}</td>
+            <td class="fw-semibold">${stu.name}</td>
+            <td>${stu.dept}</td>
+            <td class="text-secondary small">${r.date}</td>
+            <td><span class="badge-modern badge-success-soft"><i class="fa-solid fa-circle-check text-xs"></i> ${r.status}</span></td>
+          </tr>
+        `;
       });
+
       document.getElementById('regCountBadge').textContent = `${list.length} Participants`;
     }
 
@@ -348,10 +1213,12 @@
       const list = registrations.filter(r => r.eventId === evId);
       const sel = document.getElementById('attRegSelect');
       sel.innerHTML = '';
+
       list.forEach(r => {
         const stu = students.find(s => s.id === r.studentId) || { name: r.studentId };
         sel.innerHTML += `<option value="${r.regId}">#${r.regId} - ${r.studentId}: ${stu.name}</option>`;
       });
+
       renderAttendance();
     }
 
@@ -361,18 +1228,38 @@
       const list = attendance.filter(a => eventRegIds.includes(a.regId));
       const tbody = document.getElementById('attTableBody');
       tbody.innerHTML = '';
+
       list.forEach((a, idx) => {
         const reg = registrations.find(r => r.regId === a.regId);
         const stu = reg ? (students.find(s => s.id === reg.studentId) || { id: reg.studentId, name: reg.studentId }) : { id: 'N/A', name: 'N/A' };
-        const badge = a.status === 'Present' ? '<span class="badge bg-success">Present</span>' : '<span class="badge bg-danger">Absent</span>';
-        const stars = a.rating ? `<span class="text-warning">${'★'.repeat(a.rating)}</span> (${a.rating}/5)` : 'N/A';
-        tbody.innerHTML += `<tr><td>${idx + 1}</td><td>${a.regId}</td><td class="fw-bold">${stu.id}</td><td>${stu.name}</td><td>${badge}</td><td>${stars}</td><td>${a.remarks || ''}</td><td><small>${a.date}</small></td></tr>`;
+        
+        const badge = a.status === 'Present' 
+          ? '<span class="badge-modern badge-success-soft"><i class="fa-solid fa-check"></i> Present</span>' 
+          : '<span class="badge-modern badge-danger-soft"><i class="fa-solid fa-xmark"></i> Absent</span>';
+        
+        const stars = a.rating 
+          ? `<span class="text-warning">${'★'.repeat(a.rating)}</span> <small class="text-muted">(${a.rating}/5)</small>` 
+          : '<span class="text-muted small">N/A</span>';
+
+        tbody.innerHTML += `
+          <tr>
+            <td class="text-muted small">${idx + 1}</td>
+            <td class="font-monospace text-muted">#${a.regId}</td>
+            <td class="fw-bold font-monospace text-primary">${stu.id}</td>
+            <td class="fw-semibold">${stu.name}</td>
+            <td>${badge}</td>
+            <td>${stars}</td>
+            <td class="text-secondary">${a.remarks || ''}</td>
+            <td class="text-muted small">${a.date}</td>
+          </tr>
+        `;
       });
     }
 
     function renderReports() {
       const evTbody = document.getElementById('repEventTableBody');
       evTbody.innerHTML = '';
+      
       events.forEach(e => {
         const regs = registrations.filter(r => r.eventId === e.id);
         const regIds = regs.map(r => r.regId);
@@ -382,7 +1269,19 @@
         const rate = regs.length > 0 ? ((pres / regs.length) * 100).toFixed(1) : '0.0';
         const rated = atts.filter(a => a.rating != null);
         const avg = rated.length > 0 ? (rated.reduce((acc, c) => acc + c.rating, 0) / rated.length).toFixed(2) : 'N/A';
-        evTbody.innerHTML += `<tr><td class="fw-bold">${e.id}</td><td>${e.name}</td><td><span class="badge bg-primary">${e.type}</span></td><td>${regs.length} / ${e.max}</td><td class="text-success fw-bold">${pres}</td><td class="text-danger fw-bold">${abs}</td><td><strong>${rate}%</strong></td><td>${avg} / 5</td></tr>`;
+
+        evTbody.innerHTML += `
+          <tr>
+            <td class="fw-bold font-monospace text-primary">${e.id}</td>
+            <td class="fw-semibold">${e.name}</td>
+            <td><span class="badge-modern badge-primary-soft">${e.type}</span></td>
+            <td>${regs.length} / ${e.max}</td>
+            <td class="text-success fw-bold">${pres}</td>
+            <td class="text-danger fw-bold">${abs}</td>
+            <td><strong class="text-primary">${rate}%</strong></td>
+            <td><strong>${avg}</strong> <small class="text-muted">/ 5</small></td>
+          </tr>
+        `;
       });
 
       const deptTbody = document.getElementById('repDeptTableBody');
@@ -394,11 +1293,21 @@
         const totalReg = registrations.filter(r => stuIds.includes(r.studentId)).length;
         const regIds = registrations.filter(r => stuIds.includes(r.studentId)).map(r => r.regId);
         const attCount = attendance.filter(a => regIds.includes(a.regId) && a.status === 'Present').length;
-        deptTbody.innerHTML += `<tr><td class="fw-bold">${d}</td><td>${totalStu}</td><td>${totalReg}</td><td class="text-success fw-bold">${attCount}</td></tr>`;
+        
+        deptTbody.innerHTML += `
+          <tr>
+            <td class="fw-semibold">${d}</td>
+            <td>${totalStu}</td>
+            <td>${totalReg}</td>
+            <td class="text-success fw-bold">${attCount}</td>
+          </tr>
+        `;
       });
     }
 
-    // Form Event Listeners
+    // ========================================================================
+    // FORM LISTENERS & VALIDATION (PRESERVED BUSINESS RULES)
+    // ========================================================================
     document.getElementById('studentForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const id = document.getElementById('stuId').value.trim();
@@ -453,8 +1362,8 @@
       if (registrations.some(r => r.studentId === stuId && r.eventId === evId)) {
         const stu = students.find(s => s.id === stuId);
         const ev = events.find(ev => ev.id === evId);
-        alertDiv.className = 'mt-3 alert alert-warning';
-        alertDiv.innerHTML = `<strong><i class="fa-solid fa-triangle-exclamation me-1"></i> Duplicate Prevented!</strong> Student '${stu.name} (${stuId})' is already registered for '${ev.name}'.`;
+        alertDiv.className = 'mt-3 alert-custom alert-warning';
+        alertDiv.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-warning fs-5"></i> <div><strong>Duplicate Registration Prevented!</strong> Student '${stu.name} (${stuId})' is already registered for '${ev.name}'.</div>`;
         alertDiv.classList.remove('d-none');
         return;
       }
@@ -463,8 +1372,8 @@
       const currentRegCount = registrations.filter(r => r.eventId === evId).length;
       const targetEvent = events.find(ev => ev.id === evId);
       if (currentRegCount >= targetEvent.max) {
-        alertDiv.className = 'mt-3 alert alert-danger';
-        alertDiv.innerHTML = `<strong><i class="fa-solid fa-circle-xmark me-1"></i> Capacity Reached!</strong> Event '${targetEvent.name}' has reached its maximum capacity of ${targetEvent.max}.`;
+        alertDiv.className = 'mt-3 alert-custom alert-danger';
+        alertDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-danger fs-5"></i> <div><strong>Capacity Limit Reached!</strong> Event '${targetEvent.name}' has reached its maximum seat quota (${targetEvent.max} participants).</div>`;
         alertDiv.classList.remove('d-none');
         return;
       }
@@ -474,8 +1383,8 @@
       registrations.push({ regId: newId, studentId: stuId, eventId: evId, date: now, status: "Confirmed" });
       saveState();
 
-      alertDiv.className = 'mt-3 alert alert-success';
-      alertDiv.innerHTML = `<strong><i class="fa-solid fa-circle-check me-1"></i> Success!</strong> Student registered for ${targetEvent.name}.`;
+      alertDiv.className = 'mt-3 alert-custom alert-success';
+      alertDiv.innerHTML = `<i class="fa-solid fa-circle-check text-success fs-5"></i> <div><strong>Registration Confirmed!</strong> Student enrolled for '${targetEvent.name}'.</div>`;
       alertDiv.classList.remove('d-none');
 
       renderEvents();
@@ -501,16 +1410,30 @@
       saveState();
 
       const alertDiv = document.getElementById('attAlert');
-      alertDiv.className = 'mt-3 alert alert-success';
-      alertDiv.innerHTML = `<strong><i class="fa-solid fa-check me-1"></i> Saved!</strong> Attendance marked as ${status}.`;
+      alertDiv.className = 'mt-3 alert-custom alert-success';
+      alertDiv.innerHTML = `<i class="fa-solid fa-check-circle text-success fs-5"></i> <div><strong>Attendance Recorded!</strong> Status saved as '${status}'.</div>`;
       alertDiv.classList.remove('d-none');
 
       renderAttendance();
       renderReports();
     });
 
-    // Init
+    // Auto-disable feedback rating if Absent
+    document.getElementById('attStatusSelect').addEventListener('change', (e) => {
+      const isAbsent = e.target.value === 'Absent';
+      const ratingSel = document.getElementById('attRatingSelect');
+      const remarksInput = document.getElementById('attRemarks');
+      ratingSel.disabled = isAbsent;
+      if (isAbsent) {
+        remarksInput.value = 'Medical leave / Prior absence intimation';
+      } else {
+        remarksInput.value = 'Active participant in workshop sessions';
+      }
+    });
+
+    // Window Init
     window.onload = () => {
+      initTheme();
       renderStudents();
       renderEvents();
     };
