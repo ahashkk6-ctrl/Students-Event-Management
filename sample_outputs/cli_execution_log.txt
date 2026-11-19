@@ -1,0 +1,282 @@
+﻿
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[33m
+--- STUDENT MANAGEMENT ---[0m
+1. Add New Student
+2. List All Students
+3. Search Student by ID
+0. Back to Main Menu
+[1mChoice (0-3): [0m[33m
+--- ALL ENROLLED STUDENTS (20) ---[0m
+ID         | Name                 | Department                       | Year    | Email                     | Phone
+------------------------------------------------------------------------------------------
+25AD001    | Meera Krishnan       | Artificial Intelligence & Data Science | Year 2 | meera.ad@vcet.ac.in       | 9876543222
+25AD002    | Naveen Prakash       | Artificial Intelligence & Data Science | Year 3 | naveen.ad@vcet.ac.in      | 9876543223
+25AD003    | Oviya Selvan         | Artificial Intelligence & Data Science | Year 1 | oviya.ad@vcet.ac.in       | 9876543224
+25CE001    | Roshini Balan        | Civil Engineering                | Year 3 | roshini.ce@vcet.ac.in     | 9876543227
+25CE002    | Siddharth Mani       | Civil Engineering                | Year 4 | siddharth.ce@vcet.ac.in   | 9876543228
+25CS001    | Farhan Ali           | Computer Science                 | Year 3 | farhan.cs@vcet.ac.in      | 9876543215
+25CS002    | Gayathri Priya       | Computer Science                 | Year 2 | gayathri.cs@vcet.ac.in    | 9876543216
+25CS003    | Harish Varma         | Computer Science                 | Year 4 | harish.cs@vcet.ac.in      | 9876543217
+25CS004    | Ishwarya Lakshmi     | Computer Science                 | Year 3 | ishwarya.cs@vcet.ac.in    | 9876543218
+25EC001    | Jagadeesh Paul       | Electronics and Communication    | Year 2 | jagadeesh.ec@vcet.ac.in   | 9876543219
+25EC002    | Keerthana Devi       | Electronics and Communication    | Year 3 | keerthana.ec@vcet.ac.in   | 9876543220
+25EC003    | Lokesh Nathan        | Electronics and Communication    | Year 4 | lokesh.ec@vcet.ac.in      | 9876543221
+25IT001    | Aarav Sharma         | Information Technology           | Year 3 | aarav.it@vcet.ac.in       | 9876543210
+25IT002    | Bhavana Ramesh       | Information Technology           | Year 3 | bhavana.it@vcet.ac.in     | 9876543211
+25IT003    | Chandran Kumar       | Information Technology           | Year 2 | chandran.it@vcet.ac.in    | 9876543212
+25IT004    | Deepika Sundar       | Information Technology           | Year 4 | deepika.it@vcet.ac.in     | 9876543213
+25IT005    | Elango Muthu         | Information Technology           | Year 1 | elango.it@vcet.ac.in      | 9876543214
+25IT006    | Tharun Prasad        | Information Technology           | Year 2 | tharun.it@vcet.ac.in      | 9876543229
+25ME001    | Pradeep Raj          | Mechanical Engineering           | Year 3 | pradeep.me@vcet.ac.in     | 9876543225
+25ME002    | Qadir Basha          | Mechanical Engineering           | Year 2 | qadir.me@vcet.ac.in       | 9876543226
+
+Press Enter to continue...
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[33m
+--- STUDENT MANAGEMENT ---[0m
+1. Add New Student
+2. List All Students
+3. Search Student by ID
+0. Back to Main Menu
+[1mChoice (0-3): [0m[1mEnter Student ID (e.g. 25IT010): [0m[1mEnter Full Name: [0m[1mEnter Department (e.g. Information Technology): [0m[1mEnter Year of Study (1-4): [0m[1mEnter Email: [0m[1mEnter Phone Number: [0m[32m[SUCCESS] Student 'Kavitha S' registered successfully![0m
+
+Press Enter to continue...
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[33m
+--- EVENT MANAGEMENT ---[0m
+1. Add New Campus Event
+2. List All Events
+3. Search Event by ID
+0. Back to Main Menu
+[1mChoice (0-3): [0m[33m
+--- ALL CAMPUS EVENTS (6) ---[0m
+Event ID | Event Name                       | Type         | Date       | Venue                    | Capacity
+------------------------------------------------------------------------------------------
+EVT101   | CodeQuest National Hackathon     | Technical    | 2026-09-15 | Main Computing Lab 1     | Max:  12
+EVT102   | Hands-on Generative AI & LLMs    | Workshop     | 2026-09-22 | Seminar Hall B           | Max:  15
+EVT103   | Future of Cloud Infrastructure   | Seminar      | 2026-10-05 | Auditorium 2             | Max:  20
+EVT104   | Tarang Inter-College Cultural Fest | Cultural     | 2026-10-18 | Open Air Amphitheatre    | Max:  30
+EVT105   | Internet of Things with Embedded C | Workshop     | 2026-11-02 | IoT Innovation Lab       | Max:  10
+EVT106   | Cyber Forensics & Threat Defense | Technical    | 2026-11-12 | Digital Security Lab     | Max:  12
+
+Press Enter to continue...
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[33m
+--- EVENT MANAGEMENT ---[0m
+1. Add New Campus Event
+2. List All Events
+3. Search Event by ID
+0. Back to Main Menu
+[1mChoice (0-3): [0m[1mEnter Event ID (e.g. EVT107): [0m[1mEnter Event Name: [0mEvent Types: 1. Technical, 2. Workshop, 3. Seminar, 4. Cultural
+[1mSelect Type (1-4): [0m[1mEnter Event Date (YYYY-MM-DD): [0m[1mEnter Venue: [0m[1mEnter Maximum Participant Capacity (1-500): [0m[1mEnter Brief Description: [0m[32m[SUCCESS] Event 'Web3 & Smart Contracts Summit' added successfully![0m
+
+Press Enter to continue...
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[33m
+--- EVENT REGISTRATION (DUPLICATE PREVENTING) ---[0m
+1. Register Student for an Event
+2. View Registered Participants for an Event
+0. Back to Main Menu
+[1mChoice (0-2): [0m[1mEnter Student ID (e.g. 25IT001): [0m[1mEnter Event ID (e.g. EVT101): [0m[33m[WARNING] [PREVENTED DUPLICATE] DUPLICATE: Student 'Aarav Sharma (25IT001)' is already registered for 'CodeQuest National Hackathon'.[0m
+
+Press Enter to continue...
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[33m
+--- EVENT REGISTRATION (DUPLICATE PREVENTING) ---[0m
+1. Register Student for an Event
+2. View Registered Participants for an Event
+0. Back to Main Menu
+[1mChoice (0-2): [0m[1mEnter Student ID (e.g. 25IT001): [0m[1mEnter Event ID (e.g. EVT101): [0m[32m[SUCCESS] SUCCESS: Successfully registered Kavitha S for Web3 & Smart Contracts Summit.[0m
+
+Press Enter to continue...
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[33m
+--- EVENT REGISTRATION (DUPLICATE PREVENTING) ---[0m
+1. Register Student for an Event
+2. View Registered Participants for an Event
+0. Back to Main Menu
+[1mChoice (0-2): [0m[1mEnter Event ID (e.g. EVT101): [0m[33m
+--- REGISTERED PARTICIPANTS FOR: CodeQuest National Hackathon (8/12) ---[0m
+Reg ID | Student ID | Student Name           | Department                     | Status    
+------------------------------------------------------------------------------------------
+1      | 25IT001    | Aarav Sharma           | Information Technology         | Confirmed 
+2      | 25IT002    | Bhavana Ramesh         | Information Technology         | Confirmed 
+3      | 25CS001    | Farhan Ali             | Computer Science               | Confirmed 
+4      | 25CS003    | Harish Varma           | Computer Science               | Confirmed 
+5      | 25AD001    | Meera Krishnan         | Artificial Intelligence & Data Science | Confirmed 
+6      | 25AD002    | Naveen Prakash         | Artificial Intelligence & Data Science | Confirmed 
+7      | 25EC002    | Keerthana Devi         | Electronics and Communication  | Confirmed 
+8      | 25IT004    | Deepika Sundar         | Information Technology         | Confirmed 
+
+Press Enter to continue...
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[33m
+--- ATTENDANCE & PARTICIPATION STATUS ---[0m
+1. Mark / Update Student Attendance & Feedback
+2. View Attendance Sheet for an Event
+0. Back to Main Menu
+[1mChoice (0-2): [0m[1mEnter Registration ID (1-100000): [0mAttendance Status: 1. Present, 2. Absent
+[1mSelect Status (1-2): [0m[1mEnter Feedback Rating (1-5): [0m[1mEnter Participant Feedback Remarks: [0m[32m[SUCCESS] SUCCESS: Attendance recorded as 'Present' for Student ID: 25IT001 (Aarav Sharma).[0m
+
+Press Enter to continue...
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[33m
+--- REPORTS & ANALYTICS ---[0m
+1. Event-Wise Summary Report (Requirement 5)
+2. Department-Wise Participation Distribution
+0. Back to Main Menu
+[1mChoice (0-2): [0m[33m
+--- EVENT-WISE COMPREHENSIVE PARTICIPATION REPORT ---[0m
+Event ID | Event Name                     | Type       | Registered | Present | Absent  | Att Rate | Avg Rating
+------------------------------------------------------------------------------------------
+EVT101   | CodeQuest National Hackathon   | Technical  |  8 / 12    | 6       | 2       |  75.0%  | 4.50 / 5
+EVT102   | Hands-on Generative AI & LLMs  | Workshop   |  9 / 15    | 8       | 1       |  88.9%  | 4.50 / 5
+EVT103   | Future of Cloud Infrastructure | Seminar    |  7 / 20    | 5       | 2       |  71.4%  | 4.00 / 5
+EVT104   | Tarang Inter-College Cultural Fest | Cultural   | 10 / 30    | 9       | 1       |  90.0%  | 4.67 / 5
+EVT105   | Internet of Things with Embedded C | Workshop   |  5 / 10    | 4       | 1       |  80.0%  | 4.50 / 5
+EVT106   | Cyber Forensics & Threat Defense | Technical  |  5 / 12    | 4       | 1       |  80.0%  | 4.75 / 5
+EVT107   | Web3 & Smart Contracts Summit  | Workshop   |  1 / 15    | 0       | 0       |   0.0%  | 0.00 / 5
+
+Press Enter to continue...
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[33m
+--- REPORTS & ANALYTICS ---[0m
+1. Event-Wise Summary Report (Requirement 5)
+2. Department-Wise Participation Distribution
+0. Back to Main Menu
+[1mChoice (0-2): [0m[33m
+--- DEPARTMENT-WISE PARTICIPATION DISTRIBUTION ---[0m
+Department                             | Total Students | Registrations    | Attended Events
+------------------------------------------------------------------------------------------
+Information Technology                 | 7              | 14               | 11
+Computer Science                       | 4              | 9                | 8
+Electronics and Communication          | 3              | 8                | 8
+Artificial Intelligence & Data Science | 3              | 7                | 5
+Mechanical Engineering                 | 2              | 4                | 2
+Civil Engineering                      | 2              | 3                | 2
+
+Press Enter to continue...
+[36m[1m==========================================================================================[0m
+[36m[1m   SMART CAMPUS EVENT MANAGEMENT & PARTICIPATION SYSTEM
+   Velalar College of Engineering and Technology | Dept of IT[0m
+[36m[1m==========================================================================================[0m
+1. Student Management
+2. Event Management
+3. Event Registration (with Duplicate Prevention & Capacity Check)
+4. Attendance & Participation Status Management
+5. Event-Wise Reports & Department Analytics
+6. Trigger Python Data Science Visualization Suite
+0. Exit Application
+------------------------------------------------------------------------------------------
+[1mSelect an option (0-6): [0m[32m[SUCCESS] Exiting Smart Campus System. Thank you![0m
