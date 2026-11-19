@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Campus Event Management & Participation System | VCET IT</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #f8fafc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .header-banner { background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: white; padding: 25px 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .nav-tabs .nav-link { color: #475569; font-weight: 600; padding: 12px 20px; border-radius: 8px 8px 0 0; }
+    .nav-tabs .nav-link.active { color: #1e3a8a; border-bottom: 3px solid #2563eb; font-weight: 700; background: white; }
+    .card { border: none; border-radius: 12px; box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1); }
+    .chart-card { transition: transform 0.2s; cursor: pointer; }
+    .chart-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+  <!-- Header Banner -->
+  <div class="header-banner mb-4">
+    <div class="container-fluid">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <div>
+          <h3 class="fw-bold mb-1"><i class="fa-solid fa-graduation-cap me-2"></i>VELALAR COLLEGE OF ENGINEERING AND TECHNOLOGY</h3>
+          <p class="mb-0 text-slate-300">Department of Information Technology | Scenario 6: Smart Campus Event Management & Student Participation Analysis</p>
+        </div>
+        <div class="d-flex gap-2">
+          <span class="badge bg-success px-3 py-2 fs-6"><i class="fa-solid fa-globe me-1"></i> Live Web App</span>
+          <a href="https://github.com/ahashkk6-ctrl/Students-Event-Management" target="_blank" class="btn btn-outline-light btn-sm fw-bold px-3">
+            <i class="fa-brands fa-github me-1"></i> View Repository
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid px-4">
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs mb-4" id="mainTabs" role="tablist">
+      <li class="nav-item"><button class="nav-link active" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button"><i class="fa-solid fa-users me-2"></i>Students</button></li>
+      <li class="nav-item"><button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button"><i class="fa-solid fa-calendar-days me-2"></i>Campus Events</button></li>
+      <li class="nav-item"><button class="nav-link" id="reg-tab" data-bs-toggle="tab" data-bs-target="#registration" type="button"><i class="fa-solid fa-clipboard-check me-2"></i>Event Registration</button></li>
+      <li class="nav-item"><button class="nav-link" id="att-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button"><i class="fa-solid fa-user-check me-2"></i>Attendance & Feedback</button></li>
+      <li class="nav-item"><button class="nav-link" id="rep-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button"><i class="fa-solid fa-chart-pie me-2"></i>Reports & Visuals</button></li>
+    </ul>
+
+    <!-- Tab Contents -->
+    <div class="tab-content" id="tabContent">
+      <!-- TAB 1: STUDENTS -->
+      <div class="tab-pane fade show active" id="students" role="tabpanel">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="card p-4">
+              <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-user-plus me-2"></i>Register New Student</h5>
+              <form id="studentForm">
+                <div class="mb-2"><label class="form-label fw-semibold">Student ID</label><input type="text" class="form-control" id="stuId" placeholder="e.g. 25IT010" required></div>
+                <div class="mb-2"><label class="form-label fw-semibold">Full Name</label><input type="text" class="form-control" id="stuName" placeholder="Student Name" required></div>
+                <div class="mb-2"><label class="form-label fw-semibold">Department</label>
+                  <select class="form-select" id="stuDept">
+                    <option>Information Technology</option><option>Computer Science</option>
+                    <option>Artificial Intelligence & Data Science</option><option>Electronics and Communication</option>
+                    <option>Mechanical Engineering</option><option>Civil Engineering</option>
+                  </select>
+                </div>
+                <div class="mb-2"><label class="form-label fw-semibold">Year of Study</label>
+                  <select class="form-select" id="stuYear"><option value="1">1st Year</option><option value="2">2nd Year</option><option value="3" selected>3rd Year</option><option value="4">4th Year</option></select>
+                </div>
+                <div class="mb-2"><label class="form-label fw-semibold">Email Address</label><input type="email" class="form-control" id="stuEmail" placeholder="name@vcet.ac.in" required></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Phone Number</label><input type="text" class="form-control" id="stuPhone" placeholder="9876543210" required></div>
+                <button type="submit" class="btn btn-primary w-100 fw-bold"><i class="fa-solid fa-save me-1"></i> Register Student</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card p-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0"><i class="fa-solid fa-address-book me-2"></i>Enrolled Students List</h5>
+                <span id="studentCountBadge" class="badge bg-primary fs-6">20 Students</span>
+              </div>
+              <div class="table-responsive" style="max-height: 520px;">
+                <table class="table table-hover align-middle">
+                  <thead class="table-light"><tr><th>ID</th><th>Name</th><th>Department</th><th>Year</th><th>Email</th><th>Phone</th></tr></thead>
+                  <tbody id="studentTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: EVENTS -->
+      <div class="tab-pane fade" id="events" role="tabpanel">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="card p-4">
+              <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-calendar-plus me-2"></i>Create Campus Event</h5>
+              <form id="eventForm">
+                <div class="mb-2"><label class="form-label fw-semibold">Event ID</label><input type="text" class="form-control" id="evId" placeholder="e.g. EVT108" required></div>
+                <div class="mb-2"><label class="form-label fw-semibold">Event Name</label><input type="text" class="form-control" id="evName" placeholder="Event Title" required></div>
+                <div class="mb-2"><label class="form-label fw-semibold">Category</label>
+                  <select class="form-select" id="evType">
+                    <option>Technical</option><option>Workshop</option><option>Seminar</option><option>Cultural</option>
+                  </select>
+                </div>
+                <div class="mb-2"><label class="form-label fw-semibold">Event Date</label><input type="date" class="form-control" id="evDate" value="2026-12-05" required></div>
+                <div class="mb-2"><label class="form-label fw-semibold">Venue</label><input type="text" class="form-control" id="evVenue" placeholder="Hall / Lab" required></div>
+                <div class="mb-2"><label class="form-label fw-semibold">Max Capacity</label><input type="number" class="form-control" id="evMax" min="1" max="500" value="20" required></div>
+                <div class="mb-3"><label class="form-label fw-semibold">Description</label><textarea class="form-control" id="evDesc" rows="2"></textarea></div>
+                <button type="submit" class="btn btn-primary w-100 fw-bold"><i class="fa-solid fa-plus-circle me-1"></i> Add Event</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card p-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0"><i class="fa-solid fa-calendar-check me-2"></i>Scheduled Campus Events</h5>
+                <span id="eventCountBadge" class="badge bg-primary fs-6">6 Events</span>
+              </div>
+              <div class="table-responsive" style="max-height: 520px;">
+                <table class="table table-hover align-middle">
+                  <thead class="table-light"><tr><th>ID</th><th>Event Name</th><th>Category</th><th>Date</th><th>Venue</th><th>Capacity Utilization</th></tr></thead>
+                  <tbody id="eventTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: REGISTRATION -->
+      <div class="tab-pane fade" id="registration" role="tabpanel">
+        <div class="card p-4 mb-4">
+          <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-shield-halved me-2"></i>Student Event Registration (Duplicate-Protected)</h5>
+          <form id="regForm" class="row g-3 align-items-end">
+            <div class="col-md-5"><label class="form-label fw-semibold">Select Student</label><select class="form-select" id="regStuSelect" required></select></div>
+            <div class="col-md-5"><label class="form-label fw-semibold">Select Event</label><select class="form-select" id="regEvSelect" required></select></div>
+            <div class="col-md-2"><button type="submit" class="btn btn-success w-100 fw-bold"><i class="fa-solid fa-user-plus me-1"></i> Register</button></div>
+          </form>
+          <div id="regAlert" class="mt-3 d-none"></div>
+        </div>
+        <div class="card p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex align-items-center gap-2">
+              <h5 class="fw-bold mb-0">Registered Participants for:</h5>
+              <select class="form-select form-select-sm" id="filterEventSelect" style="width: 320px;" onchange="renderRegistrations()"></select>
+            </div>
+            <span id="regCountBadge" class="badge bg-secondary"></span>
+          </div>
+          <div class="table-responsive" style="max-height: 400px;">
+            <table class="table table-hover align-middle">
+              <thead class="table-light"><tr><th>Reg ID</th><th>Student ID</th><th>Name</th><th>Department</th><th>Date</th><th>Status</th></tr></thead>
+              <tbody id="regTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: ATTENDANCE -->
+      <div class="tab-pane fade" id="attendance" role="tabpanel">
+        <div class="card p-4 mb-4">
+          <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-clipboard-user me-2"></i>Record Student Attendance & Feedback</h5>
+          <form id="attForm" class="row g-3 align-items-end">
+            <div class="col-md-3"><label class="form-label fw-semibold">Select Event</label><select class="form-select" id="attEvSelect" onchange="onAttEventChange()" required></select></div>
+            <div class="col-md-3"><label class="form-label fw-semibold">Participant</label><select class="form-select" id="attRegSelect" required></select></div>
+            <div class="col-md-2"><label class="form-label fw-semibold">Status</label><select class="form-select" id="attStatusSelect"><option value="Present">Present</option><option value="Absent">Absent</option></select></div>
+            <div class="col-md-2"><label class="form-label fw-semibold">Rating</label><select class="form-select" id="attRatingSelect"><option value="5">5 - Outstanding</option><option value="4">4 - Very Good</option><option value="3">3 - Good</option><option value="2">2 - Fair</option><option value="1">1 - Poor</option></select></div>
+            <div class="col-md-2"><button type="submit" class="btn btn-primary w-100 fw-bold"><i class="fa-solid fa-check me-1"></i> Save</button></div>
+            <div class="col-12"><input type="text" class="form-control" id="attRemarks" placeholder="Optional feedback remarks or reason for absence" value="Active participant"></div>
+          </form>
+          <div id="attAlert" class="mt-3 d-none"></div>
+        </div>
+        <div class="card p-4">
+          <h5 class="fw-bold mb-3"><i class="fa-solid fa-list-check me-2"></i>Attendance Verification Sheet</h5>
+          <div class="table-responsive" style="max-height: 400px;">
+            <table class="table table-hover align-middle">
+              <thead class="table-light"><tr><th>Att ID</th><th>Reg ID</th><th>Student ID</th><th>Name</th><th>Status</th><th>Rating</th><th>Remarks</th><th>Marked At</th></tr></thead>
+              <tbody id="attTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: REPORTS & VISUALS -->
+      <div class="tab-pane fade" id="reports" role="tabpanel">
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-chart-line me-2"></i>Institutional Participation Reports & Visual Analytics</h5>
+        <div class="row g-4 mb-4">
+          <div class="col-lg-8">
+            <div class="card p-4 h-100">
+              <h6 class="fw-bold mb-3 text-secondary">Event-Wise Participation Performance</h6>
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered align-middle">
+                  <thead class="table-light"><tr><th>Event ID</th><th>Event Name</th><th>Category</th><th>Registered</th><th>Present</th><th>Absent</th><th>Att Rate</th><th>Avg Rating</th></tr></thead>
+                  <tbody id="repEventTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card p-4 h-100">
+              <h6 class="fw-bold mb-3 text-secondary">Department-Wise Distribution</h6>
+              <div class="table-responsive">
+                <table class="table table-sm table-hover align-middle">
+                  <thead class="table-light"><tr><th>Department</th><th>Students</th><th>Registrations</th><th>Attended</th></tr></thead>
+                  <tbody id="repDeptTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visualizations Gallery -->
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-chart-column me-2"></i>Python Data Science Visualizations Suite (25ITC31)</h5>
+        <div class="row g-4 mb-5" id="visGallery">
+          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">1. Department-Wise Participation</h6><img src="data_analysis/visualizations/01_department_participation_barchart.png" class="img-fluid rounded" alt="Chart 1"></div></div>
+          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">2. Capacity vs Attendance</h6><img src="data_analysis/visualizations/02_event_attendance_comparison.png" class="img-fluid rounded" alt="Chart 2"></div></div>
+          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">3. Event Type Distribution</h6><img src="data_analysis/visualizations/03_event_type_distribution_piechart.png" class="img-fluid rounded" alt="Chart 3"></div></div>
+          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">4. Year of Study Participation</h6><img src="data_analysis/visualizations/04_year_wise_participation_countplot.png" class="img-fluid rounded" alt="Chart 4"></div></div>
+          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">5. Feedback Ratings by Event Type</h6><img src="data_analysis/visualizations/05_feedback_rating_boxplot.png" class="img-fluid rounded" alt="Chart 5"></div></div>
+          <div class="col-md-6"><div class="card p-3 chart-card"><h6 class="fw-bold text-center mt-1">6. Participation Correlation Matrix</h6><img src="data_analysis/visualizations/06_participation_correlation_heatmap.png" class="img-fluid rounded" alt="Chart 6"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Initial Seed Data (persisted in localStorage for live demo)
+    const initialStudents = [
+      { id: "25IT001", name: "Aarav Sharma", dept: "Information Technology", year: 3, email: "aarav.it@vcet.ac.in", phone: "9876543210" },
+      { id: "25IT002", name: "Bhavana Ramesh", dept: "Information Technology", year: 3, email: "bhavana.it@vcet.ac.in", phone: "9876543211" },
+      { id: "25IT003", name: "Chandran Kumar", dept: "Information Technology", year: 2, email: "chandran.it@vcet.ac.in", phone: "9876543212" },
+      { id: "25IT004", name: "Deepika Sundar", dept: "Information Technology", year: 4, email: "deepika.it@vcet.ac.in", phone: "9876543213" },
+      { id: "25IT005", name: "Elango Muthu", dept: "Information Technology", year: 1, email: "elango.it@vcet.ac.in", phone: "9876543214" },
+      { id: "25CS001", name: "Farhan Ali", dept: "Computer Science", year: 3, email: "farhan.cs@vcet.ac.in", phone: "9876543215" },
+      { id: "25CS002", name: "Gayathri Priya", dept: "Computer Science", year: 2, email: "gayathri.cs@vcet.ac.in", phone: "9876543216" },
+      { id: "25CS003", name: "Harish Varma", dept: "Computer Science", year: 4, email: "harish.cs@vcet.ac.in", phone: "9876543217" },
+      { id: "25CS004", name: "Ishwarya Lakshmi", dept: "Computer Science", year: 3, email: "ishwarya.cs@vcet.ac.in", phone: "9876543218" },
+      { id: "25EC001", name: "Jagadeesh Paul", dept: "Electronics and Communication", year: 2, email: "jagadeesh.ec@vcet.ac.in", phone: "9876543219" },
+      { id: "25EC002", name: "Keerthana Devi", dept: "Electronics and Communication", year: 3, email: "keerthana.ec@vcet.ac.in", phone: "9876543220" },
+      { id: "25EC003", name: "Lokesh Nathan", dept: "Electronics and Communication", year: 4, email: "lokesh.ec@vcet.ac.in", phone: "9876543221" },
+      { id: "25AD001", name: "Meera Krishnan", dept: "Artificial Intelligence & Data Science", year: 2, email: "meera.ad@vcet.ac.in", phone: "9876543222" },
+      { id: "25AD002", name: "Naveen Prakash", dept: "Artificial Intelligence & Data Science", year: 3, email: "naveen.ad@vcet.ac.in", phone: "9876543223" },
+      { id: "25AD003", name: "Oviya Selvan", dept: "Artificial Intelligence & Data Science", year: 1, email: "oviya.ad@vcet.ac.in", phone: "9876543224" },
+      { id: "25ME001", name: "Pradeep Raj", dept: "Mechanical Engineering", year: 3, email: "pradeep.me@vcet.ac.in", phone: "9876543225" },
+      { id: "25ME002", name: "Qadir Basha", dept: "Mechanical Engineering", year: 2, email: "qadir.me@vcet.ac.in", phone: "9876543226" },
+      { id: "25CE001", name: "Roshini Balan", dept: "Civil Engineering", year: 3, email: "roshini.ce@vcet.ac.in", phone: "9876543227" },
+      { id: "25CE002", name: "Siddharth Mani", dept: "Civil Engineering", year: 4, email: "siddharth.ce@vcet.ac.in", phone: "9876543228" },
+      { id: "25IT006", name: "Tharun Prasad", dept: "Information Technology", year: 2, email: "tharun.it@vcet.ac.in", phone: "9876543229" }
+    ];
+
+    const initialEvents = [
+      { id: "EVT101", name: "CodeQuest National Hackathon", type: "Technical", date: "2026-09-15", venue: "Main Computing Lab 1", max: 12, desc: "24-hour coding challenge" },
+      { id: "EVT102", name: "Hands-on Generative AI & LLMs", type: "Workshop", date: "2026-09-22", venue: "Seminar Hall B", max: 15, desc: "Building agentic systems" },
+      { id: "EVT103", name: "Future of Cloud Infrastructure", type: "Seminar", date: "2026-10-05", venue: "Auditorium 2", max: 20, desc: "Cloud native computing" },
+      { id: "EVT104", name: "Tarang Inter-College Cultural Fest", type: "Cultural", date: "2026-10-18", venue: "Open Air Amphitheatre", max: 30, desc: "Annual cultural extravaganza" },
+      { id: "EVT105", name: "Internet of Things with Embedded C", type: "Workshop", date: "2026-11-02", venue: "IoT Innovation Lab", max: 10, desc: "Hands-on microcontrollers" },
+      { id: "EVT106", name: "Cyber Forensics & Threat Defense", type: "Technical", date: "2026-11-12", venue: "Digital Security Lab", max: 12, desc: "Blue-team tactics" }
+    ];
+
+    const initialRegistrations = [
+      { regId: 1, studentId: "25IT001", eventId: "EVT101", date: "2026-09-01 10:00:00", status: "Confirmed" },
+      { regId: 2, studentId: "25IT002", eventId: "EVT101", date: "2026-09-01 10:15:00", status: "Confirmed" },
+      { regId: 3, studentId: "25CS001", eventId: "EVT101", date: "2026-09-01 11:30:00", status: "Confirmed" },
+      { regId: 4, studentId: "25CS003", eventId: "EVT101", date: "2026-09-02 09:45:00", status: "Confirmed" },
+      { regId: 5, studentId: "25AD001", eventId: "EVT101", date: "2026-09-02 14:20:00", status: "Confirmed" },
+      { regId: 6, studentId: "25AD002", eventId: "EVT101", date: "2026-09-03 16:00:00", status: "Confirmed" },
+      { regId: 7, studentId: "25EC002", eventId: "EVT101", date: "2026-09-04 11:10:00", status: "Confirmed" },
+      { regId: 8, studentId: "25IT004", eventId: "EVT101", date: "2026-09-05 13:00:00", status: "Confirmed" },
+      { regId: 9, studentId: "25IT001", eventId: "EVT102", date: "2026-09-10 09:30:00", status: "Confirmed" },
+      { regId: 10, studentId: "25IT003", eventId: "EVT102", date: "2026-09-10 10:00:00", status: "Confirmed" },
+      { regId: 11, studentId: "25CS002", eventId: "EVT102", date: "2026-09-10 11:15:00", status: "Confirmed" },
+      { regId: 12, studentId: "25CS004", eventId: "EVT102", date: "2026-09-11 12:45:00", status: "Confirmed" }
+    ];
+
+    const initialAttendance = [
+      { attId: 1, regId: 1, status: "Present", rating: 5, remarks: "Exceptional coding experience", date: "2026-09-15" },
+      { regId: 2, status: "Present", rating: 5, remarks: "Great team collaboration", date: "2026-09-15" },
+      { regId: 3, status: "Present", rating: 4, remarks: "Very well organized", date: "2026-09-15" },
+      { regId: 4, status: "Absent", rating: null, remarks: "Medical leave notified", date: "2026-09-15" },
+      { regId: 5, status: "Present", rating: 5, remarks: "Loved ML problem track", date: "2026-09-15" },
+      { regId: 6, status: "Present", rating: 4, remarks: "Great judging panel", date: "2026-09-15" },
+      { regId: 7, status: "Present", rating: 4, remarks: "Learned hardware co-design", date: "2026-09-15" },
+      { regId: 8, status: "Absent", rating: null, remarks: "Semester test conflict", date: "2026-09-15" }
+    ];
+
+    let students = JSON.parse(localStorage.getItem('smart_students')) || initialStudents;
+    let events = JSON.parse(localStorage.getItem('smart_events')) || initialEvents;
+    let registrations = JSON.parse(localStorage.getItem('smart_registrations')) || initialRegistrations;
+    let attendance = JSON.parse(localStorage.getItem('smart_attendance')) || initialAttendance;
+
+    function saveState() {
+      localStorage.setItem('smart_students', JSON.stringify(students));
+      localStorage.setItem('smart_events', JSON.stringify(events));
+      localStorage.setItem('smart_registrations', JSON.stringify(registrations));
+      localStorage.setItem('smart_attendance', JSON.stringify(attendance));
+    }
+
+    function renderStudents() {
+      const tbody = document.getElementById('studentTableBody');
+      tbody.innerHTML = '';
+      const regStu = document.getElementById('regStuSelect');
+      regStu.innerHTML = '';
+      students.forEach(s => {
+        tbody.innerHTML += `<tr><td class="fw-bold">${s.id}</td><td>${s.name}</td><td>${s.dept}</td><td><span class="badge bg-secondary">Year ${s.year}</span></td><td>${s.email}</td><td>${s.phone}</td></tr>`;
+        regStu.innerHTML += `<option value="${s.id}">${s.id} - ${s.name} (${s.dept})</option>`;
+      });
+      document.getElementById('studentCountBadge').textContent = `${students.length} Students`;
+    }
+
+    function renderEvents() {
+      const tbody = document.getElementById('eventTableBody');
+      tbody.innerHTML = '';
+      const regEv = document.getElementById('regEvSelect');
+      const filterEv = document.getElementById('filterEventSelect');
+      const attEv = document.getElementById('attEvSelect');
+      regEv.innerHTML = ''; filterEv.innerHTML = ''; attEv.innerHTML = '';
+
+      events.forEach(e => {
+        const count = registrations.filter(r => r.eventId === e.id && r.status === 'Confirmed').length;
+        const pct = Math.min(100, Math.round((count / e.max) * 100));
+        tbody.innerHTML += `<tr><td class="fw-bold">${e.id}</td><td>${e.name}</td><td><span class="badge bg-info text-dark">${e.type}</span></td><td>${e.date}</td><td>${e.venue}</td><td><div class="d-flex align-items-center gap-2"><div class="progress flex-grow-1" style="height: 8px;"><div class="progress-bar bg-success" style="width: ${pct}%;"></div></div><small class="fw-bold">${count}/${e.max}</small></div></td></tr>`;
+        const opt = `<option value="${e.id}">${e.id} - ${e.name}</option>`;
+        regEv.innerHTML += opt;
+        filterEv.innerHTML += opt;
+        attEv.innerHTML += opt;
+      });
+      document.getElementById('eventCountBadge').textContent = `${events.length} Events`;
+      renderRegistrations();
+      onAttEventChange();
+      renderReports();
+    }
+
+    function renderRegistrations() {
+      const evId = document.getElementById('filterEventSelect').value || (events[0] ? events[0].id : '');
+      const list = registrations.filter(r => r.eventId === evId);
+      const tbody = document.getElementById('regTableBody');
+      tbody.innerHTML = '';
+      list.forEach(r => {
+        const stu = students.find(s => s.id === r.studentId) || { name: r.studentId, dept: 'N/A' };
+        tbody.innerHTML += `<tr><td>${r.regId}</td><td class="fw-bold">${r.studentId}</td><td>${stu.name}</td><td>${stu.dept}</td><td>${r.date}</td><td><span class="badge bg-success">${r.status}</span></td></tr>`;
+      });
+      document.getElementById('regCountBadge').textContent = `${list.length} Participants`;
+    }
+
+    function onAttEventChange() {
+      const evId = document.getElementById('attEvSelect').value || (events[0] ? events[0].id : '');
+      const list = registrations.filter(r => r.eventId === evId);
+      const sel = document.getElementById('attRegSelect');
+      sel.innerHTML = '';
+      list.forEach(r => {
+        const stu = students.find(s => s.id === r.studentId) || { name: r.studentId };
+        sel.innerHTML += `<option value="${r.regId}">#${r.regId} - ${r.studentId}: ${stu.name}</option>`;
+      });
+      renderAttendance();
+    }
+
+    function renderAttendance() {
+      const evId = document.getElementById('attEvSelect').value || (events[0] ? events[0].id : '');
+      const eventRegIds = registrations.filter(r => r.eventId === evId).map(r => r.regId);
+      const list = attendance.filter(a => eventRegIds.includes(a.regId));
+      const tbody = document.getElementById('attTableBody');
+      tbody.innerHTML = '';
+      list.forEach((a, idx) => {
+        const reg = registrations.find(r => r.regId === a.regId);
+        const stu = reg ? (students.find(s => s.id === reg.studentId) || { id: reg.studentId, name: reg.studentId }) : { id: 'N/A', name: 'N/A' };
+        const badge = a.status === 'Present' ? '<span class="badge bg-success">Present</span>' : '<span class="badge bg-danger">Absent</span>';
+        const stars = a.rating ? `<span class="text-warning">${'★'.repeat(a.rating)}</span> (${a.rating}/5)` : 'N/A';
+        tbody.innerHTML += `<tr><td>${idx + 1}</td><td>${a.regId}</td><td class="fw-bold">${stu.id}</td><td>${stu.name}</td><td>${badge}</td><td>${stars}</td><td>${a.remarks || ''}</td><td><small>${a.date}</small></td></tr>`;
+      });
+    }
+
+    function renderReports() {
+      const evTbody = document.getElementById('repEventTableBody');
+      evTbody.innerHTML = '';
+      events.forEach(e => {
+        const regs = registrations.filter(r => r.eventId === e.id);
+        const regIds = regs.map(r => r.regId);
+        const atts = attendance.filter(a => regIds.includes(a.regId));
+        const pres = atts.filter(a => a.status === 'Present').length;
+        const abs = atts.filter(a => a.status === 'Absent').length;
+        const rate = regs.length > 0 ? ((pres / regs.length) * 100).toFixed(1) : '0.0';
+        const rated = atts.filter(a => a.rating != null);
+        const avg = rated.length > 0 ? (rated.reduce((acc, c) => acc + c.rating, 0) / rated.length).toFixed(2) : 'N/A';
+        evTbody.innerHTML += `<tr><td class="fw-bold">${e.id}</td><td>${e.name}</td><td><span class="badge bg-primary">${e.type}</span></td><td>${regs.length} / ${e.max}</td><td class="text-success fw-bold">${pres}</td><td class="text-danger fw-bold">${abs}</td><td><strong>${rate}%</strong></td><td>${avg} / 5</td></tr>`;
+      });
+
+      const deptTbody = document.getElementById('repDeptTableBody');
+      deptTbody.innerHTML = '';
+      const depts = [...new Set(students.map(s => s.dept))];
+      depts.forEach(d => {
+        const totalStu = students.filter(s => s.dept === d).length;
+        const stuIds = students.filter(s => s.dept === d).map(s => s.id);
+        const totalReg = registrations.filter(r => stuIds.includes(r.studentId)).length;
+        const regIds = registrations.filter(r => stuIds.includes(r.studentId)).map(r => r.regId);
+        const attCount = attendance.filter(a => regIds.includes(a.regId) && a.status === 'Present').length;
+        deptTbody.innerHTML += `<tr><td class="fw-bold">${d}</td><td>${totalStu}</td><td>${totalReg}</td><td class="text-success fw-bold">${attCount}</td></tr>`;
+      });
+    }
+
+    // Form Event Listeners
+    document.getElementById('studentForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('stuId').value.trim();
+      if (students.some(s => s.id.toLowerCase() === id.toLowerCase())) {
+        alert("Student ID already exists!");
+        return;
+      }
+      students.push({
+        id: id,
+        name: document.getElementById('stuName').value.trim(),
+        dept: document.getElementById('stuDept').value,
+        year: parseInt(document.getElementById('stuYear').value),
+        email: document.getElementById('stuEmail').value.trim(),
+        phone: document.getElementById('stuPhone').value.trim()
+      });
+      saveState();
+      renderStudents();
+      renderEvents();
+      document.getElementById('studentForm').reset();
+      alert("Student registered successfully!");
+    });
+
+    document.getElementById('eventForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('evId').value.trim();
+      if (events.some(ev => ev.id.toLowerCase() === id.toLowerCase())) {
+        alert("Event ID already exists!");
+        return;
+      }
+      events.push({
+        id: id,
+        name: document.getElementById('evName').value.trim(),
+        type: document.getElementById('evType').value,
+        date: document.getElementById('evDate').value,
+        venue: document.getElementById('evVenue').value.trim(),
+        max: parseInt(document.getElementById('evMax').value),
+        desc: document.getElementById('evDesc').value.trim()
+      });
+      saveState();
+      renderEvents();
+      document.getElementById('eventForm').reset();
+      alert("Campus Event created successfully!");
+    });
+
+    document.getElementById('regForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const stuId = document.getElementById('regStuSelect').value;
+      const evId = document.getElementById('regEvSelect').value;
+      const alertDiv = document.getElementById('regAlert');
+
+      // Duplicate Prevention Check (Functional Requirement 3)
+      if (registrations.some(r => r.studentId === stuId && r.eventId === evId)) {
+        const stu = students.find(s => s.id === stuId);
+        const ev = events.find(ev => ev.id === evId);
+        alertDiv.className = 'mt-3 alert alert-warning';
+        alertDiv.innerHTML = `<strong><i class="fa-solid fa-triangle-exclamation me-1"></i> Duplicate Prevented!</strong> Student '${stu.name} (${stuId})' is already registered for '${ev.name}'.`;
+        alertDiv.classList.remove('d-none');
+        return;
+      }
+
+      // Capacity Limit Check
+      const currentRegCount = registrations.filter(r => r.eventId === evId).length;
+      const targetEvent = events.find(ev => ev.id === evId);
+      if (currentRegCount >= targetEvent.max) {
+        alertDiv.className = 'mt-3 alert alert-danger';
+        alertDiv.innerHTML = `<strong><i class="fa-solid fa-circle-xmark me-1"></i> Capacity Reached!</strong> Event '${targetEvent.name}' has reached its maximum capacity of ${targetEvent.max}.`;
+        alertDiv.classList.remove('d-none');
+        return;
+      }
+
+      const newId = registrations.length > 0 ? Math.max(...registrations.map(r => r.regId)) + 1 : 1;
+      const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
+      registrations.push({ regId: newId, studentId: stuId, eventId: evId, date: now, status: "Confirmed" });
+      saveState();
+
+      alertDiv.className = 'mt-3 alert alert-success';
+      alertDiv.innerHTML = `<strong><i class="fa-solid fa-circle-check me-1"></i> Success!</strong> Student registered for ${targetEvent.name}.`;
+      alertDiv.classList.remove('d-none');
+
+      renderEvents();
+      renderRegistrations();
+      onAttEventChange();
+      renderReports();
+    });
+
+    document.getElementById('attForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const regId = parseInt(document.getElementById('attRegSelect').value);
+      const status = document.getElementById('attStatusSelect').value;
+      const rating = status === 'Present' ? parseInt(document.getElementById('attRatingSelect').value) : null;
+      const remarks = document.getElementById('attRemarks').value.trim();
+      const today = new Date().toISOString().substring(0, 10);
+
+      const existingIdx = attendance.findIndex(a => a.regId === regId);
+      if (existingIdx >= 0) {
+        attendance[existingIdx] = { regId, status, rating, remarks, date: today };
+      } else {
+        attendance.push({ regId, status, rating, remarks, date: today });
+      }
+      saveState();
+
+      const alertDiv = document.getElementById('attAlert');
+      alertDiv.className = 'mt-3 alert alert-success';
+      alertDiv.innerHTML = `<strong><i class="fa-solid fa-check me-1"></i> Saved!</strong> Attendance marked as ${status}.`;
+      alertDiv.classList.remove('d-none');
+
+      renderAttendance();
+      renderReports();
+    });
+
+    // Init
+    window.onload = () => {
+      renderStudents();
+      renderEvents();
+    };
+  </script>
+</body>
+</html>
