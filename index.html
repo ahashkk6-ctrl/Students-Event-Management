@@ -401,17 +401,48 @@
     .table-container {
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: auto;
+      max-height: 480px;
       background-color: var(--bg-surface);
+      position: relative;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-focus) var(--bg-surface-elevated);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Custom Modern Scrollbars for smooth scrolling */
+    .table-container::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+      background: var(--bg-surface-elevated);
+      border-radius: var(--radius-sm);
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+      background: var(--border-focus);
+      border-radius: var(--radius-pill);
+    }
+
+    .table-container::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
     }
 
     .custom-table {
       margin-bottom: 0;
       width: 100%;
       color: var(--text-main);
+      border-collapse: separate;
+      border-spacing: 0;
     }
 
     .custom-table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 5;
       background-color: var(--bg-surface-elevated);
       color: var(--text-secondary);
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -422,6 +453,7 @@
       padding: 12px 16px;
       border-bottom: 1.5px solid var(--border-color);
       white-space: nowrap;
+      box-shadow: 0 1px 0 var(--border-color);
     }
 
     .custom-table tbody tr {
@@ -657,7 +689,7 @@
                 <h5><span class="icon-square"><i class="fa-solid fa-users"></i></span> Enrolled Students</h5>
                 <span id="studentCountBadge" class="badge-modern badge-primary-soft">20 Students</span>
               </div>
-              <div class="table-container table-responsive" style="max-height: 540px;">
+              <div class="table-container table-responsive" style="max-height: 480px;">
                 <table class="custom-table table-hover">
                   <thead>
                     <tr>
@@ -736,7 +768,7 @@
                 <h5><span class="icon-square"><i class="fa-solid fa-calendar-days"></i></span> Scheduled Campus Events</h5>
                 <span id="eventCountBadge" class="badge-modern badge-primary-soft">6 Events</span>
               </div>
-              <div class="table-container table-responsive" style="max-height: 540px;">
+              <div class="table-container table-responsive" style="max-height: 480px;">
                 <table class="custom-table table-hover">
                   <thead>
                     <tr>
