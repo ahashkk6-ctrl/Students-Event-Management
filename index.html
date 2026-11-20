@@ -236,18 +236,24 @@
       height: 72px;
     }
 
-    .sidebar-brand-badge {
-      width: 38px;
-      height: 38px;
+    .sidebar-brand-logo-box {
+      width: 44px;
+      height: 44px;
+      background: #ffffff;
       border-radius: 10px;
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #ffffff;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
+      padding: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
       flex-shrink: 0;
+    }
+
+    .sidebar-brand-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .sidebar-brand-text {
@@ -888,8 +894,8 @@
       <!-- Sidebar Header -->
       <div class="sidebar-header">
         <div class="d-flex align-items-center gap-2">
-          <div class="sidebar-brand-badge">
-            <i class="fa-solid fa-graduation-cap"></i>
+          <div class="sidebar-brand-logo-box" title="Velalar College of Engineering and Technology">
+            <img src="assets/vcet-logo.png" alt="VCET Logo" class="sidebar-brand-logo-img">
           </div>
           <div class="sidebar-brand-text">
             <span class="fw-bold text-white d-block" style="font-size: 0.95rem; line-height: 1.2;">Smart Campus</span>
@@ -1116,16 +1122,47 @@
                   <i class="fa-solid fa-check"></i> Save Student Profile
                 </button>
               </form>
+
+              <!-- Quick Delete Student Record Box -->
+              <div class="mt-4 pt-3 border-top">
+                <h6 class="fw-bold text-danger mb-2 d-flex align-items-center gap-2" style="font-size: 0.88rem;">
+                  <i class="fa-solid fa-user-minus"></i> Delete Student Record
+                </h6>
+                <p class="text-secondary small mb-2">Remove an enrolled student record by Student ID:</p>
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" id="deleteStuIdInput" placeholder="Enter ID (e.g. 25IT001)">
+                  <button class="btn btn-outline-danger d-inline-flex align-items-center gap-1" type="button" onclick="deleteStudentByIdInput()">
+                    <i class="fa-solid fa-trash-can"></i> Delete
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- Right: Enrolled Students List -->
           <div class="col-lg-8">
             <div class="app-card">
-              <div class="card-header-styled">
+              <div class="card-header-styled flex-wrap gap-2">
                 <h5><span class="icon-square"><i class="fa-solid fa-users"></i></span> Enrolled Students</h5>
-                <span id="studentCountBadge" class="badge-modern badge-primary-soft">20 Students</span>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                  <span id="studentCountBadge" class="badge-modern badge-primary-soft">20 Students</span>
+                  <button class="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1" onclick="deleteAllStudents()" title="Delete all enrolled student records">
+                    <i class="fa-solid fa-trash-can"></i> Delete All
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1" onclick="resetStudentsDefault()" title="Restore default 20 student roster">
+                    <i class="fa-solid fa-rotate-left"></i> Reset Defaults
+                  </button>
+                </div>
               </div>
+
+              <!-- Filter Search Toolbar -->
+              <div class="mb-3">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text bg-transparent border-end-0 text-secondary"><i class="fa-solid fa-magnifying-glass"></i></span>
+                  <input type="text" class="form-control border-start-0" id="searchStudentInput" placeholder="Filter enrolled students by Name, ID, or Department..." oninput="filterStudents()">
+                </div>
+              </div>
+
               <div class="table-container table-responsive" style="max-height: 480px;">
                 <table class="custom-table table-hover">
                   <thead>
@@ -1136,7 +1173,7 @@
                       <th>Year</th>
                       <th>Email</th>
                       <th>Phone</th>
-                      <th class="text-center" style="width: 75px;">Action</th>
+                      <th class="text-center" style="width: 105px;">Action</th>
                     </tr>
                   </thead>
                   <tbody id="studentTableBody"></tbody>
@@ -1735,8 +1772,8 @@
             <td class="text-secondary">${s.email}</td>
             <td class="text-secondary">${s.phone}</td>
             <td class="text-center">
-              <button type="button" class="btn-action-danger" onclick="deleteStudent('${s.id}')" title="Delete Student ${s.id}">
-                <i class="fa-solid fa-trash-can"></i>
+              <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1 py-1 px-2" onclick="deleteStudent('${s.id}')" title="Delete Student ${s.name} (${s.id})">
+                <i class="fa-solid fa-trash-can"></i> <span style="font-size: 0.78rem;">Delete</span>
               </button>
             </td>
           </tr>
@@ -1932,6 +1969,65 @@
       onAttEventChange();
       renderReports();
       renderInteractiveCharts();
+    }
+
+    function deleteStudentByIdInput() {
+      const input = document.getElementById('deleteStuIdInput');
+      if (!input) return;
+      const id = input.value.trim();
+      if (!id) {
+        alert("Please enter a Student ID to delete.");
+        return;
+      }
+      const student = students.find(s => s.id.toLowerCase() === id.toLowerCase());
+      if (!student) {
+        alert(`No student found with ID "${id}". Please verify the ID and try again.`);
+        return;
+      }
+      deleteStudent(student.id);
+      input.value = '';
+    }
+
+    function deleteAllStudents() {
+      if (students.length === 0) {
+        alert("There are no enrolled students to delete.");
+        return;
+      }
+      if (!confirm(`Warning: Are you sure you want to delete ALL ${students.length} enrolled students? This will purge all student profiles and their registrations.`)) {
+        return;
+      }
+      students = [];
+      registrations = [];
+      saveState();
+      renderStudents();
+      renderRegistrations();
+      onAttEventChange();
+      renderReports();
+      renderInteractiveCharts();
+      alert("All enrolled students data has been deleted.");
+    }
+
+    function resetStudentsDefault() {
+      if (!confirm("Restore the default roster of 20 enrolled students?")) {
+        return;
+      }
+      students = JSON.parse(JSON.stringify(initialStudents));
+      saveState();
+      renderStudents();
+      renderRegistrations();
+      onAttEventChange();
+      renderReports();
+      renderInteractiveCharts();
+      alert("Default student records restored successfully!");
+    }
+
+    function filterStudents() {
+      const q = (document.getElementById('searchStudentInput')?.value || '').toLowerCase();
+      const rows = document.querySelectorAll('#studentTableBody tr');
+      rows.forEach(tr => {
+        const text = tr.innerText.toLowerCase();
+        tr.style.display = text.includes(q) ? '' : 'none';
+      });
     }
 
     // ========================================================================
