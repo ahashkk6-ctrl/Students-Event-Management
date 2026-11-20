@@ -148,19 +148,24 @@
       pointer-events: none;
     }
 
-    .college-logo-badge {
-      width: 48px;
-      height: 48px;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 14px;
-      display: flex;
+    .college-logo-box {
+      background: #ffffff;
+      padding: 6px 12px;
+      border-radius: 12px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      color: #a5b4fc;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+      height: 52px;
+    }
+
+    .college-logo-img {
+      height: 40px;
+      width: auto;
+      max-width: 150px;
+      object-fit: contain;
+      display: block;
     }
 
     .pulse-dot {
@@ -203,59 +208,378 @@
     }
 
     /* ==========================================================================
-       4. NAVIGATION TABS
+       4. VERTICAL SIDEBAR NAVIGATION & MAIN WRAPPER
        ========================================================================== */
-    .custom-nav-tabs {
-      border-bottom: 2px solid var(--border-color);
-      gap: 6px;
-      padding-bottom: 0;
-      margin-bottom: 24px;
-      overflow-x: auto;
-      flex-wrap: nowrap;
-      scrollbar-width: none;
+    .app-sidebar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      background: linear-gradient(180deg, #090e1a 0%, #0d1527 35%, #151e36 70%, #1e1b4b 100%);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 1040;
+      display: flex;
+      flex-direction: column;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.25);
     }
 
-    .custom-nav-tabs::-webkit-scrollbar {
-      display: none;
+    .sidebar-header {
+      padding: 18px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      height: 72px;
     }
 
-    .custom-nav-tabs .nav-link {
-      color: var(--text-secondary);
+    .sidebar-brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
+      flex-shrink: 0;
+    }
+
+    .sidebar-brand-text {
+      white-space: nowrap;
+      overflow: hidden;
+      transition: opacity 0.2s ease, width 0.2s ease;
+    }
+
+    .sidebar-toggle-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .sidebar-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
+    .sidebar-nav {
+      padding: 16px 0;
+      flex-grow: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-nav-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      padding: 8px 20px 4px 20px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .sidebar-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px;
+      margin: 2px 12px;
+      border-radius: 10px;
+      color: #94a3b8;
       background: transparent;
       border: none;
-      border-radius: var(--radius-md) var(--radius-md) 0 0;
-      padding: 12px 18px;
+      border-left: 4px solid transparent;
+      text-align: left;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 600;
       font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
       white-space: nowrap;
-      transition: all var(--transition-fast);
+      position: relative;
+      text-decoration: none;
     }
 
-    .custom-nav-tabs .nav-link:hover {
-      color: var(--primary);
-      background-color: var(--primary-subtle);
+    .sidebar-nav-item i {
+      font-size: 1.15rem;
+      width: 22px;
+      text-align: center;
+      flex-shrink: 0;
+      color: #94a3b8;
+      transition: color 0.2s ease;
     }
 
-    .custom-nav-tabs .nav-link.active {
-      color: var(--primary);
-      background: transparent;
-      font-weight: 700;
+    .sidebar-nav-item:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(3px);
     }
 
-    .custom-nav-tabs .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
+    .sidebar-nav-item:hover i {
+      color: #ffffff;
+    }
+
+    .sidebar-nav-item.active {
+      color: #ffffff;
+      background: linear-gradient(90deg, rgba(99, 102, 241, 0.3) 0%, rgba(99, 102, 241, 0.08) 100%);
+      border-left: 4px solid #6366f1;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar-nav-item.active i {
+      color: #818cf8;
+    }
+
+    .sidebar-footer {
+      padding: 16px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-collapse-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .sidebar-collapse-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+    }
+
+    /* Main Content Wrapper shifted by sidebar */
+    .main-wrapper {
+      margin-left: 250px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background-color: var(--bg-page);
+    }
+
+    /* Collapsed Sidebar State (Icons Only) */
+    body.sidebar-collapsed .app-sidebar {
+      width: 76px;
+    }
+
+    body.sidebar-collapsed .main-wrapper {
+      margin-left: 76px;
+    }
+
+    body.sidebar-collapsed .sidebar-brand-text,
+    body.sidebar-collapsed .sidebar-nav-title,
+    body.sidebar-collapsed .nav-label,
+    body.sidebar-collapsed .sidebar-footer-info {
+      display: none !important;
+    }
+
+    body.sidebar-collapsed .sidebar-header {
+      justify-content: center;
+      padding: 18px 10px;
+    }
+
+    body.sidebar-collapsed .sidebar-nav-item {
+      justify-content: center;
+      padding: 14px 0;
+      margin: 4px 8px;
+    }
+
+    body.sidebar-collapsed .sidebar-collapse-btn {
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    body.sidebar-collapsed .sidebar-toggle-btn {
+      display: none !important;
+    }
+
+    /* Mobile Drawer & Backdrop */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: var(--primary-gradient);
-      border-radius: 3px 3px 0 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1035;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .sidebar-backdrop.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .mobile-toggle-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.15rem;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .mobile-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+
+    @media (max-width: 767.98px) {
+      .app-sidebar {
+        left: -270px;
+        width: 250px;
+        z-index: 1050;
+      }
+
+      .app-sidebar.mobile-open {
+        left: 0;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      }
+
+      .main-wrapper {
+        margin-left: 0 !important;
+      }
+
+      .college-title {
+        font-size: 1rem !important;
+      }
+    }
+
+    /* Stat Cards for Students Page */
+    .stat-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--card-shadow);
+      transition: all var(--transition-normal);
+      height: 100%;
+    }
+
+    .stat-card:hover {
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .stat-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .stat-card-icon.icon-primary {
+      background: var(--primary-subtle);
+      color: var(--primary);
+    }
+
+    .stat-card-icon.icon-secondary {
+      background: var(--secondary-subtle);
+      color: var(--secondary);
+    }
+
+    .stat-card-icon.icon-warning {
+      background: var(--accent-warning-subtle);
+      color: var(--accent-warning);
+    }
+
+    .stat-card-content {
+      flex-grow: 1;
+      min-width: 0;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .stat-value {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .stat-desc {
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .btn-action-danger {
+      background: transparent;
+      color: var(--accent-danger);
+      border: 1px solid var(--accent-danger-subtle);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .btn-action-danger:hover {
+      background: var(--accent-danger);
+      color: #ffffff;
+      border-color: var(--accent-danger);
     }
 
     /* ==========================================================================
@@ -555,82 +879,195 @@
 </head>
 <body>
 
-  <!-- ========================================================================
-       TOP HEADER & NAVIGATION
-       ======================================================================== -->
-  <header class="header-banner">
-    <div class="container-fluid">
-      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
-        <!-- Brand Info -->
-        <div class="d-flex align-items-center gap-3">
-          <div class="college-logo-badge">
+  <div class="app-layout">
+
+    <!-- ========================================================================
+         LEFT VERTICAL SIDEBAR
+         ======================================================================== -->
+    <aside class="app-sidebar" id="appSidebar">
+      <!-- Sidebar Header -->
+      <div class="sidebar-header">
+        <div class="d-flex align-items-center gap-2">
+          <div class="sidebar-brand-badge">
             <i class="fa-solid fa-graduation-cap"></i>
           </div>
-          <div>
-            <h4 class="fw-bold mb-0 text-white">VELALAR COLLEGE OF ENGINEERING AND TECHNOLOGY</h4>
-            <div class="d-flex align-items-center gap-2 mt-1">
-              <span class="badge bg-white bg-opacity-10 text-white-50 px-2 py-1 text-xs">Autonomous</span>
-              <span class="text-white-50 small">Department of Information Technology</span>
-              <span class="text-white-50 small d-none d-md-inline">•</span>
-              <span class="badge bg-indigo-500 bg-opacity-25 text-info px-2 py-1 text-xs d-none d-md-inline">Scenario 6: Smart Campus</span>
+          <div class="sidebar-brand-text">
+            <span class="fw-bold text-white d-block" style="font-size: 0.95rem; line-height: 1.2;">Smart Campus</span>
+            <span class="text-white-50" style="font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;">VCET IT Portal</span>
+          </div>
+        </div>
+        <button class="sidebar-toggle-btn d-none d-md-flex" id="sidebarCollapseBtnTop" onclick="toggleSidebarCollapse()" title="Collapse / Expand Sidebar">
+          <i class="fa-solid fa-angles-left"></i>
+        </button>
+      </div>
+
+      <!-- Sidebar Navigation Menu -->
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-title">MAIN NAVIGATION</div>
+        <button class="sidebar-nav-item active" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button" title="Students">
+          <i class="fa-solid fa-user-graduate"></i>
+          <span class="nav-label">Students</span>
+        </button>
+        <button class="sidebar-nav-item" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button" title="Campus Events">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span class="nav-label">Campus Events</span>
+        </button>
+        <button class="sidebar-nav-item" id="reg-tab" data-bs-toggle="tab" data-bs-target="#registration" type="button" title="Event Registration">
+          <i class="fa-solid fa-id-card-clip"></i>
+          <span class="nav-label">Event Registration</span>
+        </button>
+        <button class="sidebar-nav-item" id="att-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button" title="Attendance & Feedback">
+          <i class="fa-solid fa-clipboard-user"></i>
+          <span class="nav-label">Attendance & Feedback</span>
+        </button>
+        <button class="sidebar-nav-item" id="rep-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" title="Reports & Live Visuals">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span class="nav-label">Reports & Live Visuals</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <button class="sidebar-collapse-btn d-none d-md-flex" id="sidebarCollapseBtnBottom" onclick="toggleSidebarCollapse()" title="Collapse / Expand Sidebar">
+          <i class="fa-solid fa-angles-left" id="collapseIcon"></i>
+          <span class="nav-label">Collapse Menu</span>
+        </button>
+        <div class="sidebar-footer-info">
+          <span class="badge bg-success bg-opacity-25 text-emerald border border-success border-opacity-25 text-xs">
+            <span class="pulse-dot"></span> System Live
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeMobileSidebar()"></div>
+
+    <!-- ========================================================================
+         MAIN CONTENT WRAPPER
+         ======================================================================== -->
+    <div class="main-wrapper" id="mainWrapper">
+
+      <!-- TOP HEADER -->
+      <header class="header-banner">
+        <div class="container-fluid">
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+            <!-- Brand Info & Mobile Toggle -->
+            <div class="d-flex align-items-center gap-3">
+              <!-- Mobile Hamburger Toggle -->
+              <button class="mobile-toggle-btn d-md-none" id="mobileSidebarToggle" onclick="toggleMobileSidebar()" aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars"></i>
+              </button>
+
+              <!-- VCET Logo with white rounded background -->
+              <div class="college-logo-box">
+                <img src="assets/vcet-logo.png" alt="Velalar College of Engineering and Technology Logo" class="college-logo-img">
+              </div>
+
+              <!-- College & Department Info -->
+              <div>
+                <h4 class="fw-bold mb-0 text-white college-title">VELALAR COLLEGE OF ENGINEERING AND TECHNOLOGY</h4>
+                <div class="d-flex align-items-center gap-2 mt-1 flex-wrap">
+                  <span class="badge bg-white bg-opacity-10 text-white-50 px-2 py-1 text-xs">Autonomous</span>
+                  <span class="text-white-50 small">Department of Information Technology</span>
+                  <span class="text-white-50 small d-none d-md-inline">•</span>
+                  <span class="badge bg-indigo-500 bg-opacity-25 text-info px-2 py-1 text-xs d-none d-md-inline">Scenario 6: Smart Campus</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Controls: Theme Toggle & Live Badge -->
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge bg-success bg-opacity-25 text-emerald border border-success border-opacity-25 px-3 py-2 text-xs d-flex align-items-center">
+                <span class="pulse-dot"></span> System Live
+              </span>
+              <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                <i class="fa-solid fa-moon"></i> <span>Dark Mode</span>
+              </button>
             </div>
           </div>
         </div>
+      </header>
 
-        <!-- Controls: Theme Toggle & Live Badge -->
-        <div class="d-flex align-items-center gap-2">
-          <span class="badge bg-success bg-opacity-25 text-emerald border border-success border-opacity-25 px-3 py-2 text-xs d-flex align-items-center">
-            <span class="pulse-dot"></span> System Live
-          </span>
-          <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-            <i class="fa-solid fa-moon"></i> <span>Dark Mode</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
+      <!-- MAIN APP CONTAINER -->
+      <main class="container-fluid px-3 px-md-4 py-4">
 
-  <!-- ========================================================================
-       MAIN APP CONTAINER
-       ======================================================================== -->
-  <main class="container-fluid px-3 px-md-4 py-4">
+        <!-- Tab Contents -->
+        <div class="tab-content" id="tabContent">
 
-    <!-- Navigation Tabs -->
-    <ul class="nav custom-nav-tabs" id="mainTabs" role="tablist">
-      <li class="nav-item">
-        <button class="nav-link active" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button">
-          <i class="fa-solid fa-user-graduate"></i> Students
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button">
-          <i class="fa-solid fa-calendar-check"></i> Campus Events
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" id="reg-tab" data-bs-toggle="tab" data-bs-target="#registration" type="button">
-          <i class="fa-solid fa-id-card-clip"></i> Event Registration
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" id="att-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button">
-          <i class="fa-solid fa-clipboard-user"></i> Attendance & Feedback
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" id="rep-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button">
-          <i class="fa-solid fa-chart-pie"></i> Reports & Live Visuals
-        </button>
-      </li>
-    </ul>
+          <!-- ====================================================================
+               TAB 1: STUDENTS MANAGEMENT
+               ==================================================================== -->
+          <div class="tab-pane fade show active" id="students" role="tabpanel">
 
-    <!-- Tab Contents -->
-    <div class="tab-content" id="tabContent">
+            <!-- 1. Students Stat Cards Row -->
+            <div class="row g-3 mb-4">
+              <div class="col-sm-6 col-xl-4">
+                <div class="stat-card">
+                  <div class="stat-card-icon icon-primary">
+                    <i class="fa-solid fa-users"></i>
+                  </div>
+                  <div class="stat-card-content">
+                    <span class="stat-label">Total Enrolled</span>
+                    <h3 class="stat-value" id="statTotalStudents">20</h3>
+                    <span class="stat-desc text-success"><i class="fa-solid fa-circle-check"></i> Active Profiles</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-4">
+                <div class="stat-card">
+                  <div class="stat-card-icon icon-secondary">
+                    <i class="fa-solid fa-building-columns"></i>
+                  </div>
+                  <div class="stat-card-content">
+                    <span class="stat-label">Departments</span>
+                    <h3 class="stat-value" id="statTotalDepts">6</h3>
+                    <span class="stat-desc text-secondary"><i class="fa-solid fa-layer-group"></i> Represented</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-xl-4">
+                <div class="stat-card">
+                  <div class="stat-card-icon icon-warning">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                  </div>
+                  <div class="stat-card-content">
+                    <span class="stat-label">Most Populated Year</span>
+                    <h3 class="stat-value" id="statTopYear">Year 3</h3>
+                    <span class="stat-desc text-warning" id="statTopYearSub"><i class="fa-solid fa-chart-line"></i> 8 Students</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      <!-- ====================================================================
-           TAB 1: STUDENTS MANAGEMENT
-           ==================================================================== -->
-      <div class="tab-pane fade show active" id="students" role="tabpanel">
+            <!-- 2. Live Interactive Student Analytics Charts Row -->
+            <div class="row g-4 mb-4">
+              <!-- Doughnut Chart: Students by Department -->
+              <div class="col-lg-6">
+                <div class="app-card">
+                  <div class="card-header-styled">
+                    <h5><span class="icon-square"><i class="fa-solid fa-chart-pie"></i></span> Students by Department</h5>
+                    <span class="badge-modern badge-primary-soft">Live Doughnut</span>
+                  </div>
+                  <div style="height: 270px; position: relative;">
+                    <canvas id="stuDeptChart"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bar Chart: Students by Year of Study -->
+              <div class="col-lg-6">
+                <div class="app-card">
+                  <div class="card-header-styled">
+                    <h5><span class="icon-square"><i class="fa-solid fa-chart-column"></i></span> Students by Year of Study</h5>
+                    <span class="badge-modern badge-info-soft">Year 1 to Year 4</span>
+                  </div>
+                  <div style="height: 270px; position: relative;">
+                    <canvas id="stuYearChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
         <div class="row g-4">
           <!-- Left: Add Student Form -->
           <div class="col-lg-4">
@@ -699,6 +1136,7 @@
                       <th>Year</th>
                       <th>Email</th>
                       <th>Phone</th>
+                      <th class="text-center" style="width: 75px;">Action</th>
                     </tr>
                   </thead>
                   <tbody id="studentTableBody"></tbody>
@@ -1114,6 +1552,8 @@
 
     </div>
   </main>
+</div><!-- /#mainWrapper -->
+</div><!-- /.app-layout -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -1133,6 +1573,7 @@
       localStorage.setItem('vcet_theme', next);
       updateThemeButton(next);
       renderInteractiveCharts(); // Refresh charts to adapt theme colors
+      updateStudentStatsAndCharts(); // Refresh student charts for theme colors
     }
 
     function updateThemeButton(theme) {
@@ -1277,13 +1718,14 @@
       const regStu = document.getElementById('regStuSelect');
       regStu.innerHTML = '';
 
+      const yearBadges = {
+        1: '<span class="badge-modern badge-neutral-soft">Year 1</span>',
+        2: '<span class="badge-modern badge-info-soft">Year 2</span>',
+        3: '<span class="badge-modern badge-primary-soft">Year 3</span>',
+        4: '<span class="badge-modern badge-warning-soft">Year 4</span>'
+      };
+
       students.forEach(s => {
-        const yearBadges = {
-          1: '<span class="badge-modern badge-neutral-soft">Year 1</span>',
-          2: '<span class="badge-modern badge-info-soft">Year 2</span>',
-          3: '<span class="badge-modern badge-primary-soft">Year 3</span>',
-          4: '<span class="badge-modern badge-warning-soft">Year 4</span>'
-        };
         tbody.innerHTML += `
           <tr>
             <td class="fw-bold font-monospace text-primary">${s.id}</td>
@@ -1292,12 +1734,284 @@
             <td>${yearBadges[s.year] || s.year}</td>
             <td class="text-secondary">${s.email}</td>
             <td class="text-secondary">${s.phone}</td>
+            <td class="text-center">
+              <button type="button" class="btn-action-danger" onclick="deleteStudent('${s.id}')" title="Delete Student ${s.id}">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
           </tr>
         `;
         regStu.innerHTML += `<option value="${s.id}">${s.id} - ${s.name} (${s.dept})</option>`;
       });
 
       document.getElementById('studentCountBadge').textContent = `${students.length} Students`;
+      updateStudentStatsAndCharts();
+    }
+
+    // ========================================================================
+    // STUDENTS LIVE STATS & CHARTS CONTROLLER
+    // ========================================================================
+    let stuDeptChartInstance = null;
+    let stuYearChartInstance = null;
+
+    function updateStudentStatsAndCharts() {
+      // 1. Calculate Stats
+      const totalCount = students.length;
+      const uniqueDepts = [...new Set(students.map(s => s.dept))];
+      const deptsCount = uniqueDepts.length;
+
+      const yearCounts = { 1: 0, 2: 0, 3: 0, 4: 0 };
+      students.forEach(s => {
+        const y = parseInt(s.year);
+        if (yearCounts[y] !== undefined) yearCounts[y]++;
+      });
+
+      let topYear = 1;
+      let topYearCount = 0;
+      [1, 2, 3, 4].forEach(y => {
+        if (yearCounts[y] > topYearCount) {
+          topYearCount = yearCounts[y];
+          topYear = y;
+        }
+      });
+
+      // Update Stat Cards in DOM
+      const statTotalEl = document.getElementById('statTotalStudents');
+      const statDeptsEl = document.getElementById('statTotalDepts');
+      const statTopYearEl = document.getElementById('statTopYear');
+      const statTopYearSubEl = document.getElementById('statTopYearSub');
+
+      if (statTotalEl) statTotalEl.textContent = totalCount;
+      if (statDeptsEl) statDeptsEl.textContent = deptsCount;
+      if (statTopYearEl) statTopYearEl.textContent = `Year ${topYear}`;
+      if (statTopYearSubEl) statTopYearSubEl.innerHTML = `<i class="fa-solid fa-chart-line"></i> ${topYearCount} Students`;
+
+      // 2. Chart.js Theme Configuration
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const textColor = isDark ? '#cbd5e1' : '#475569';
+      const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+      const cardBg = isDark ? '#111827' : '#ffffff';
+
+      // 3. Render / Update Doughnut Chart (Students by Department)
+      const deptCounts = {};
+      students.forEach(s => {
+        deptCounts[s.dept] = (deptCounts[s.dept] || 0) + 1;
+      });
+
+      const deptLabels = Object.keys(deptCounts);
+      const deptData = Object.values(deptCounts);
+      const deptColors = [
+        '#4f46e5', '#0ea5e9', '#10b981', '#f59e0b',
+        '#ec4899', '#8b5cf6', '#06b6d4', '#f97316'
+      ];
+
+      const deptCanvas = document.getElementById('stuDeptChart');
+      if (deptCanvas) {
+        if (stuDeptChartInstance) {
+          stuDeptChartInstance.destroy();
+        }
+        stuDeptChartInstance = new Chart(deptCanvas, {
+          type: 'doughnut',
+          data: {
+            labels: deptLabels,
+            datasets: [{
+              data: deptData,
+              backgroundColor: deptColors.slice(0, deptLabels.length),
+              borderColor: cardBg,
+              borderWidth: 2,
+              hoverOffset: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                labels: {
+                  color: textColor,
+                  font: { family: 'Inter', size: 11, weight: '500' },
+                  boxWidth: 12,
+                  padding: 10
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                    const val = ctx.parsed;
+                    const pct = total > 0 ? ((val / total) * 100).toFixed(1) : 0;
+                    return ` ${ctx.label}: ${val} (${pct}%)`;
+                  }
+                }
+              }
+            },
+            cutout: '62%'
+          }
+        });
+      }
+
+      // 4. Render / Update Bar Chart (Students by Year of Study)
+      const yearCanvas = document.getElementById('stuYearChart');
+      if (yearCanvas) {
+        if (stuYearChartInstance) {
+          stuYearChartInstance.destroy();
+        }
+        stuYearChartInstance = new Chart(yearCanvas, {
+          type: 'bar',
+          data: {
+            labels: ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+            datasets: [{
+              label: 'Students',
+              data: [yearCounts[1] || 0, yearCounts[2] || 0, yearCounts[3] || 0, yearCounts[4] || 0],
+              backgroundColor: [
+                'rgba(148, 163, 184, 0.85)',
+                'rgba(56, 189, 248, 0.85)',
+                'rgba(99, 102, 241, 0.85)',
+                'rgba(245, 158, 11, 0.85)'
+              ],
+              borderColor: [
+                '#64748b',
+                '#0284c7',
+                '#4f46e5',
+                '#d97706'
+              ],
+              borderWidth: 1.5,
+              borderRadius: 8,
+              maxBarThickness: 45
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    return ` Enrolled: ${ctx.parsed.y} students`;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: {
+                  color: textColor,
+                  font: { family: 'Inter', size: 11, weight: '500' }
+                }
+              },
+              y: {
+                beginAtZero: true,
+                grid: { color: gridColor },
+                ticks: {
+                  stepSize: 1,
+                  precision: 0,
+                  color: textColor,
+                  font: { family: 'Inter', size: 11 }
+                }
+              }
+            }
+          }
+        });
+      }
+    }
+
+    function deleteStudent(id) {
+      const student = students.find(s => s.id === id);
+      const name = student ? student.name : id;
+      if (!confirm(`Are you sure you want to remove student "${name}" (${id})?`)) {
+        return;
+      }
+      students = students.filter(s => s.id !== id);
+      registrations = registrations.filter(r => r.stuId !== id);
+      saveState();
+      renderStudents();
+      renderRegistrations();
+      onAttEventChange();
+      renderReports();
+      renderInteractiveCharts();
+    }
+
+    // ========================================================================
+    // SIDEBAR NAVIGATION & COLLAPSE CONTROLLER
+    // ========================================================================
+    function initSidebar() {
+      const isCollapsed = localStorage.getItem('smart_sidebar_collapsed') === 'true';
+      if (isCollapsed) {
+        document.body.classList.add('sidebar-collapsed');
+        updateCollapseIcons(true);
+      }
+
+      const navItems = document.querySelectorAll('.sidebar-nav-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          navItems.forEach(btn => btn.classList.remove('active'));
+          item.classList.add('active');
+
+          const targetId = item.getAttribute('data-bs-target');
+          if (targetId) {
+            document.querySelectorAll('.tab-pane').forEach(tp => {
+              tp.classList.remove('show', 'active');
+            });
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+              targetEl.classList.add('show', 'active');
+            }
+
+            if (targetId === '#reports') {
+              setTimeout(renderInteractiveCharts, 80);
+            } else if (targetId === '#students') {
+              setTimeout(updateStudentStatsAndCharts, 80);
+            }
+          }
+
+          closeMobileSidebar();
+        });
+      });
+    }
+
+    function toggleSidebarCollapse() {
+      document.body.classList.toggle('sidebar-collapsed');
+      const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+      localStorage.setItem('smart_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+      updateCollapseIcons(isCollapsed);
+
+      setTimeout(() => {
+        if (stuDeptChartInstance) stuDeptChartInstance.resize();
+        if (stuYearChartInstance) stuYearChartInstance.resize();
+        window.dispatchEvent(new Event('resize'));
+      }, 320);
+    }
+
+    function updateCollapseIcons(isCollapsed) {
+      const icon = document.getElementById('collapseIcon');
+      if (icon) {
+        icon.className = isCollapsed ? 'fa-solid fa-angles-right' : 'fa-solid fa-angles-left';
+      }
+      const topBtnIcon = document.querySelector('#sidebarCollapseBtnTop i');
+      if (topBtnIcon) {
+        topBtnIcon.className = isCollapsed ? 'fa-solid fa-angles-right' : 'fa-solid fa-angles-left';
+      }
+    }
+
+    function toggleMobileSidebar() {
+      const sidebar = document.getElementById('appSidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (sidebar && backdrop) {
+        sidebar.classList.toggle('mobile-open');
+        backdrop.classList.toggle('show');
+      }
+    }
+
+    function closeMobileSidebar() {
+      const sidebar = document.getElementById('appSidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (sidebar && backdrop) {
+        sidebar.classList.remove('mobile-open');
+        backdrop.classList.remove('show');
+      }
     }
 
     function renderEvents() {
@@ -2016,6 +2730,7 @@
     // Window Init
     window.onload = () => {
       initTheme();
+      initSidebar();
       renderStudents();
       renderEvents();
     };
