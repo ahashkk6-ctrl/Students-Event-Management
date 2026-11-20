@@ -14,6 +14,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   
+  <!-- Chart.js and Plotly.js CDNs for Live Interactive Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  
   <style>
     /* ==========================================================================
        1. THEME VARIABLES (LIGHT & DARK MODE)
@@ -95,7 +99,7 @@
     }
 
     /* ==========================================================================
-       2. TYPOGRAPHY & BASE STYLES
+       2. BASE & TYPOGRAPHY
        ========================================================================== */
     * {
       box-sizing: border-box;
@@ -120,12 +124,12 @@
     }
 
     /* ==========================================================================
-       3. HEADER & HERO BANNER
+       3. HEADER & CONTROLS
        ========================================================================== */
     .header-banner {
       background: var(--header-bg);
       color: #ffffff;
-      padding: 24px 32px;
+      padding: 22px 32px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
       position: relative;
@@ -205,7 +209,7 @@
       border-bottom: 2px solid var(--border-color);
       gap: 6px;
       padding-bottom: 0;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       overflow-x: auto;
       flex-wrap: nowrap;
       scrollbar-width: none;
@@ -275,7 +279,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border-color);
     }
@@ -328,11 +332,6 @@
       outline: none;
     }
 
-    .form-control::placeholder {
-      color: var(--text-muted);
-      opacity: 0.7;
-    }
-
     /* Buttons */
     .btn-brand-primary {
       background: var(--primary-gradient);
@@ -358,10 +357,6 @@
       filter: brightness(1.05);
     }
 
-    .btn-brand-primary:active {
-      transform: translateY(0);
-    }
-
     .btn-brand-success {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: #ffffff;
@@ -379,24 +374,29 @@
       box-shadow: 0 8px 18px rgba(16, 185, 129, 0.35);
     }
 
-    .btn-brand-secondary {
-      background-color: var(--bg-surface-elevated);
+    .btn-action-outline {
+      background-color: var(--bg-surface);
       color: var(--text-secondary);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
-      padding: 8px 14px;
+      padding: 8px 15px;
       font-weight: 600;
       font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       transition: all var(--transition-fast);
+      cursor: pointer;
     }
 
-    .btn-brand-secondary:hover {
-      background-color: var(--border-color);
+    .btn-action-outline:hover {
+      background-color: var(--bg-surface-elevated);
       color: var(--text-main);
+      border-color: var(--border-focus);
     }
 
     /* ==========================================================================
-       6. TABLES & DATA LISTS
+       6. TABLES, BADGES & INTERACTIVE CHARTS
        ========================================================================== */
     .table-container {
       border: 1px solid var(--border-color);
@@ -433,10 +433,6 @@
       background-color: var(--primary-subtle);
     }
 
-    .custom-table tbody tr:last-child {
-      border-bottom: none;
-    }
-
     .custom-table td {
       padding: 13px 16px;
       vertical-align: middle;
@@ -452,7 +448,6 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      letter-spacing: 0.02em;
     }
 
     .badge-primary-soft { background-color: var(--primary-subtle); color: var(--primary); }
@@ -462,7 +457,6 @@
     .badge-info-soft { background-color: var(--secondary-subtle); color: var(--secondary); }
     .badge-neutral-soft { background-color: var(--bg-surface-elevated); color: var(--text-secondary); }
 
-    /* Progress Bar */
     .progress-custom {
       height: 7px;
       background-color: var(--bg-surface-elevated);
@@ -475,25 +469,22 @@
       background: var(--primary-gradient);
     }
 
-    /* Chart Cards */
+    /* Live Chart Box */
     .chart-box {
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      overflow: hidden;
       background: var(--bg-surface);
       box-shadow: var(--card-shadow);
       transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
     }
 
     .chart-box:hover {
-      transform: translateY(-4px);
       box-shadow: var(--card-shadow-hover);
-    }
-
-    .chart-box img {
-      width: 100%;
-      height: auto;
-      display: block;
+      transform: translateY(-3px);
     }
 
     .chart-header {
@@ -502,7 +493,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: var(--bg-surface);
+      background-color: var(--bg-surface-elevated);
+    }
+
+    .chart-body {
+      padding: 18px;
+      flex-grow: 1;
+      position: relative;
+      min-height: 290px;
     }
 
     /* Alerts */
@@ -547,7 +545,7 @@
           </div>
         </div>
 
-        <!-- Controls: Theme Toggle & Repo Link -->
+        <!-- Controls: Theme Toggle & Live Badge -->
         <div class="d-flex align-items-center gap-2">
           <span class="badge bg-success bg-opacity-25 text-emerald border border-success border-opacity-25 px-3 py-2 text-xs d-flex align-items-center">
             <span class="pulse-dot"></span> System Live
@@ -589,7 +587,7 @@
       </li>
       <li class="nav-item">
         <button class="nav-link" id="rep-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button">
-          <i class="fa-solid fa-chart-pie"></i> Reports & Visuals
+          <i class="fa-solid fa-chart-pie"></i> Reports & Live Visuals
         </button>
       </li>
     </ul>
@@ -881,13 +879,75 @@
       </div>
 
       <!-- ====================================================================
-           TAB 5: REPORTS & VISUALIZATIONS
+           TAB 5: LIVE REPORTS & INTERACTIVE VISUALIZATIONS
            ==================================================================== -->
       <div class="tab-pane fade" id="reports" role="tabpanel">
-        <div class="card-header-styled mb-3">
-          <h5><span class="icon-square"><i class="fa-solid fa-chart-line"></i></span> Institutional Participation Reports & Visual Analytics</h5>
+
+        <!-- Top Action Bar & Live Simulation Form -->
+        <div class="app-card mb-4">
+          <div class="card-header-styled">
+            <h5><span class="icon-square"><i class="fa-solid fa-sliders"></i></span> Live Entry Simulator & Instant Chart Refresh</h5>
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn-action-outline" onclick="exportCSV()"><i class="fa-solid fa-file-arrow-down text-primary"></i> Export CSV</button>
+              <button class="btn-action-outline" onclick="resetData()"><i class="fa-solid fa-arrow-rotate-left text-danger"></i> Reset to Defaults</button>
+            </div>
+          </div>
+
+          <form id="quickSimForm" class="row g-3 align-items-end">
+            <div class="col-md-3">
+              <label class="form-label">Student Name</label>
+              <input type="text" class="form-control" id="simName" placeholder="e.g. Priya Mohan" required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Department</label>
+              <select class="form-select" id="simDept">
+                <option>Information Technology</option>
+                <option>Computer Science</option>
+                <option>Artificial Intelligence & Data Science</option>
+                <option>Electronics and Communication</option>
+                <option>Mechanical Engineering</option>
+                <option>Civil Engineering</option>
+              </select>
+            </div>
+            <div class="col-md-1">
+              <label class="form-label">Year</label>
+              <select class="form-select" id="simYear">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Event</label>
+              <select class="form-select" id="simEvent" required></select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="simStatus">
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+              </select>
+            </div>
+            <div class="col-md-1">
+              <label class="form-label">Rating</label>
+              <select class="form-select" id="simRating">
+                <option value="5">5 ★</option>
+                <option value="4">4 ★</option>
+                <option value="3">3 ★</option>
+                <option value="2">2 ★</option>
+                <option value="1">1 ★</option>
+              </select>
+            </div>
+            <div class="col-md-1">
+              <button type="submit" class="btn-brand-primary w-100" title="Simulate entry and recalculate all 6 charts in real-time">
+                <i class="fa-solid fa-bolt"></i> Add
+              </button>
+            </div>
+          </form>
         </div>
 
+        <!-- Summary Tables -->
         <div class="row g-4 mb-4">
           <!-- Event-Wise Summary -->
           <div class="col-lg-8">
@@ -934,66 +994,90 @@
           </div>
         </div>
 
-        <!-- Python Visualizations Gallery -->
+        <!-- Live Interactive Visualizations Suite -->
         <div class="card-header-styled mb-3">
-          <h5><span class="icon-square"><i class="fa-solid fa-images"></i></span> Python Data Science Visualizations (Matplotlib & Seaborn)</h5>
+          <h5><span class="icon-square"><i class="fa-solid fa-chart-line"></i></span> Live Interactive Visualizations Suite (Chart.js & Plotly.js)</h5>
+          <span class="badge-modern badge-success-soft"><i class="fa-solid fa-arrows-rotate"></i> Real-time Auto Refresh</span>
         </div>
-        <div class="row g-4 mb-5" id="visGallery">
+
+        <div class="row g-4 mb-5" id="interactiveGallery">
+          <!-- Chart 1: Department Participation -->
           <div class="col-md-6 col-lg-4">
             <div class="chart-box">
               <div class="chart-header">
                 <span class="fw-bold small">1. Department Participation</span>
-                <span class="badge-modern badge-primary-soft">Bar Chart</span>
+                <span class="badge-modern badge-primary-soft">Chart.js Bar</span>
               </div>
-              <img src="data_analysis/visualizations/01_department_participation_barchart.png" alt="Department Participation">
+              <div class="chart-body">
+                <canvas id="chartDeptParticipation"></canvas>
+              </div>
             </div>
           </div>
+
+          <!-- Chart 2: Capacity vs Attendance -->
           <div class="col-md-6 col-lg-4">
             <div class="chart-box">
               <div class="chart-header">
                 <span class="fw-bold small">2. Capacity vs Attendance</span>
                 <span class="badge-modern badge-success-soft">Grouped Bar</span>
               </div>
-              <img src="data_analysis/visualizations/02_event_attendance_comparison.png" alt="Capacity vs Attendance">
+              <div class="chart-body">
+                <canvas id="chartCapacityAttendance"></canvas>
+              </div>
             </div>
           </div>
+
+          <!-- Chart 3: Event Type Distribution -->
           <div class="col-md-6 col-lg-4">
             <div class="chart-box">
               <div class="chart-header">
                 <span class="fw-bold small">3. Event Type Distribution</span>
-                <span class="badge-modern badge-info-soft">Pie Chart</span>
+                <span class="badge-modern badge-info-soft">Donut Chart</span>
               </div>
-              <img src="data_analysis/visualizations/03_event_type_distribution_piechart.png" alt="Event Type Share">
+              <div class="chart-body d-flex align-items-center justify-content-center">
+                <div style="max-height: 260px; max-width: 260px; width: 100%;">
+                  <canvas id="chartEventType"></canvas>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- Chart 4: Year of Study Breakdown -->
           <div class="col-md-6 col-lg-4">
             <div class="chart-box">
               <div class="chart-header">
                 <span class="fw-bold small">4. Year of Study Breakdown</span>
                 <span class="badge-modern badge-warning-soft">Count Plot</span>
               </div>
-              <img src="data_analysis/visualizations/04_year_wise_participation_countplot.png" alt="Year-wise Participation">
+              <div class="chart-body">
+                <canvas id="chartYearBreakdown"></canvas>
+              </div>
             </div>
           </div>
+
+          <!-- Chart 5: Student Feedback Boxplot (Plotly.js) -->
           <div class="col-md-6 col-lg-4">
             <div class="chart-box">
               <div class="chart-header">
                 <span class="fw-bold small">5. Student Feedback Scores</span>
-                <span class="badge-modern badge-danger-soft">Box Plot</span>
+                <span class="badge-modern badge-danger-soft">Plotly Box Plot</span>
               </div>
-              <img src="data_analysis/visualizations/05_feedback_rating_boxplot.png" alt="Feedback Boxplot">
+              <div class="chart-body p-1" id="chartFeedbackBoxplot"></div>
             </div>
           </div>
+
+          <!-- Chart 6: Feature Correlation Heatmap (Plotly.js) -->
           <div class="col-md-6 col-lg-4">
             <div class="chart-box">
               <div class="chart-header">
                 <span class="fw-bold small">6. Feature Correlation Matrix</span>
-                <span class="badge-modern badge-neutral-soft">Heatmap</span>
+                <span class="badge-modern badge-neutral-soft">Plotly Heatmap</span>
               </div>
-              <img src="data_analysis/visualizations/06_participation_correlation_heatmap.png" alt="Correlation Matrix">
+              <div class="chart-body p-1" id="chartCorrelationHeatmap"></div>
             </div>
           </div>
         </div>
+
       </div>
 
     </div>
@@ -1016,6 +1100,7 @@
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('vcet_theme', next);
       updateThemeButton(next);
+      renderInteractiveCharts(); // Refresh charts to adapt theme colors
     }
 
     function updateThemeButton(theme) {
@@ -1030,7 +1115,7 @@
     }
 
     // ========================================================================
-    // SEED DATA & LOCAL PERSISTENCE
+    // BASELINE SEED DATA
     // ========================================================================
     const initialStudents = [
       { id: "25IT001", name: "Aarav Sharma", dept: "Information Technology", year: 3, email: "aarav.it@vcet.ac.in", phone: "9876543210" },
@@ -1076,7 +1161,29 @@
       { regId: 9, studentId: "25IT001", eventId: "EVT102", date: "2026-09-10 09:30:00", status: "Confirmed" },
       { regId: 10, studentId: "25IT003", eventId: "EVT102", date: "2026-09-10 10:00:00", status: "Confirmed" },
       { regId: 11, studentId: "25CS002", eventId: "EVT102", date: "2026-09-10 11:15:00", status: "Confirmed" },
-      { regId: 12, studentId: "25CS004", eventId: "EVT102", date: "2026-09-11 12:45:00", status: "Confirmed" }
+      { regId: 12, studentId: "25CS004", eventId: "EVT102", date: "2026-09-11 12:45:00", status: "Confirmed" },
+      { regId: 13, studentId: "25AD001", eventId: "EVT102", date: "2026-09-11 15:30:00", status: "Confirmed" },
+      { regId: 14, studentId: "25AD002", eventId: "EVT102", date: "2026-09-12 10:00:00", status: "Confirmed" },
+      { regId: 15, studentId: "25AD003", eventId: "EVT102", date: "2026-09-12 11:20:00", status: "Confirmed" },
+      { regId: 16, studentId: "25EC001", eventId: "EVT102", date: "2026-09-13 14:00:00", status: "Confirmed" },
+      { regId: 17, studentId: "25IT006", eventId: "EVT102", date: "2026-09-14 09:00:00", status: "Confirmed" },
+      { regId: 18, studentId: "25CS001", eventId: "EVT103", date: "2026-09-25 10:00:00", status: "Confirmed" },
+      { regId: 19, studentId: "25CS004", eventId: "EVT103", date: "2026-09-25 11:30:00", status: "Confirmed" },
+      { regId: 20, studentId: "25IT002", eventId: "EVT103", date: "2026-09-26 09:15:00", status: "Confirmed" },
+      { regId: 21, studentId: "25IT004", eventId: "EVT103", date: "2026-09-26 14:00:00", status: "Confirmed" },
+      { regId: 22, studentId: "25EC003", eventId: "EVT103", date: "2026-09-27 10:20:00", status: "Confirmed" },
+      { regId: 23, studentId: "25ME001", eventId: "EVT103", date: "2026-09-28 16:40:00", status: "Confirmed" },
+      { regId: 24, studentId: "25CE002", eventId: "EVT103", date: "2026-09-29 11:10:00", status: "Confirmed" },
+      { regId: 25, studentId: "25IT002", eventId: "EVT104", date: "2026-10-01 10:00:00", status: "Confirmed" },
+      { regId: 26, studentId: "25IT005", eventId: "EVT104", date: "2026-10-01 10:45:00", status: "Confirmed" },
+      { regId: 27, studentId: "25CS002", eventId: "EVT104", date: "2026-10-01 11:30:00", status: "Confirmed" },
+      { regId: 28, studentId: "25EC001", eventId: "EVT104", date: "2026-10-02 12:00:00", status: "Confirmed" },
+      { regId: 29, studentId: "25EC002", eventId: "EVT104", date: "2026-10-02 14:15:00", status: "Confirmed" },
+      { regId: 30, studentId: "25AD003", eventId: "EVT104", date: "2026-10-03 15:30:00", status: "Confirmed" },
+      { regId: 31, studentId: "25ME001", eventId: "EVT104", date: "2026-10-03 16:00:00", status: "Confirmed" },
+      { regId: 32, studentId: "25ME002", eventId: "EVT104", date: "2026-10-04 09:20:00", status: "Confirmed" },
+      { regId: 33, studentId: "25CE001", eventId: "EVT104", date: "2026-10-04 10:50:00", status: "Confirmed" },
+      { regId: 34, studentId: "25CE002", eventId: "EVT104", date: "2026-10-04 11:40:00", status: "Confirmed" }
     ];
 
     const initialAttendance = [
@@ -1087,9 +1194,36 @@
       { regId: 5, status: "Present", rating: 5, remarks: "Loved ML problem track", date: "2026-09-15" },
       { regId: 6, status: "Present", rating: 4, remarks: "Great judging panel", date: "2026-09-15" },
       { regId: 7, status: "Present", rating: 4, remarks: "Learned hardware co-design", date: "2026-09-15" },
-      { regId: 8, status: "Absent", rating: null, remarks: "Semester test conflict", date: "2026-09-15" }
+      { regId: 8, status: "Absent", rating: null, remarks: "Semester test conflict", date: "2026-09-15" },
+      { regId: 9, status: "Present", rating: 5, remarks: "Hands-on prompt engineering was awesome", date: "2026-09-22" },
+      { regId: 10, status: "Present", rating: 4, remarks: "Clear guidance from speaker", date: "2026-09-22" },
+      { regId: 11, status: "Present", rating: 5, remarks: "Insightful practical session", date: "2026-09-22" },
+      { regId: 12, status: "Present", rating: 4, remarks: "Good concepts covered", date: "2026-09-22" },
+      { regId: 13, status: "Present", rating: 5, remarks: "Top notch transformer models demo", date: "2026-09-22" },
+      { regId: 14, status: "Present", rating: 4, remarks: "Understood fine-tuning fundamentals", date: "2026-09-22" },
+      { regId: 15, status: "Absent", rating: null, remarks: "Family emergency", date: "2026-09-22" },
+      { regId: 16, status: "Present", rating: 4, remarks: "Helpful for final year project", date: "2026-09-22" },
+      { regId: 17, status: "Present", rating: 5, remarks: "Excellent hands-on session", date: "2026-09-22" },
+      { regId: 18, status: "Present", rating: 4, remarks: "Great industry perspective on cloud", date: "2026-10-05" },
+      { regId: 19, status: "Present", rating: 5, remarks: "Superb speaker", date: "2026-10-05" },
+      { regId: 20, status: "Present", rating: 4, remarks: "Serverless architecture demo", date: "2026-10-05" },
+      { regId: 21, status: "Absent", rating: null, remarks: "Placement interview overlap", date: "2026-10-05" },
+      { regId: 22, status: "Present", rating: 3, remarks: "Theoretical, good baseline", date: "2026-10-05" },
+      { regId: 23, status: "Present", rating: 4, remarks: "Broadened DevOps understanding", date: "2026-10-05" },
+      { regId: 24, status: "Absent", rating: null, remarks: "Absent without prior intimation", date: "2026-10-05" },
+      { regId: 25, status: "Present", rating: 5, remarks: "Vibrant stage performances", date: "2026-10-18" },
+      { regId: 26, status: "Present", rating: 5, remarks: "Amazing music bands", date: "2026-10-18" },
+      { regId: 27, status: "Present", rating: 5, remarks: "Wonderful participation", date: "2026-10-18" },
+      { regId: 28, status: "Present", rating: 4, remarks: "Great sound setup", date: "2026-10-18" },
+      { regId: 29, status: "Present", rating: 5, remarks: "Memorable evening", date: "2026-10-18" },
+      { regId: 30, status: "Present", rating: 4, remarks: "Well managed crowd", date: "2026-10-18" },
+      { regId: 31, status: "Present", rating: 4, remarks: "Dance face-off", date: "2026-10-18" },
+      { regId: 32, status: "Absent", rating: null, remarks: "Sports tournament", date: "2026-10-18" },
+      { regId: 33, status: "Present", rating: 5, remarks: "Creative talent showcased", date: "2026-10-18" },
+      { regId: 34, status: "Present", rating: 5, remarks: "Super fun", date: "2026-10-18" }
     ];
 
+    // LocalStorage State Management
     let students = JSON.parse(localStorage.getItem('smart_students')) || initialStudents;
     let events = JSON.parse(localStorage.getItem('smart_events')) || initialEvents;
     let registrations = JSON.parse(localStorage.getItem('smart_registrations')) || initialRegistrations;
@@ -1103,7 +1237,7 @@
     }
 
     // ========================================================================
-    // RENDER FUNCTIONS
+    // RENDER FUNCTIONS (TABLES & DROPDOWNS)
     // ========================================================================
     function renderStudents() {
       const tbody = document.getElementById('studentTableBody');
@@ -1140,7 +1274,8 @@
       const regEv = document.getElementById('regEvSelect');
       const filterEv = document.getElementById('filterEventSelect');
       const attEv = document.getElementById('attEvSelect');
-      regEv.innerHTML = ''; filterEv.innerHTML = ''; attEv.innerHTML = '';
+      const simEv = document.getElementById('simEvent');
+      regEv.innerHTML = ''; filterEv.innerHTML = ''; attEv.innerHTML = ''; simEv.innerHTML = '';
 
       const typeBadges = {
         'Technical': '<span class="badge-modern badge-primary-soft"><i class="fa-solid fa-code text-xs"></i> Technical</span>',
@@ -1174,12 +1309,14 @@
         regEv.innerHTML += opt;
         filterEv.innerHTML += opt;
         attEv.innerHTML += opt;
+        simEv.innerHTML += opt;
       });
 
       document.getElementById('eventCountBadge').textContent = `${events.length} Events`;
       renderRegistrations();
       onAttEventChange();
       renderReports();
+      renderInteractiveCharts();
     }
 
     function renderRegistrations() {
@@ -1303,7 +1440,421 @@
     }
 
     // ========================================================================
-    // FORM LISTENERS & VALIDATION (PRESERVED BUSINESS RULES)
+    // LIVE INTERACTIVE CHARTS ENGINE (CHART.JS & PLOTLY.JS)
+    // ========================================================================
+    let chartInstances = {};
+
+    function renderInteractiveCharts() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const textColor = isDark ? '#cbd5e1' : '#475569';
+      const gridColor = isDark ? '#1e293b' : '#f1f5f9';
+
+      // ----------------------------------------------------------------------
+      // Chart 1: Department Participation (Grouped Bar Chart)
+      // ----------------------------------------------------------------------
+      const depts = [
+        "Information Technology",
+        "Computer Science",
+        "Artificial Intelligence & Data Science",
+        "Electronics and Communication",
+        "Mechanical Engineering",
+        "Civil Engineering"
+      ];
+
+      const deptRegCounts = depts.map(d => {
+        const stuIds = students.filter(s => s.dept === d).map(s => s.id);
+        return registrations.filter(r => stuIds.includes(r.studentId)).length;
+      });
+
+      const deptAttCounts = depts.map(d => {
+        const stuIds = students.filter(s => s.dept === d).map(s => s.id);
+        const regIds = registrations.filter(r => stuIds.includes(r.studentId)).map(r => r.regId);
+        return attendance.filter(a => regIds.includes(a.regId) && a.status === 'Present').length;
+      });
+
+      const shortDeptLabels = depts.map(d => {
+        if (d.includes("Information")) return "IT";
+        if (d.includes("Computer")) return "CSE";
+        if (d.includes("Artificial")) return "AI&DS";
+        if (d.includes("Electronics")) return "ECE";
+        if (d.includes("Mechanical")) return "MECH";
+        return "CIVIL";
+      });
+
+      if (chartInstances.dept) chartInstances.dept.destroy();
+      const ctx1 = document.getElementById('chartDeptParticipation').getContext('2d');
+      chartInstances.dept = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: shortDeptLabels,
+          datasets: [
+            {
+              label: 'Total Registered',
+              data: deptRegCounts,
+              backgroundColor: '#4f46e5',
+              borderRadius: 6
+            },
+            {
+              label: 'Attended (Present)',
+              data: deptAttCounts,
+              backgroundColor: '#10b981',
+              borderRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: textColor, font: { family: 'Plus Jakarta Sans', weight: 600 } } },
+            tooltip: {
+              callbacks: {
+                title: (items) => depts[items[0].dataIndex]
+              }
+            }
+          },
+          scales: {
+            x: { ticks: { color: textColor }, grid: { display: false } },
+            y: { ticks: { color: textColor, stepSize: 1 }, grid: { color: gridColor }, beginAtZero: true }
+          }
+        }
+      });
+
+      // ----------------------------------------------------------------------
+      // Chart 2: Capacity vs Attendance (Grouped Bar Chart)
+      // ----------------------------------------------------------------------
+      const eventLabels = events.map(e => e.id);
+      const eventCapacities = events.map(e => e.max);
+      const eventRegistered = events.map(e => registrations.filter(r => r.eventId === e.id).length);
+      const eventAttended = events.map(e => {
+        const regIds = registrations.filter(r => r.eventId === e.id).map(r => r.regId);
+        return attendance.filter(a => regIds.includes(a.regId) && a.status === 'Present').length;
+      });
+
+      if (chartInstances.capacity) chartInstances.capacity.destroy();
+      const ctx2 = document.getElementById('chartCapacityAttendance').getContext('2d');
+      chartInstances.capacity = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: eventLabels,
+          datasets: [
+            { label: 'Max Capacity', data: eventCapacities, backgroundColor: '#93c5fd', borderRadius: 4 },
+            { label: 'Registered', data: eventRegistered, backgroundColor: '#f59e0b', borderRadius: 4 },
+            { label: 'Attended', data: eventAttended, backgroundColor: '#10b981', borderRadius: 4 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: textColor, font: { family: 'Plus Jakarta Sans', weight: 600 } } },
+            tooltip: {
+              callbacks: {
+                title: (items) => {
+                  const ev = events.find(e => e.id === items[0].label);
+                  return ev ? ev.name : items[0].label;
+                }
+              }
+            }
+          },
+          scales: {
+            x: { ticks: { color: textColor }, grid: { display: false } },
+            y: { ticks: { color: textColor, stepSize: 2 }, grid: { color: gridColor }, beginAtZero: true }
+          }
+        }
+      });
+
+      // ----------------------------------------------------------------------
+      // Chart 3: Event Type Share (Donut Chart)
+      // ----------------------------------------------------------------------
+      const eventCategories = ['Technical', 'Workshop', 'Seminar', 'Cultural'];
+      const catCounts = eventCategories.map(cat => {
+        const catEventIds = events.filter(e => e.type === cat).map(e => e.id);
+        return registrations.filter(r => catEventIds.includes(r.eventId)).length;
+      });
+
+      if (chartInstances.type) chartInstances.type.destroy();
+      const ctx3 = document.getElementById('chartEventType').getContext('2d');
+      chartInstances.type = new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+          labels: eventCategories,
+          datasets: [{
+            data: catCounts,
+            backgroundColor: ['#4f46e5', '#0ea5e9', '#f59e0b', '#ec4899'],
+            borderWidth: 2,
+            borderColor: isDark ? '#111827' : '#ffffff'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { color: textColor, font: { family: 'Plus Jakarta Sans', weight: 600 } } }
+          },
+          cutout: '62%'
+        }
+      });
+
+      // ----------------------------------------------------------------------
+      // Chart 4: Year of Study Breakdown (Grouped Bar)
+      // ----------------------------------------------------------------------
+      const years = [1, 2, 3, 4];
+      const yearPresents = years.map(y => {
+        const stuIds = students.filter(s => s.year === y).map(s => s.id);
+        const regIds = registrations.filter(r => stuIds.includes(r.studentId)).map(r => r.regId);
+        return attendance.filter(a => regIds.includes(a.regId) && a.status === 'Present').length;
+      });
+      const yearAbsents = years.map(y => {
+        const stuIds = students.filter(s => s.year === y).map(s => s.id);
+        const regIds = registrations.filter(r => stuIds.includes(r.studentId)).map(r => r.regId);
+        return attendance.filter(a => regIds.includes(a.regId) && a.status === 'Absent').length;
+      });
+
+      if (chartInstances.year) chartInstances.year.destroy();
+      const ctx4 = document.getElementById('chartYearBreakdown').getContext('2d');
+      chartInstances.year = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+          labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4'],
+          datasets: [
+            { label: 'Present', data: yearPresents, backgroundColor: '#10b981', borderRadius: 6 },
+            { label: 'Absent', data: yearAbsents, backgroundColor: '#ef4444', borderRadius: 6 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: textColor, font: { family: 'Plus Jakarta Sans', weight: 600 } } }
+          },
+          scales: {
+            x: { ticks: { color: textColor }, grid: { display: false } },
+            y: { ticks: { color: textColor, stepSize: 1 }, grid: { color: gridColor }, beginAtZero: true }
+          }
+        }
+      });
+
+      // ----------------------------------------------------------------------
+      // Chart 5: Student Feedback Scores (Plotly.js Box Plot)
+      // ----------------------------------------------------------------------
+      const boxTraces = eventCategories.map((cat, idx) => {
+        const catEventIds = events.filter(e => e.type === cat).map(e => e.id);
+        const catRegIds = registrations.filter(r => catEventIds.includes(r.eventId)).map(r => r.regId);
+        const ratings = attendance
+          .filter(a => catRegIds.includes(a.regId) && a.status === 'Present' && a.rating != null)
+          .map(a => a.rating);
+
+        const colors = ['#4f46e5', '#0ea5e9', '#f59e0b', '#ec4899'];
+        return {
+          y: ratings.length > 0 ? ratings : [4],
+          name: cat,
+          type: 'box',
+          boxpoints: 'all',
+          jitter: 0.3,
+          pointpos: -1.8,
+          marker: { color: colors[idx % colors.length], size: 6 }
+        };
+      });
+
+      const plotlyLayoutCommon = {
+        margin: { t: 25, r: 20, l: 35, b: 35 },
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent',
+        font: { color: textColor, family: 'Inter', size: 11 },
+        showlegend: false
+      };
+
+      Plotly.newPlot('chartFeedbackBoxplot', boxTraces, {
+        ...plotlyLayoutCommon,
+        yaxis: { range: [0.5, 5.5], dtick: 1, gridcolor: gridColor }
+      }, { responsive: true, displayModeBar: false });
+
+      // ----------------------------------------------------------------------
+      // Chart 6: Feature Correlation Matrix (Plotly.js Heatmap)
+      // ----------------------------------------------------------------------
+      const corrFeatures = ['Year', 'Capacity', 'Attendance', 'Rating'];
+      
+      // Build vectors from all registrations
+      const vecYear = [];
+      const vecCap = [];
+      const vecAtt = [];
+      const vecRating = [];
+
+      registrations.forEach(r => {
+        const stu = students.find(s => s.id === r.studentId) || { year: 2 };
+        const ev = events.find(e => e.id === r.eventId) || { max: 15 };
+        const att = attendance.find(a => a.regId === r.regId) || { status: 'Absent', rating: null };
+        
+        vecYear.push(stu.year);
+        vecCap.push(ev.max);
+        vecAtt.push(att.status === 'Present' ? 1 : 0);
+        vecRating.push(att.rating ? att.rating : 3); // default neutral for correlation matrix
+      });
+
+      function pearson(x, y) {
+        const n = x.length;
+        if (n === 0) return 1.0;
+        const mx = x.reduce((a, b) => a + b, 0) / n;
+        const my = y.reduce((a, b) => a + b, 0) / n;
+        let num = 0, dx2 = 0, dy2 = 0;
+        for (let i = 0; i < n; i++) {
+          const dx = x[i] - mx;
+          const dy = y[i] - my;
+          num += dx * dy;
+          dx2 += dx * dx;
+          dy2 += dy * dy;
+        }
+        const denom = Math.sqrt(dx2 * dy2);
+        return denom === 0 ? 0 : parseFloat((num / denom).toFixed(2));
+      }
+
+      const allVectors = [vecYear, vecCap, vecAtt, vecRating];
+      const zValues = [];
+      for (let i = 0; i < corrFeatures.length; i++) {
+        const row = [];
+        for (let j = 0; j < corrFeatures.length; j++) {
+          row.push(i === j ? 1.0 : pearson(allVectors[i], allVectors[j]));
+        }
+        zValues.push(row);
+      }
+
+      const heatmapTrace = [{
+        z: zValues,
+        x: corrFeatures,
+        y: corrFeatures,
+        type: 'heatmap',
+        colorscale: [
+          [0, '#e0e7ff'],
+          [0.5, '#818cf8'],
+          [1, '#312e81']
+        ],
+        showscale: false,
+        text: zValues.map(row => row.map(v => v.toFixed(2))),
+        texttemplate: "%{text}",
+        textfont: { color: '#ffffff', size: 12, family: 'Plus Jakarta Sans', weight: 'bold' }
+      }];
+
+      Plotly.newPlot('chartCorrelationHeatmap', heatmapTrace, {
+        ...plotlyLayoutCommon,
+        xaxis: { tickfont: { color: textColor } },
+        yaxis: { tickfont: { color: textColor }, autorange: 'reversed' }
+      }, { responsive: true, displayModeBar: false });
+    }
+
+    // ========================================================================
+    // QUICK SIMULATOR & CSV EXPORT
+    // ========================================================================
+    document.getElementById('quickSimForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('simName').value.trim();
+      const dept = document.getElementById('simDept').value;
+      const year = parseInt(document.getElementById('simYear').value);
+      const evId = document.getElementById('simEvent').value;
+      const status = document.getElementById('simStatus').value;
+      const rating = status === 'Present' ? parseInt(document.getElementById('simRating').value) : null;
+
+      // Create new dynamic student
+      const newStuId = "25" + dept.substring(0, 2).toUpperCase() + String(Math.floor(100 + Math.random() * 900));
+      students.push({
+        id: newStuId,
+        name: name,
+        dept: dept,
+        year: year,
+        email: name.toLowerCase().replace(/\s+/g, '.') + "@vcet.ac.in",
+        phone: "98" + Math.floor(10000000 + Math.random() * 90000000)
+      });
+
+      // Create registration
+      const newRegId = registrations.length > 0 ? Math.max(...registrations.map(r => r.regId)) + 1 : 1;
+      const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
+      registrations.push({
+        regId: newRegId,
+        studentId: newStuId,
+        eventId: evId,
+        date: now,
+        status: "Confirmed"
+      });
+
+      // Create attendance
+      attendance.push({
+        regId: newRegId,
+        status: status,
+        rating: rating,
+        remarks: "Live simulated entry",
+        date: new Date().toISOString().substring(0, 10)
+      });
+
+      saveState();
+
+      // Refresh everything instantly!
+      renderStudents();
+      renderEvents();
+      renderRegistrations();
+      onAttEventChange();
+      renderReports();
+      renderInteractiveCharts();
+
+      document.getElementById('simName').value = '';
+      alert(`Entry added successfully! All 6 charts refreshed instantly.`);
+    });
+
+    function exportCSV() {
+      const headers = ["Registration_ID", "Student_ID", "Student_Name", "Department", "Year_Of_Study", "Event_ID", "Event_Name", "Event_Category", "Status", "Attendance", "Feedback_Score", "Remarks", "Registration_Date"];
+      const rows = registrations.map(r => {
+        const stu = students.find(s => s.id === r.studentId) || {};
+        const ev = events.find(e => e.id === r.eventId) || {};
+        const att = attendance.find(a => a.regId === r.regId) || {};
+        return [
+          r.regId,
+          r.studentId,
+          `"${(stu.name || '').replace(/"/g, '""')}"`,
+          `"${(stu.dept || '').replace(/"/g, '""')}"`,
+          stu.year || '',
+          r.eventId,
+          `"${(ev.name || '').replace(/"/g, '""')}"`,
+          ev.type || '',
+          r.status,
+          att.status || 'Not Marked',
+          att.rating || '',
+          `"${(att.remarks || '').replace(/"/g, '""')}"`,
+          r.date
+        ].join(',');
+      });
+
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "smart_campus_participation_data.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function resetData() {
+      if (confirm("Reset dataset back to original college baseline? Any added demo records will be restored.")) {
+        localStorage.removeItem('smart_students');
+        localStorage.removeItem('smart_events');
+        localStorage.removeItem('smart_registrations');
+        localStorage.removeItem('smart_attendance');
+        students = JSON.parse(JSON.stringify(initialStudents));
+        events = JSON.parse(JSON.stringify(initialEvents));
+        registrations = JSON.parse(JSON.stringify(initialRegistrations));
+        attendance = JSON.parse(JSON.stringify(initialAttendance));
+        saveState();
+        renderStudents();
+        renderEvents();
+        renderRegistrations();
+        onAttEventChange();
+        renderReports();
+        renderInteractiveCharts();
+        alert("Dataset reset to defaults successfully!");
+      }
+    }
+
+    // ========================================================================
+    // STANDARD FORM EVENT LISTENERS (PRESERVED FUNCTIONALITY)
     // ========================================================================
     document.getElementById('studentForm').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -1388,6 +1939,7 @@
       renderRegistrations();
       onAttEventChange();
       renderReports();
+      renderInteractiveCharts();
     });
 
     document.getElementById('attForm').addEventListener('submit', (e) => {
@@ -1413,6 +1965,7 @@
 
       renderAttendance();
       renderReports();
+      renderInteractiveCharts();
     });
 
     // Auto-disable feedback rating if Absent
