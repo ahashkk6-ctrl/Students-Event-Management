@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Smart Campus Event Management & Participation System | VCET IT</title>
   
   <!-- Google Fonts: Inter & Plus Jakarta Sans -->
@@ -129,7 +129,7 @@
     .header-banner {
       background: var(--header-bg);
       color: #ffffff;
-      padding: 22px 32px;
+      padding: 20px 32px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
       position: relative;
@@ -146,6 +146,45 @@
       background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(99, 102, 241, 0) 70%);
       border-radius: 50%;
       pointer-events: none;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .header-left-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .header-title-wrap {
+      min-width: 0;
+    }
+
+    .college-title {
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .header-sub-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .header-right-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
     }
 
     .college-logo-box {
@@ -179,6 +218,17 @@
       animation: pulseGreen 2s infinite;
     }
 
+    .pulse-dot-mobile {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 2s infinite;
+      flex-shrink: 0;
+    }
+
     @keyframes pulseGreen {
       0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
       70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
@@ -205,6 +255,26 @@
       background: rgba(255, 255, 255, 0.2);
       color: #ffffff;
       transform: translateY(-1px);
+    }
+
+    .sidebar-close-mobile-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .sidebar-close-mobile-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
     /* ==========================================================================
@@ -473,23 +543,184 @@
     }
 
     @media (max-width: 767.98px) {
+      /* Fixed 64px compact top bar with safe-area notch support */
+      .header-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: calc(64px + env(safe-area-inset-top, 0px));
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: 0;
+        padding-left: 14px;
+        padding-right: 14px;
+        z-index: 1030;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+        display: flex;
+        align-items: center;
+      }
+
+      .header-banner::before {
+        display: none;
+      }
+
+      .header-container {
+        height: 64px;
+        gap: 10px;
+      }
+
+      .header-left-group {
+        gap: 10px;
+        flex: 1 1 auto;
+        overflow: hidden;
+      }
+
+      .mobile-toggle-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+        border-radius: 10px;
+        flex-shrink: 0;
+      }
+
+      .college-logo-box {
+        height: 40px;
+        padding: 4px 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        flex-shrink: 0;
+      }
+
+      .college-logo-img {
+        height: 28px;
+        max-width: 75px;
+      }
+
+      .header-title-wrap {
+        flex: 1 1 auto;
+        overflow: hidden;
+      }
+
+      .college-title {
+        font-size: 16px !important;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.2;
+      }
+
+      /* Hide on mobile: Autonomous badge, department text, scenario text, System Live text */
+      .header-sub-info,
+      .header-live-badge {
+        display: none !important;
+      }
+
+      /* Dark mode toggle: icon only on mobile */
+      .theme-toggle-btn {
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+      }
+
+      .theme-toggle-btn span {
+        display: none !important;
+      }
+
+      /* Main wrapper shifted down by fixed header height */
+      .main-wrapper {
+        margin-left: 0 !important;
+        padding-top: calc(64px + env(safe-area-inset-top, 0px)) !important;
+      }
+
+      main.container-fluid {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        padding-top: 18px !important;
+        padding-bottom: 24px !important;
+      }
+
+      /* Mobile drawer sidebar & backdrop */
       .app-sidebar {
-        left: -270px;
-        width: 250px;
-        z-index: 1050;
+        left: -280px;
+        width: 260px;
+        z-index: 1060;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .app-sidebar.mobile-open {
         left: 0;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
       }
 
-      .main-wrapper {
-        margin-left: 0 !important;
+      .sidebar-backdrop {
+        z-index: 1055;
       }
 
-      .college-title {
-        font-size: 1rem !important;
+      /* Stat cards horizontal snap scroll row */
+      .stat-cards-row {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px !important;
+        margin-left: -16px !important;
+        margin-right: -16px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        padding-bottom: 8px !important;
+        margin-bottom: 18px !important;
+      }
+
+      .stat-cards-row::-webkit-scrollbar {
+        height: 3px;
+      }
+
+      .stat-cards-row::-webkit-scrollbar-thumb {
+        background: rgba(99, 102, 241, 0.25);
+        border-radius: 3px;
+      }
+
+      .stat-cards-row > [class*="col-"] {
+        flex: 0 0 205px !important;
+        max-width: 205px !important;
+        width: 205px !important;
+        scroll-snap-align: start;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      .stat-card {
+        padding: 12px 14px;
+        border-radius: 14px;
+        gap: 12px;
+      }
+
+      .stat-card-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+      }
+
+      .stat-value {
+        font-size: 1.35rem;
+      }
+
+      .stat-label {
+        font-size: 0.68rem;
+      }
+
+      .stat-desc {
+        font-size: 0.68rem;
+        margin-top: 2px;
       }
     }
 
@@ -1227,6 +1458,9 @@
         <button class="sidebar-toggle-btn d-none d-md-flex" id="sidebarCollapseBtnTop" onclick="toggleSidebarCollapse()" title="Collapse / Expand Sidebar">
           <i class="fa-solid fa-angles-left"></i>
         </button>
+        <button class="sidebar-close-mobile-btn d-md-none" onclick="closeMobileSidebar()" aria-label="Close Navigation Menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
 
       <!-- Sidebar Navigation Menu -->
@@ -1277,42 +1511,46 @@
     <div class="main-wrapper" id="mainWrapper">
 
       <!-- TOP HEADER -->
-      <header class="header-banner">
-        <div class="container-fluid">
-          <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
-            <!-- Brand Info & Mobile Toggle -->
-            <div class="d-flex align-items-center gap-3">
-              <!-- Mobile Hamburger Toggle -->
-              <button class="mobile-toggle-btn d-md-none" id="mobileSidebarToggle" onclick="toggleMobileSidebar()" aria-label="Toggle Navigation Menu">
-                <i class="fa-solid fa-bars"></i>
-              </button>
+      <header class="header-banner" id="headerBanner">
+        <div class="header-container">
+          <!-- Left: Brand Info & Mobile Toggle -->
+          <div class="header-left-group">
+            <!-- Mobile Hamburger Toggle -->
+            <button class="mobile-toggle-btn d-md-none" id="mobileSidebarToggle" onclick="toggleMobileSidebar()" aria-label="Toggle Navigation Menu">
+              <i class="fa-solid fa-bars"></i>
+            </button>
 
-              <!-- VCET Logo with white rounded background -->
-              <div class="college-logo-box">
-                <img src="assets/vcet-logo.png" alt="Velalar College of Engineering and Technology Logo" class="college-logo-img">
-              </div>
-
-              <!-- College & Department Info -->
-              <div>
-                <h4 class="fw-bold mb-0 text-white college-title">VELALAR COLLEGE OF ENGINEERING AND TECHNOLOGY</h4>
-                <div class="d-flex align-items-center gap-2 mt-1 flex-wrap">
-                  <span class="badge bg-white bg-opacity-10 text-white-50 px-2 py-1 text-xs">Autonomous</span>
-                  <span class="text-white-50 small">Department of Information Technology</span>
-                  <span class="text-white-50 small d-none d-md-inline">•</span>
-                  <span class="badge bg-indigo-500 bg-opacity-25 text-info px-2 py-1 text-xs d-none d-md-inline">Scenario 6: Smart Campus</span>
-                </div>
-              </div>
+            <!-- VCET Logo with white rounded background -->
+            <div class="college-logo-box" title="Velalar College of Engineering and Technology">
+              <img src="assets/vcet-logo.png" alt="VCET Logo" class="college-logo-img">
             </div>
 
-            <!-- Controls: Theme Toggle & Live Badge -->
-            <div class="d-flex align-items-center gap-2">
-              <span class="badge bg-success bg-opacity-25 text-emerald border border-success border-opacity-25 px-3 py-2 text-xs d-flex align-items-center">
-                <span class="pulse-dot"></span> System Live
-              </span>
-              <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-                <i class="fa-solid fa-moon"></i> <span>Dark Mode</span>
-              </button>
+            <!-- College & Department Info -->
+            <div class="header-title-wrap">
+              <div class="d-flex align-items-center gap-2">
+                <h4 class="fw-bold mb-0 text-white college-title">
+                  <span class="d-none d-sm-inline">VELALAR COLLEGE OF ENGINEERING AND TECHNOLOGY</span>
+                  <span class="d-inline d-sm-none">VCET</span>
+                </h4>
+                <span class="pulse-dot-mobile d-md-none" title="System Live"></span>
+              </div>
+              <div class="header-sub-info mt-1">
+                <span class="badge bg-white bg-opacity-10 text-white-50 px-2 py-1 text-xs">Autonomous</span>
+                <span class="text-white-50 small">Department of Information Technology</span>
+                <span class="text-white-50 small d-none d-md-inline">•</span>
+                <span class="badge bg-indigo-500 bg-opacity-25 text-info px-2 py-1 text-xs d-none d-md-inline">Scenario 6: Smart Campus</span>
+              </div>
             </div>
+          </div>
+
+          <!-- Right: Controls (Theme Toggle & Live Badge) -->
+          <div class="header-right-group">
+            <span class="badge bg-success bg-opacity-25 text-emerald border border-success border-opacity-25 px-3 py-2 text-xs d-none d-md-flex align-items-center header-live-badge">
+              <span class="pulse-dot"></span> System Live
+            </span>
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle Dark/Light Mode">
+              <i class="fa-solid fa-moon"></i> <span>Dark Mode</span>
+            </button>
           </div>
         </div>
       </header>
@@ -1329,7 +1567,7 @@
           <div class="tab-pane fade show active" id="students" role="tabpanel">
 
             <!-- 1. Students Stat Cards Row -->
-            <div class="row g-3 mb-4">
+            <div class="row g-3 mb-4 stat-cards-row">
               <div class="col-sm-6 col-xl-4">
                 <div class="stat-card">
                   <div class="stat-card-icon icon-primary">
