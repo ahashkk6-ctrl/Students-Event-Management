@@ -39,10 +39,10 @@
       --accent-danger: #ef4444;
       --accent-danger-subtle: #fee2e2;
       
-      --bg-page: #f8fafc;
+      --bg-page: #f4f6fb;
       --bg-surface: #ffffff;
       --bg-surface-elevated: #f1f5f9;
-      --bg-input: #ffffff;
+      --bg-input: #f8fafc;
       
       --text-main: #0f172a;
       --text-secondary: #475569;
@@ -594,72 +594,103 @@
     .app-card {
       background-color: var(--bg-surface);
       border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      box-shadow: var(--card-shadow);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
       transition: box-shadow var(--transition-normal), transform var(--transition-normal);
       height: 100%;
     }
 
     .app-card:hover {
-      box-shadow: var(--card-shadow-hover);
+      box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.08), 0 8px 12px -4px rgba(0, 0, 0, 0.03);
     }
 
     .card-header-styled {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-      padding-bottom: 12px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+      padding-bottom: 16px;
       border-bottom: 1px solid var(--border-color);
+    }
+
+    .card-header-title-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .icon-gradient-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--primary-gradient);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+      flex-shrink: 0;
     }
 
     .card-header-styled h5, .card-header-styled h6 {
       margin: 0;
       font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 1.15rem;
+      color: var(--text-main);
     }
 
-    .card-header-styled .icon-square {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--primary-subtle);
-      color: var(--primary);
-      font-size: 0.95rem;
+    .card-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      margin: 2px 0 0 0;
+      font-weight: 400;
+      line-height: 1.35;
     }
 
-    /* Form Inputs */
+    /* Form Inputs & Selects */
     .form-label {
       color: var(--text-secondary);
-      font-weight: 600;
-      font-size: 0.8rem;
+      font-weight: 700;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       margin-bottom: 6px;
+      display: block;
     }
 
     .form-control, .form-select {
+      height: 48px;
       background-color: var(--bg-input);
       border: 1.5px solid var(--border-color);
       color: var(--text-main);
-      border-radius: var(--radius-md);
-      padding: 9px 14px;
-      font-size: 0.9rem;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 0.92rem;
+      font-family: inherit;
       transition: all var(--transition-fast);
     }
 
     .form-control:focus, .form-select:focus {
-      background-color: var(--bg-input);
-      border-color: var(--border-focus);
+      background-color: var(--bg-surface);
+      border-color: #6366f1;
       color: var(--text-main);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18);
       outline: none;
+    }
+
+    .form-select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%236366f1' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px 12px;
+      padding-right: 40px;
+    }
+
+    textarea.form-control {
+      height: auto;
+      min-height: 80px;
     }
 
     /* Buttons */
@@ -667,49 +698,68 @@
       background: var(--primary-gradient);
       color: #ffffff;
       border: none;
-      border-radius: var(--radius-md);
-      padding: 10px 18px;
+      border-radius: 12px;
+      height: 48px;
+      padding: 0 24px;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.925rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-      transition: all var(--transition-fast);
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.28);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
     }
 
     .btn-brand-primary:hover {
       color: #ffffff;
       transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.35);
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.38);
       filter: brightness(1.05);
+    }
+
+    .btn-brand-primary:active {
+      transform: translateY(0);
+      filter: brightness(0.95);
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.2);
     }
 
     .btn-brand-success {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: #ffffff;
       border: none;
-      border-radius: var(--radius-md);
-      padding: 10px 18px;
+      border-radius: 12px;
+      height: 48px;
+      padding: 0 24px;
       font-weight: 600;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-      transition: all var(--transition-fast);
+      font-size: 0.925rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.28);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
     }
 
     .btn-brand-success:hover {
       color: #ffffff;
       transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.38);
+    }
+
+    .btn-brand-success:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
     }
 
     .btn-action-outline {
       background-color: var(--bg-surface);
       color: var(--text-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 8px 15px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 8px 16px;
       font-weight: 600;
       font-size: 0.85rem;
       display: inline-flex;
@@ -725,12 +775,219 @@
       border-color: var(--border-focus);
     }
 
+    /* Destructive Section (Delete Record Box) */
+    .destructive-box {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      border: 1.5px dashed rgba(239, 68, 68, 0.35);
+      background-color: rgba(239, 68, 68, 0.03);
+      transition: all 0.2s ease;
+    }
+
+    .destructive-box:hover {
+      border-color: rgba(239, 68, 68, 0.6);
+      background-color: rgba(239, 68, 68, 0.05);
+    }
+
+    .destructive-title {
+      color: #ef4444;
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .destructive-desc {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    /* Outlined Action Buttons */
+    .btn-header-danger {
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      background: transparent;
+      border-radius: 10px;
+      padding: 7px 14px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-header-danger:hover {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: #ef4444;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+    }
+
+    .btn-header-outline {
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      background: transparent;
+      border-radius: 10px;
+      padding: 7px 14px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-header-outline:hover {
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      border-color: var(--border-focus);
+    }
+
+    /* Search Pill Group */
+    .search-pill-group {
+      background: var(--bg-input);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-pill);
+      padding: 2px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .search-pill-group:focus-within {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18);
+      background: var(--bg-surface);
+    }
+
+    .search-pill-input {
+      border: none;
+      background: transparent;
+      box-shadow: none !important;
+      padding: 10px 4px;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      width: 100%;
+      outline: none;
+    }
+
+    /* Student Avatars & Year Badges */
+    .student-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1 0%, #38bdf8 100%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(99, 102, 241, 0.25);
+    }
+
+    .year-badge-1 {
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .year-badge-2 {
+      background: rgba(14, 165, 233, 0.12);
+      color: #0284c7;
+      border: 1px solid rgba(14, 165, 233, 0.25);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .year-badge-3 {
+      background: rgba(99, 102, 241, 0.12);
+      color: #4f46e5;
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .year-badge-4 {
+      background: rgba(245, 158, 11, 0.12);
+      color: #d97706;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    [data-theme="dark"] .year-badge-1 { color: #34d399; background: rgba(16, 185, 129, 0.2); }
+    [data-theme="dark"] .year-badge-2 { color: #38bdf8; background: rgba(14, 165, 233, 0.2); }
+    [data-theme="dark"] .year-badge-3 { color: #a5b4fc; background: rgba(99, 102, 241, 0.2); }
+    [data-theme="dark"] .year-badge-4 { color: #fcd34d; background: rgba(245, 158, 11, 0.2); }
+
+    .btn-icon-delete {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: transparent;
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      color: #ef4444;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-icon-delete:hover {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: #ef4444;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+    }
+
+    /* Tab Switch Animation */
+    .tab-pane.fade {
+      transition: opacity 0.2s linear;
+    }
+
+    .tab-pane.fade.show {
+      animation: tabFadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* ==========================================================================
        6. TABLES, BADGES & INTERACTIVE CHARTS
        ========================================================================== */
     .table-container {
       border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
+      border-radius: 16px;
       overflow-x: auto;
       overflow-y: auto;
       max-height: 480px;
@@ -777,10 +1034,10 @@
       color: var(--text-secondary);
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 12px 16px;
+      letter-spacing: 0.06em;
+      padding: 14px 16px;
       border-bottom: 1.5px solid var(--border-color);
       white-space: nowrap;
       box-shadow: 0 1px 0 var(--border-color);
@@ -796,9 +1053,74 @@
     }
 
     .custom-table td {
-      padding: 13px 16px;
+      padding: 16px;
       vertical-align: middle;
       font-size: 0.88rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Mobile Table-to-Card Pattern */
+    @media (max-width: 767.98px) {
+      .table-responsive-cards thead {
+        display: none;
+      }
+      .table-responsive-cards, 
+      .table-responsive-cards tbody, 
+      .table-responsive-cards tr, 
+      .table-responsive-cards td {
+        display: block;
+        width: 100%;
+      }
+      .table-responsive-cards tr {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 18px;
+        margin-bottom: 14px;
+        box-shadow: var(--card-shadow);
+      }
+      .table-responsive-cards td {
+        padding: 8px 0;
+        border: none !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.88rem;
+      }
+      .table-responsive-cards td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+      }
+      .table-responsive-cards td.cell-student-name {
+        justify-content: flex-start;
+        border-bottom: 1px solid var(--border-color) !important;
+        padding-bottom: 12px;
+        margin-bottom: 8px;
+      }
+      .table-responsive-cards td.cell-student-name::before {
+        display: none;
+      }
+      .table-responsive-cards td.cell-action {
+        justify-content: flex-end;
+        border-top: 1px solid var(--border-color) !important;
+        padding-top: 12px;
+        margin-top: 8px;
+      }
+      .table-responsive-cards td.cell-action::before {
+        display: none;
+      }
+      .app-card {
+        padding: 22px 18px;
+        border-radius: 18px;
+      }
+      .form-control, .form-select, .btn-brand-primary, .btn-brand-success {
+        height: 48px;
+        min-height: 46px;
+      }
     }
 
     /* Badges */
@@ -1052,7 +1374,15 @@
               <div class="col-lg-6">
                 <div class="app-card">
                   <div class="card-header-styled">
-                    <h5><span class="icon-square"><i class="fa-solid fa-chart-pie"></i></span> Students by Department</h5>
+                    <div class="card-header-title-group">
+                      <div class="icon-gradient-badge" style="width: 36px; height: 36px; font-size: 0.95rem;">
+                        <i class="fa-solid fa-chart-pie"></i>
+                      </div>
+                      <div>
+                        <h6 class="fw-bold mb-0">Students by Department</h6>
+                        <p class="card-subtitle">Distribution across 6 academic disciplines</p>
+                      </div>
+                    </div>
                     <span class="badge-modern badge-primary-soft">Live Doughnut</span>
                   </div>
                   <div style="height: 270px; position: relative;">
@@ -1065,7 +1395,15 @@
               <div class="col-lg-6">
                 <div class="app-card">
                   <div class="card-header-styled">
-                    <h5><span class="icon-square"><i class="fa-solid fa-chart-column"></i></span> Students by Year of Study</h5>
+                    <div class="card-header-title-group">
+                      <div class="icon-gradient-badge" style="width: 36px; height: 36px; font-size: 0.95rem;">
+                        <i class="fa-solid fa-chart-column"></i>
+                      </div>
+                      <div>
+                        <h6 class="fw-bold mb-0">Students by Year of Study</h6>
+                        <p class="card-subtitle">Enrollment count by academic seniority</p>
+                      </div>
+                    </div>
                     <span class="badge-modern badge-info-soft">Year 1 to Year 4</span>
                   </div>
                   <div style="height: 270px; position: relative;">
@@ -1074,25 +1412,411 @@
                 </div>
               </div>
             </div>
-        <div class="row g-4">
-          <!-- Left: Add Student Form -->
-          <div class="col-lg-4">
+
+            <div class="row g-4">
+              <!-- Left: Add Student Form -->
+              <div class="col-lg-4">
+                <div class="app-card">
+                  <div class="card-header-styled">
+                    <div class="card-header-title-group">
+                      <div class="icon-gradient-badge">
+                        <i class="fa-solid fa-user-plus"></i>
+                      </div>
+                      <div>
+                        <h5>Register Student</h5>
+                        <p class="card-subtitle">Add a verified student profile into campus records</p>
+                      </div>
+                    </div>
+                  </div>
+                  <form id="studentForm">
+                    <div class="mb-3">
+                      <label class="form-label">Student ID</label>
+                      <input type="text" class="form-control" id="stuId" placeholder="e.g. 25IT010" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Full Name</label>
+                      <input type="text" class="form-control" id="stuName" placeholder="Enter student name" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Department</label>
+                      <select class="form-select" id="stuDept">
+                        <option>Information Technology</option>
+                        <option>Computer Science</option>
+                        <option>Artificial Intelligence & Data Science</option>
+                        <option>Electronics and Communication</option>
+                        <option>Mechanical Engineering</option>
+                        <option>Civil Engineering</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Year of Study</label>
+                      <select class="form-select" id="stuYear">
+                        <option value="1">1st Year (Freshman)</option>
+                        <option value="2">2nd Year (Sophomore)</option>
+                        <option value="3" selected>3rd Year (Junior)</option>
+                        <option value="4">4th Year (Senior)</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Email Address</label>
+                      <input type="email" class="form-control" id="stuEmail" placeholder="student@vcet.ac.in" required>
+                    </div>
+                    <div class="mb-4">
+                      <label class="form-label">Phone Number</label>
+                      <input type="text" class="form-control" id="stuPhone" placeholder="9876543210" required>
+                    </div>
+                    <button type="submit" class="btn-brand-primary w-100">
+                      <i class="fa-solid fa-check"></i> Save Student Profile
+                    </button>
+                  </form>
+
+                  <!-- Destructive Section: Quick Delete Student Record Box -->
+                  <div class="destructive-box mt-4">
+                    <div class="destructive-title">
+                      <i class="fa-solid fa-triangle-exclamation"></i> Danger Zone
+                    </div>
+                    <p class="destructive-desc">Permanently remove an enrolled student record by Student ID:</p>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="deleteStuIdInput" placeholder="Enter ID (e.g. 25IT001)">
+                      <button class="btn btn-outline-danger d-inline-flex align-items-center gap-1" type="button" onclick="deleteStudentByIdInput()">
+                        <i class="fa-solid fa-trash-can"></i> Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Enrolled Students List -->
+              <div class="col-lg-8">
+                <div class="app-card">
+                  <div class="card-header-styled flex-wrap gap-2">
+                    <div class="card-header-title-group">
+                      <div class="icon-gradient-badge">
+                        <i class="fa-solid fa-users"></i>
+                      </div>
+                      <div>
+                        <h5>Enrolled Students</h5>
+                        <p class="card-subtitle">Manage campus enrollments, year classifications and contact info</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                      <span id="studentCountBadge" class="badge-modern badge-primary-soft">20 Students</span>
+                      <button class="btn-header-danger" onclick="deleteAllStudents()" title="Delete all enrolled student records">
+                        <i class="fa-solid fa-trash-can"></i> Delete All
+                      </button>
+                      <button class="btn-header-outline" onclick="resetStudentsDefault()" title="Restore default 20 student roster">
+                        <i class="fa-solid fa-rotate-left"></i> Reset Defaults
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Filter Search Toolbar -->
+                  <div class="search-pill-group mb-3">
+                    <i class="fa-solid fa-magnifying-glass search-pill-icon"></i>
+                    <input type="text" class="search-pill-input" id="searchStudentInput" placeholder="Filter enrolled students by Name, ID, or Department..." oninput="filterStudents()">
+                  </div>
+
+                  <div class="table-container table-responsive" style="max-height: 480px;">
+                    <table class="custom-table table-hover table-responsive-cards">
+                      <thead>
+                        <tr>
+                          <th style="min-width: 90px;">ID</th>
+                          <th style="min-width: 200px;">Full Name</th>
+                          <th style="min-width: 170px;">Department</th>
+                          <th style="min-width: 85px;">Year</th>
+                          <th style="min-width: 180px;">Email</th>
+                          <th style="min-width: 110px;">Phone</th>
+                          <th class="text-center" style="width: 80px;">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="studentTableBody"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ====================================================================
+               TAB 2: CAMPUS EVENTS
+               ==================================================================== -->
+          <div class="tab-pane fade" id="events" role="tabpanel">
+            <div class="row g-4">
+              <!-- Left: Add Event Form -->
+              <div class="col-lg-4">
+                <div class="app-card">
+                  <div class="card-header-styled">
+                    <div class="card-header-title-group">
+                      <div class="icon-gradient-badge">
+                        <i class="fa-solid fa-calendar-plus"></i>
+                      </div>
+                      <div>
+                        <h5>Create Campus Event</h5>
+                        <p class="card-subtitle">Schedule workshops, hackathons & seminars</p>
+                      </div>
+                    </div>
+                  </div>
+                  <form id="eventForm">
+                    <div class="mb-3">
+                      <label class="form-label">Event ID</label>
+                      <input type="text" class="form-control" id="evId" placeholder="e.g. EVT108" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Event Title</label>
+                      <input type="text" class="form-control" id="evName" placeholder="e.g. AI Prompt Challenge" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Category</label>
+                      <select class="form-select" id="evType">
+                        <option>Technical</option>
+                        <option>Workshop</option>
+                        <option>Seminar</option>
+                        <option>Cultural</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Event Date</label>
+                      <input type="date" class="form-control" id="evDate" value="2026-12-05" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Venue</label>
+                      <input type="text" class="form-control" id="evVenue" placeholder="Hall / Lab room" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Maximum Capacity</label>
+                      <input type="number" class="form-control" id="evMax" min="1" max="500" value="20" required>
+                    </div>
+                    <div class="mb-4">
+                      <label class="form-label">Description</label>
+                      <textarea class="form-control" id="evDesc" rows="2" placeholder="Brief overview of event"></textarea>
+                    </div>
+                    <button type="submit" class="btn-brand-primary w-100">
+                      <i class="fa-solid fa-plus-circle"></i> Create Campus Event
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Right: Scheduled Events Table -->
+              <div class="col-lg-8">
+                <div class="app-card">
+                  <div class="card-header-styled">
+                    <div class="card-header-title-group">
+                      <div class="icon-gradient-badge">
+                        <i class="fa-solid fa-calendar-days"></i>
+                      </div>
+                      <div>
+                        <h5>Scheduled Campus Events</h5>
+                        <p class="card-subtitle">Active events, capacity utilization and venues</p>
+                      </div>
+                    </div>
+                    <span id="eventCountBadge" class="badge-modern badge-primary-soft">6 Events</span>
+                  </div>
+                  <div class="table-container table-responsive" style="max-height: 480px;">
+                    <table class="custom-table table-hover table-responsive-cards">
+                      <thead>
+                        <tr>
+                          <th style="min-width: 90px;">ID</th>
+                          <th style="min-width: 200px;">Event Title</th>
+                          <th style="min-width: 120px;">Category</th>
+                          <th style="min-width: 110px;">Date</th>
+                          <th style="min-width: 160px;">Venue</th>
+                          <th style="min-width: 180px;">Capacity Utilization</th>
+                        </tr>
+                      </thead>
+                      <tbody id="eventTableBody"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ====================================================================
+               TAB 3: EVENT REGISTRATION (DUPLICATE PREVENTING)
+               ==================================================================== -->
+          <div class="tab-pane fade" id="registration" role="tabpanel">
+            <div class="app-card mb-4">
+              <div class="card-header-styled">
+                <div class="card-header-title-group">
+                  <div class="icon-gradient-badge">
+                    <i class="fa-solid fa-shield-halved"></i>
+                  </div>
+                  <div>
+                    <h5>Register Student for Event</h5>
+                    <p class="card-subtitle">Enforce capacity limits and automatic duplicate registration prevention</p>
+                  </div>
+                </div>
+              </div>
+              <form id="regForm" class="row g-3 align-items-end">
+                <div class="col-md-5">
+                  <label class="form-label">Select Student</label>
+                  <select class="form-select" id="regStuSelect" required></select>
+                </div>
+                <div class="col-md-5">
+                  <label class="form-label">Select Event</label>
+                  <select class="form-select" id="regEvSelect" required></select>
+                </div>
+                <div class="col-md-2">
+                  <button type="submit" class="btn-brand-success w-100">
+                    <i class="fa-solid fa-user-plus"></i> Register
+                  </button>
+                </div>
+              </form>
+              <div id="regAlert" class="mt-3 d-none"></div>
+            </div>
+
+            <div class="app-card">
+              <div class="card-header-styled flex-wrap gap-2">
+                <div class="card-header-title-group">
+                  <div class="icon-gradient-badge">
+                    <i class="fa-solid fa-list-check"></i>
+                  </div>
+                  <div>
+                    <h5>Registered Participants</h5>
+                    <p class="card-subtitle">Filtered enrollments for active campus event</p>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                  <select class="form-select form-select-sm" id="filterEventSelect" style="max-width: 280px;" onchange="renderRegistrations()"></select>
+                  <span id="regCountBadge" class="badge-modern badge-neutral-soft">0 Participants</span>
+                </div>
+              </div>
+              <div class="table-container table-responsive" style="max-height: 420px;">
+                <table class="custom-table table-hover table-responsive-cards">
+                  <thead>
+                    <tr>
+                      <th style="min-width: 80px;">Reg ID</th>
+                      <th style="min-width: 90px;">Student ID</th>
+                      <th style="min-width: 180px;">Student Name</th>
+                      <th style="min-width: 170px;">Department</th>
+                      <th style="min-width: 150px;">Registration Date</th>
+                      <th style="min-width: 110px;">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="regTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- ====================================================================
+               TAB 4: ATTENDANCE & FEEDBACK
+               ==================================================================== -->
+          <div class="tab-pane fade" id="attendance" role="tabpanel">
+            <div class="app-card mb-4">
+              <div class="card-header-styled">
+                <div class="card-header-title-group">
+                  <div class="icon-gradient-badge">
+                    <i class="fa-solid fa-user-check"></i>
+                  </div>
+                  <div>
+                    <h5>Mark Attendance & Student Feedback</h5>
+                    <p class="card-subtitle">Record verified attendance presence, star ratings and student remarks</p>
+                  </div>
+                </div>
+              </div>
+              <form id="attForm" class="row g-3 align-items-end">
+                <div class="col-md-3">
+                  <label class="form-label">Event</label>
+                  <select class="form-select" id="attEvSelect" onchange="onAttEventChange()" required></select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Participant</label>
+                  <select class="form-select" id="attRegSelect" required></select>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Attendance Status</label>
+                  <select class="form-select" id="attStatusSelect">
+                    <option value="Present">Present</option>
+                    <option value="Absent">Absent</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Rating</label>
+                  <select class="form-select" id="attRatingSelect">
+                    <option value="5">5 ★ (Outstanding)</option>
+                    <option value="4">4 ★ (Very Good)</option>
+                    <option value="3">3 ★ (Good)</option>
+                    <option value="2">2 ★ (Fair)</option>
+                    <option value="1">1 ★ (Poor)</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <button type="submit" class="btn-brand-primary w-100">
+                    <i class="fa-solid fa-floppy-disk"></i> Save Record
+                  </button>
+                </div>
+                <div class="col-12 mt-2">
+                  <input type="text" class="form-control" id="attRemarks" placeholder="Feedback remarks or reason for absence" value="Active participant in workshop sessions">
+                </div>
+              </form>
+              <div id="attAlert" class="mt-3 d-none"></div>
+            </div>
+
             <div class="app-card">
               <div class="card-header-styled">
-                <h5><span class="icon-square"><i class="fa-solid fa-user-plus"></i></span> Register Student</h5>
+                <div class="card-header-title-group">
+                  <div class="icon-gradient-badge">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                  </div>
+                  <div>
+                    <h5>Verified Attendance Sheet</h5>
+                    <p class="card-subtitle">Real-time attendance logs with student ratings and remarks</p>
+                  </div>
+                </div>
               </div>
-              <form id="studentForm">
-                <div class="mb-3">
-                  <label class="form-label">Student ID</label>
-                  <input type="text" class="form-control" id="stuId" placeholder="e.g. 25IT010" required>
+              <div class="table-container table-responsive" style="max-height: 420px;">
+                <table class="custom-table table-hover table-responsive-cards">
+                  <thead>
+                    <tr>
+                      <th style="min-width: 45px;">#</th>
+                      <th style="min-width: 80px;">Reg ID</th>
+                      <th style="min-width: 90px;">Student ID</th>
+                      <th style="min-width: 180px;">Name</th>
+                      <th style="min-width: 110px;">Attendance Status</th>
+                      <th style="min-width: 120px;">Rating</th>
+                      <th style="min-width: 200px;">Remarks</th>
+                      <th style="min-width: 110px;">Marked At</th>
+                    </tr>
+                  </thead>
+                  <tbody id="attTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- ====================================================================
+               TAB 5: LIVE REPORTS & INTERACTIVE VISUALIZATIONS
+               ==================================================================== -->
+          <div class="tab-pane fade" id="reports" role="tabpanel">
+
+            <!-- Top Action Bar & Live Simulation Form -->
+            <div class="app-card mb-4">
+              <div class="card-header-styled flex-wrap gap-2">
+                <div class="card-header-title-group">
+                  <div class="icon-gradient-badge">
+                    <i class="fa-solid fa-sliders"></i>
+                  </div>
+                  <div>
+                    <h5>Live Entry Simulator & Instant Chart Refresh</h5>
+                    <p class="card-subtitle">Simulate real-time student additions and watch all 6 charts update dynamically</p>
+                  </div>
                 </div>
-                <div class="mb-3">
-                  <label class="form-label">Full Name</label>
-                  <input type="text" class="form-control" id="stuName" placeholder="Enter student name" required>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                  <button class="btn-header-outline" onclick="exportCSV()"><i class="fa-solid fa-file-arrow-down text-primary"></i> Export CSV</button>
+                  <button class="btn-header-danger" onclick="resetData()"><i class="fa-solid fa-arrow-rotate-left"></i> Reset Defaults</button>
                 </div>
-                <div class="mb-3">
+              </div>
+
+              <form id="quickSimForm" class="row g-3 align-items-end">
+                <div class="col-md-3">
+                  <label class="form-label">Student Name</label>
+                  <input type="text" class="form-control" id="simName" placeholder="e.g. Priya Mohan" required>
+                </div>
+                <div class="col-md-2">
                   <label class="form-label">Department</label>
-                  <select class="form-select" id="stuDept">
+                  <select class="form-select" id="simDept">
                     <option>Information Technology</option>
                     <option>Computer Science</option>
                     <option>Artificial Intelligence & Data Science</option>
@@ -1101,411 +1825,124 @@
                     <option>Civil Engineering</option>
                   </select>
                 </div>
-                <div class="mb-3">
-                  <label class="form-label">Year of Study</label>
-                  <select class="form-select" id="stuYear">
-                    <option value="1">1st Year (Freshman)</option>
-                    <option value="2">2nd Year (Sophomore)</option>
-                    <option value="3" selected>3rd Year (Junior)</option>
-                    <option value="4">4th Year (Senior)</option>
+                <div class="col-md-1">
+                  <label class="form-label">Year</label>
+                  <select class="form-select" id="simYear">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
                   </select>
                 </div>
-                <div class="mb-3">
-                  <label class="form-label">Email Address</label>
-                  <input type="email" class="form-control" id="stuEmail" placeholder="student@vcet.ac.in" required>
+                <div class="col-md-2">
+                  <label class="form-label">Event</label>
+                  <select class="form-select" id="simEvent" required></select>
                 </div>
-                <div class="mb-4">
-                  <label class="form-label">Phone Number</label>
-                  <input type="text" class="form-control" id="stuPhone" placeholder="9876543210" required>
-                </div>
-                <button type="submit" class="btn-brand-primary w-100">
-                  <i class="fa-solid fa-check"></i> Save Student Profile
-                </button>
-              </form>
-
-              <!-- Quick Delete Student Record Box -->
-              <div class="mt-4 pt-3 border-top">
-                <h6 class="fw-bold text-danger mb-2 d-flex align-items-center gap-2" style="font-size: 0.88rem;">
-                  <i class="fa-solid fa-user-minus"></i> Delete Student Record
-                </h6>
-                <p class="text-secondary small mb-2">Remove an enrolled student record by Student ID:</p>
-                <div class="input-group input-group-sm">
-                  <input type="text" class="form-control" id="deleteStuIdInput" placeholder="Enter ID (e.g. 25IT001)">
-                  <button class="btn btn-outline-danger d-inline-flex align-items-center gap-1" type="button" onclick="deleteStudentByIdInput()">
-                    <i class="fa-solid fa-trash-can"></i> Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: Enrolled Students List -->
-          <div class="col-lg-8">
-            <div class="app-card">
-              <div class="card-header-styled flex-wrap gap-2">
-                <h5><span class="icon-square"><i class="fa-solid fa-users"></i></span> Enrolled Students</h5>
-                <div class="d-flex align-items-center gap-2 flex-wrap">
-                  <span id="studentCountBadge" class="badge-modern badge-primary-soft">20 Students</span>
-                  <button class="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1" onclick="deleteAllStudents()" title="Delete all enrolled student records">
-                    <i class="fa-solid fa-trash-can"></i> Delete All
-                  </button>
-                  <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1" onclick="resetStudentsDefault()" title="Restore default 20 student roster">
-                    <i class="fa-solid fa-rotate-left"></i> Reset Defaults
-                  </button>
-                </div>
-              </div>
-
-              <!-- Filter Search Toolbar -->
-              <div class="mb-3">
-                <div class="input-group input-group-sm">
-                  <span class="input-group-text bg-transparent border-end-0 text-secondary"><i class="fa-solid fa-magnifying-glass"></i></span>
-                  <input type="text" class="form-control border-start-0" id="searchStudentInput" placeholder="Filter enrolled students by Name, ID, or Department..." oninput="filterStudents()">
-                </div>
-              </div>
-
-              <div class="table-container table-responsive" style="max-height: 480px;">
-                <table class="custom-table table-hover">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Full Name</th>
-                      <th>Department</th>
-                      <th>Year</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th class="text-center" style="width: 105px;">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="studentTableBody"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ====================================================================
-           TAB 2: CAMPUS EVENTS
-           ==================================================================== -->
-      <div class="tab-pane fade" id="events" role="tabpanel">
-        <div class="row g-4">
-          <!-- Left: Add Event Form -->
-          <div class="col-lg-4">
-            <div class="app-card">
-              <div class="card-header-styled">
-                <h5><span class="icon-square"><i class="fa-solid fa-calendar-plus"></i></span> Create Event</h5>
-              </div>
-              <form id="eventForm">
-                <div class="mb-3">
-                  <label class="form-label">Event ID</label>
-                  <input type="text" class="form-control" id="evId" placeholder="e.g. EVT108" required>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Event Title</label>
-                  <input type="text" class="form-control" id="evName" placeholder="e.g. AI Prompt Challenge" required>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Category</label>
-                  <select class="form-select" id="evType">
-                    <option>Technical</option>
-                    <option>Workshop</option>
-                    <option>Seminar</option>
-                    <option>Cultural</option>
+                <div class="col-md-2">
+                  <label class="form-label">Status</label>
+                  <select class="form-select" id="simStatus">
+                    <option value="Present">Present</option>
+                    <option value="Absent">Absent</option>
                   </select>
                 </div>
-                <div class="mb-3">
-                  <label class="form-label">Event Date</label>
-                  <input type="date" class="form-control" id="evDate" value="2026-12-05" required>
+                <div class="col-md-1">
+                  <label class="form-label">Rating</label>
+                  <select class="form-select" id="simRating">
+                    <option value="5">5 ★</option>
+                    <option value="4">4 ★</option>
+                    <option value="3">3 ★</option>
+                    <option value="2">2 ★</option>
+                    <option value="1">1 ★</option>
+                  </select>
                 </div>
-                <div class="mb-3">
-                  <label class="form-label">Venue</label>
-                  <input type="text" class="form-control" id="evVenue" placeholder="Hall / Lab room" required>
+                <div class="col-md-1">
+                  <button type="submit" class="btn-brand-primary w-100" title="Simulate entry and recalculate all 6 charts in real-time">
+                    <i class="fa-solid fa-bolt"></i> Add
+                  </button>
                 </div>
-                <div class="mb-3">
-                  <label class="form-label">Maximum Capacity</label>
-                  <input type="number" class="form-control" id="evMax" min="1" max="500" value="20" required>
-                </div>
-                <div class="mb-4">
-                  <label class="form-label">Description</label>
-                  <textarea class="form-control" id="evDesc" rows="2" placeholder="Brief overview of event"></textarea>
-                </div>
-                <button type="submit" class="btn-brand-primary w-100">
-                  <i class="fa-solid fa-plus-circle"></i> Create Campus Event
-                </button>
               </form>
             </div>
-          </div>
 
-          <!-- Right: Scheduled Events Table -->
-          <div class="col-lg-8">
-            <div class="app-card">
-              <div class="card-header-styled">
-                <h5><span class="icon-square"><i class="fa-solid fa-calendar-days"></i></span> Scheduled Campus Events</h5>
-                <span id="eventCountBadge" class="badge-modern badge-primary-soft">6 Events</span>
+            <!-- Summary Tables -->
+            <div class="row g-4 mb-4">
+              <!-- Event-Wise Summary -->
+              <div class="col-lg-8">
+                <div class="app-card">
+                  <div class="card-header-styled">
+                    <div class="card-header-title-group">
+                      <div class="icon-gradient-badge" style="width: 36px; height: 36px; font-size: 0.95rem;">
+                        <i class="fa-solid fa-chart-column"></i>
+                      </div>
+                      <div>
+                        <h6 class="fw-bold mb-0">Event-Wise Participation Performance</h6>
+                        <p class="card-subtitle">Attendance rate and feedback averages</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-container table-responsive">
+                    <table class="custom-table table-hover table-responsive-cards">
+                      <thead>
+                        <tr>
+                          <th style="min-width: 90px;">Event ID</th>
+                          <th style="min-width: 190px;">Event Name</th>
+                          <th style="min-width: 100px;">Category</th>
+                          <th style="min-width: 100px;">Registered</th>
+                          <th style="min-width: 80px;">Present</th>
+                          <th style="min-width: 80px;">Absent</th>
+                          <th style="min-width: 90px;">Att Rate</th>
+                          <th style="min-width: 100px;">Avg Rating</th>
+                        </tr>
+                      </thead>
+                      <tbody id="repEventTableBody"></tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
-              <div class="table-container table-responsive" style="max-height: 480px;">
-                <table class="custom-table table-hover">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Event Title</th>
-                      <th>Category</th>
-                      <th>Date</th>
-                      <th>Venue</th>
-                      <th>Capacity Utilization</th>
-                    </tr>
-                  </thead>
-                  <tbody id="eventTableBody"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- ====================================================================
-           TAB 3: EVENT REGISTRATION (DUPLICATE PREVENTING)
-           ==================================================================== -->
-      <div class="tab-pane fade" id="registration" role="tabpanel">
-        <div class="app-card mb-4">
-          <div class="card-header-styled">
-            <h5><span class="icon-square"><i class="fa-solid fa-shield-halved"></i></span> Register Student for Event (Duplicate-Protected)</h5>
-          </div>
-          <form id="regForm" class="row g-3 align-items-end">
-            <div class="col-md-5">
-              <label class="form-label">Select Student</label>
-              <select class="form-select" id="regStuSelect" required></select>
-            </div>
-            <div class="col-md-5">
-              <label class="form-label">Select Event</label>
-              <select class="form-select" id="regEvSelect" required></select>
-            </div>
-            <div class="col-md-2">
-              <button type="submit" class="btn-brand-success w-100">
-                <i class="fa-solid fa-user-plus"></i> Register
-              </button>
-            </div>
-          </form>
-          <div id="regAlert" class="mt-3 d-none"></div>
-        </div>
-
-        <div class="app-card">
-          <div class="card-header-styled">
-            <div class="d-flex align-items-center gap-3">
-              <h5><span class="icon-square"><i class="fa-solid fa-list-check"></i></span> Registered Participants for:</h5>
-              <select class="form-select form-select-sm" id="filterEventSelect" style="max-width: 320px;" onchange="renderRegistrations()"></select>
-            </div>
-            <span id="regCountBadge" class="badge-modern badge-neutral-soft">0 Participants</span>
-          </div>
-          <div class="table-container table-responsive" style="max-height: 420px;">
-            <table class="custom-table table-hover">
-              <thead>
-                <tr>
-                  <th>Reg ID</th>
-                  <th>Student ID</th>
-                  <th>Student Name</th>
-                  <th>Department</th>
-                  <th>Registration Date</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="regTableBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- ====================================================================
-           TAB 4: ATTENDANCE & FEEDBACK
-           ==================================================================== -->
-      <div class="tab-pane fade" id="attendance" role="tabpanel">
-        <div class="app-card mb-4">
-          <div class="card-header-styled">
-            <h5><span class="icon-square"><i class="fa-solid fa-user-check"></i></span> Mark Attendance & Student Feedback</h5>
-          </div>
-          <form id="attForm" class="row g-3 align-items-end">
-            <div class="col-md-3">
-              <label class="form-label">Event</label>
-              <select class="form-select" id="attEvSelect" onchange="onAttEventChange()" required></select>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label">Participant</label>
-              <select class="form-select" id="attRegSelect" required></select>
-            </div>
-            <div class="col-md-2">
-              <label class="form-label">Attendance Status</label>
-              <select class="form-select" id="attStatusSelect">
-                <option value="Present">Present</option>
-                <option value="Absent">Absent</option>
-              </select>
-            </div>
-            <div class="col-md-2">
-              <label class="form-label">Rating</label>
-              <select class="form-select" id="attRatingSelect">
-                <option value="5">5 ★ (Outstanding)</option>
-                <option value="4">4 ★ (Very Good)</option>
-                <option value="3">3 ★ (Good)</option>
-                <option value="2">2 ★ (Fair)</option>
-                <option value="1">1 ★ (Poor)</option>
-              </select>
-            </div>
-            <div class="col-md-2">
-              <button type="submit" class="btn-brand-primary w-100">
-                <i class="fa-solid fa-floppy-disk"></i> Save Record
-              </button>
-            </div>
-            <div class="col-12 mt-2">
-              <input type="text" class="form-control" id="attRemarks" placeholder="Feedback remarks or reason for absence" value="Active participant in workshop sessions">
-            </div>
-          </form>
-          <div id="attAlert" class="mt-3 d-none"></div>
-        </div>
-
-        <div class="app-card">
-          <div class="card-header-styled">
-            <h5><span class="icon-square"><i class="fa-solid fa-clipboard-check"></i></span> Verified Attendance Sheet</h5>
-          </div>
-          <div class="table-container table-responsive" style="max-height: 420px;">
-            <table class="custom-table table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Reg ID</th>
-                  <th>Student ID</th>
-                  <th>Name</th>
-                  <th>Attendance Status</th>
-                  <th>Rating</th>
-                  <th>Remarks</th>
-                  <th>Marked At</th>
-                </tr>
-              </thead>
-              <tbody id="attTableBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- ====================================================================
-           TAB 5: LIVE REPORTS & INTERACTIVE VISUALIZATIONS
-           ==================================================================== -->
-      <div class="tab-pane fade" id="reports" role="tabpanel">
-
-        <!-- Top Action Bar & Live Simulation Form -->
-        <div class="app-card mb-4">
-          <div class="card-header-styled">
-            <h5><span class="icon-square"><i class="fa-solid fa-sliders"></i></span> Live Entry Simulator & Instant Chart Refresh</h5>
-            <div class="d-flex align-items-center gap-2">
-              <button class="btn-action-outline" onclick="exportCSV()"><i class="fa-solid fa-file-arrow-down text-primary"></i> Export CSV</button>
-              <button class="btn-action-outline" onclick="resetData()"><i class="fa-solid fa-arrow-rotate-left text-danger"></i> Reset to Defaults</button>
-            </div>
-          </div>
-
-          <form id="quickSimForm" class="row g-3 align-items-end">
-            <div class="col-md-3">
-              <label class="form-label">Student Name</label>
-              <input type="text" class="form-control" id="simName" placeholder="e.g. Priya Mohan" required>
-            </div>
-            <div class="col-md-2">
-              <label class="form-label">Department</label>
-              <select class="form-select" id="simDept">
-                <option>Information Technology</option>
-                <option>Computer Science</option>
-                <option>Artificial Intelligence & Data Science</option>
-                <option>Electronics and Communication</option>
-                <option>Mechanical Engineering</option>
-                <option>Civil Engineering</option>
-              </select>
-            </div>
-            <div class="col-md-1">
-              <label class="form-label">Year</label>
-              <select class="form-select" id="simYear">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3" selected>3</option>
-                <option value="4">4</option>
-              </select>
-            </div>
-            <div class="col-md-2">
-              <label class="form-label">Event</label>
-              <select class="form-select" id="simEvent" required></select>
-            </div>
-            <div class="col-md-2">
-              <label class="form-label">Status</label>
-              <select class="form-select" id="simStatus">
-                <option value="Present">Present</option>
-                <option value="Absent">Absent</option>
-              </select>
-            </div>
-            <div class="col-md-1">
-              <label class="form-label">Rating</label>
-              <select class="form-select" id="simRating">
-                <option value="5">5 ★</option>
-                <option value="4">4 ★</option>
-                <option value="3">3 ★</option>
-                <option value="2">2 ★</option>
-                <option value="1">1 ★</option>
-              </select>
-            </div>
-            <div class="col-md-1">
-              <button type="submit" class="btn-brand-primary w-100" title="Simulate entry and recalculate all 6 charts in real-time">
-                <i class="fa-solid fa-bolt"></i> Add
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- Summary Tables -->
-        <div class="row g-4 mb-4">
-          <!-- Event-Wise Summary -->
-          <div class="col-lg-8">
-            <div class="app-card">
-              <h6 class="fw-bold mb-3 text-secondary">Event-Wise Participation Performance</h6>
-              <div class="table-container table-responsive">
-                <table class="custom-table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Event ID</th>
-                      <th>Event Name</th>
-                      <th>Category</th>
-                      <th>Registered</th>
-                      <th>Present</th>
-                      <th>Absent</th>
-                      <th>Att Rate</th>
-                      <th>Avg Rating</th>
-                    </tr>
-                  </thead>
-                  <tbody id="repEventTableBody"></tbody>
-                </table>
+              <!-- Department-Wise Distribution -->
+              <div class="col-lg-4">
+                <div class="app-card">
+                  <div class="card-header-styled">
+                    <div class="card-header-title-group">
+                      <div class="icon-gradient-badge" style="width: 36px; height: 36px; font-size: 0.95rem;">
+                        <i class="fa-solid fa-building-columns"></i>
+                      </div>
+                      <div>
+                        <h6 class="fw-bold mb-0">Department-Wise Distribution</h6>
+                        <p class="card-subtitle">Cross-department reach</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-container table-responsive">
+                    <table class="custom-table table-hover table-responsive-cards">
+                      <thead>
+                        <tr>
+                          <th>Department</th>
+                          <th>Students</th>
+                          <th>Registrations</th>
+                          <th>Attended</th>
+                        </tr>
+                      </thead>
+                      <tbody id="repDeptTableBody"></tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Department-Wise Distribution -->
-          <div class="col-lg-4">
-            <div class="app-card">
-              <h6 class="fw-bold mb-3 text-secondary">Department-Wise Distribution</h6>
-              <div class="table-container table-responsive">
-                <table class="custom-table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Department</th>
-                      <th>Students</th>
-                      <th>Registrations</th>
-                      <th>Attended</th>
-                    </tr>
-                  </thead>
-                  <tbody id="repDeptTableBody"></tbody>
-                </table>
+            <!-- Live Interactive Visualizations Suite -->
+            <div class="card-header-styled mb-3">
+              <div class="card-header-title-group">
+                <div class="icon-gradient-badge">
+                  <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div>
+                  <h5>Live Interactive Visualizations Suite</h5>
+                  <p class="card-subtitle">Real-time data telemetry powered by Chart.js & Plotly.js</p>
+                </div>
               </div>
+              <span class="badge-modern badge-success-soft"><i class="fa-solid fa-arrows-rotate"></i> Real-time Auto Refresh</span>
             </div>
-          </div>
-        </div>
-
-        <!-- Live Interactive Visualizations Suite -->
-        <div class="card-header-styled mb-3">
-          <h5><span class="icon-square"><i class="fa-solid fa-chart-line"></i></span> Live Interactive Visualizations Suite (Chart.js & Plotly.js)</h5>
-          <span class="badge-modern badge-success-soft"><i class="fa-solid fa-arrows-rotate"></i> Real-time Auto Refresh</span>
-        </div>
 
         <div class="row g-4 mb-5" id="interactiveGallery">
           <!-- Chart 1: Department Participation -->
@@ -1756,24 +2193,30 @@
       regStu.innerHTML = '';
 
       const yearBadges = {
-        1: '<span class="badge-modern badge-neutral-soft">Year 1</span>',
-        2: '<span class="badge-modern badge-info-soft">Year 2</span>',
-        3: '<span class="badge-modern badge-primary-soft">Year 3</span>',
-        4: '<span class="badge-modern badge-warning-soft">Year 4</span>'
+        1: '<span class="year-badge-1">Year 1</span>',
+        2: '<span class="year-badge-2">Year 2</span>',
+        3: '<span class="year-badge-3">Year 3</span>',
+        4: '<span class="year-badge-4">Year 4</span>'
       };
 
       students.forEach(s => {
+        const initials = s.name.split(' ').map(n => n[0]).filter(Boolean).join('').substring(0, 2).toUpperCase() || 'ST';
         tbody.innerHTML += `
           <tr>
-            <td class="fw-bold font-monospace text-primary">${s.id}</td>
-            <td class="fw-semibold">${s.name}</td>
-            <td>${s.dept}</td>
-            <td>${yearBadges[s.year] || s.year}</td>
-            <td class="text-secondary">${s.email}</td>
-            <td class="text-secondary">${s.phone}</td>
-            <td class="text-center">
-              <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1 py-1 px-2" onclick="deleteStudent('${s.id}')" title="Delete Student ${s.name} (${s.id})">
-                <i class="fa-solid fa-trash-can"></i> <span style="font-size: 0.78rem;">Delete</span>
+            <td data-label="ID" class="fw-bold font-monospace text-primary text-nowrap">${s.id}</td>
+            <td data-label="Student" class="cell-student-name">
+              <div class="d-flex align-items-center gap-2">
+                <div class="student-avatar">${initials}</div>
+                <div class="text-truncate fw-semibold" style="max-width: 180px;">${s.name}</div>
+              </div>
+            </td>
+            <td data-label="Department" class="text-nowrap">${s.dept}</td>
+            <td data-label="Year">${yearBadges[s.year] || `<span class="badge-modern badge-neutral-soft">Year ${s.year}</span>`}</td>
+            <td data-label="Email" class="text-secondary small text-nowrap">${s.email}</td>
+            <td data-label="Phone" class="text-secondary small text-nowrap">${s.phone}</td>
+            <td data-label="Action" class="text-center cell-action">
+              <button type="button" class="btn-icon-delete" onclick="deleteStudent('${s.id}')" title="Delete Student ${s.name} (${s.id})">
+                <i class="fa-solid fa-trash-can"></i>
               </button>
             </td>
           </tr>
@@ -2132,12 +2575,12 @@
         
         tbody.innerHTML += `
           <tr>
-            <td class="fw-bold font-monospace text-primary">${e.id}</td>
-            <td class="fw-semibold">${e.name}</td>
-            <td>${typeBadges[e.type] || e.type}</td>
-            <td class="text-secondary">${e.date}</td>
-            <td class="text-secondary">${e.venue}</td>
-            <td>
+            <td data-label="ID" class="fw-bold font-monospace text-primary text-nowrap">${e.id}</td>
+            <td data-label="Event" class="cell-student-name fw-semibold">${e.name}</td>
+            <td data-label="Category">${typeBadges[e.type] || e.type}</td>
+            <td data-label="Date" class="text-secondary small text-nowrap">${e.date}</td>
+            <td data-label="Venue" class="text-secondary small">${e.venue}</td>
+            <td data-label="Capacity">
               <div class="d-flex align-items-center gap-2">
                 <div class="progress-custom flex-grow-1">
                   <div class="progress-bar" style="width: ${pct}%;"></div>
@@ -2171,12 +2614,12 @@
         const stu = students.find(s => s.id === r.studentId) || { name: r.studentId, dept: 'N/A' };
         tbody.innerHTML += `
           <tr>
-            <td class="font-monospace text-muted">#${r.regId}</td>
-            <td class="fw-bold font-monospace text-primary">${r.studentId}</td>
-            <td class="fw-semibold">${stu.name}</td>
-            <td>${stu.dept}</td>
-            <td class="text-secondary small">${r.date}</td>
-            <td><span class="badge-modern badge-success-soft"><i class="fa-solid fa-circle-check text-xs"></i> ${r.status}</span></td>
+            <td data-label="Reg ID" class="font-monospace text-muted text-nowrap">#${r.regId}</td>
+            <td data-label="Student ID" class="fw-bold font-monospace text-primary text-nowrap">${r.studentId}</td>
+            <td data-label="Student" class="cell-student-name fw-semibold">${stu.name}</td>
+            <td data-label="Department" class="text-nowrap">${stu.dept}</td>
+            <td data-label="Date" class="text-secondary small text-nowrap">${r.date}</td>
+            <td data-label="Status"><span class="badge-modern badge-success-soft"><i class="fa-solid fa-circle-check text-xs"></i> ${r.status}</span></td>
           </tr>
         `;
       });
@@ -2219,14 +2662,14 @@
 
         tbody.innerHTML += `
           <tr>
-            <td class="text-muted small">${idx + 1}</td>
-            <td class="font-monospace text-muted">#${a.regId}</td>
-            <td class="fw-bold font-monospace text-primary">${stu.id}</td>
-            <td class="fw-semibold">${stu.name}</td>
-            <td>${badge}</td>
-            <td>${stars}</td>
-            <td class="text-secondary">${a.remarks || ''}</td>
-            <td class="text-muted small">${a.date}</td>
+            <td data-label="#" class="text-muted small">${idx + 1}</td>
+            <td data-label="Reg ID" class="font-monospace text-muted text-nowrap">#${a.regId}</td>
+            <td data-label="Student ID" class="fw-bold font-monospace text-primary text-nowrap">${stu.id}</td>
+            <td data-label="Name" class="cell-student-name fw-semibold">${stu.name}</td>
+            <td data-label="Status">${badge}</td>
+            <td data-label="Rating">${stars}</td>
+            <td data-label="Remarks" class="text-secondary small">${a.remarks || ''}</td>
+            <td data-label="Marked At" class="text-muted small text-nowrap">${a.date}</td>
           </tr>
         `;
       });
@@ -2248,14 +2691,14 @@
 
         evTbody.innerHTML += `
           <tr>
-            <td class="fw-bold font-monospace text-primary">${e.id}</td>
-            <td class="fw-semibold">${e.name}</td>
-            <td><span class="badge-modern badge-primary-soft">${e.type}</span></td>
-            <td>${regs.length} / ${e.max}</td>
-            <td class="text-success fw-bold">${pres}</td>
-            <td class="text-danger fw-bold">${abs}</td>
-            <td><strong class="text-primary">${rate}%</strong></td>
-            <td><strong>${avg}</strong> <small class="text-muted">/ 5</small></td>
+            <td data-label="ID" class="fw-bold font-monospace text-primary text-nowrap">${e.id}</td>
+            <td data-label="Event" class="cell-student-name fw-semibold">${e.name}</td>
+            <td data-label="Category"><span class="badge-modern badge-primary-soft">${e.type}</span></td>
+            <td data-label="Registered" class="text-nowrap">${regs.length} / ${e.max}</td>
+            <td data-label="Present" class="text-success fw-bold">${pres}</td>
+            <td data-label="Absent" class="text-danger fw-bold">${abs}</td>
+            <td data-label="Att Rate"><strong class="text-primary">${rate}%</strong></td>
+            <td data-label="Avg Rating"><strong>${avg}</strong> <small class="text-muted">/ 5</small></td>
           </tr>
         `;
       });
@@ -2272,10 +2715,10 @@
         
         deptTbody.innerHTML += `
           <tr>
-            <td class="fw-semibold">${d}</td>
-            <td>${totalStu}</td>
-            <td>${totalReg}</td>
-            <td class="text-success fw-bold">${attCount}</td>
+            <td data-label="Department" class="cell-student-name fw-semibold">${d}</td>
+            <td data-label="Students">${totalStu}</td>
+            <td data-label="Registrations">${totalReg}</td>
+            <td data-label="Attended" class="text-success fw-bold">${attCount}</td>
           </tr>
         `;
       });
