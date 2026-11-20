@@ -120,7 +120,7 @@ public class SmartCampusGUI extends JFrame {
         JTextField txtId = new JTextField(12);
         JTextField txtName = new JTextField(12);
         String[] depts = {"Information Technology", "Computer Science", "Artificial Intelligence & Data Science",
-                "Electronics and Communication", "Mechanical Engineering", "Civil Engineering"};
+                "Electronics and Communication", "Mechanical Engineering", "Civil Engineering", "Cybersecurity"};
         JComboBox<String> cmbDept = new JComboBox<>(depts);
         JComboBox<Integer> cmbYear = new JComboBox<>(new Integer[]{1, 2, 3, 4});
         JTextField txtEmail = new JTextField(12);

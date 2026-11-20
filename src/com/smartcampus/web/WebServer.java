@@ -460,6 +460,7 @@ public class WebServer {
                 "                    <option>Information Technology</option><option>Computer Science</option>\n" +
                 "                    <option>Artificial Intelligence & Data Science</option><option>Electronics and Communication</option>\n" +
                 "                    <option>Mechanical Engineering</option><option>Civil Engineering</option>\n" +
+                "                    <option>Cybersecurity</option>\n" +
                 "                  </select>\n" +
                 "                </div>\n" +
                 "                <div class=\"mb-2\"><label class=\"form-label fw-semibold\">Year of Study</label>\n" +

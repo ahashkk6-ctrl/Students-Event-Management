@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Smart Campus Event Management & Participation System | VCET IT</title>
-  
+
   <!-- Google Fonts: Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- Bootstrap 5 & Font Awesome 6 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
+
   <!-- Chart.js and Plotly.js CDNs for Live Interactive Charts -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-  
+
   <style>
     /* ==========================================================================
        1. THEME VARIABLES (LIGHT & DARK MODE)
@@ -28,38 +31,38 @@
       --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
       --primary-subtle: #eef2ff;
       --primary-text: #3730a3;
-      
+
       --secondary: #0ea5e9;
       --secondary-subtle: #e0f2fe;
-      
+
       --accent-success: #10b981;
       --accent-success-subtle: #d1fae5;
       --accent-warning: #f59e0b;
       --accent-warning-subtle: #fef3c7;
       --accent-danger: #ef4444;
       --accent-danger-subtle: #fee2e2;
-      
+
       --bg-page: #f4f6fb;
       --bg-surface: #ffffff;
       --bg-surface-elevated: #f1f5f9;
       --bg-input: #f8fafc;
-      
+
       --text-main: #0f172a;
       --text-secondary: #475569;
       --text-muted: #94a3b8;
-      
+
       --border-color: #e2e8f0;
       --border-focus: #6366f1;
-      
+
       --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
       --card-shadow-hover: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
       --header-bg: linear-gradient(135deg, #0f172a 0%, #1e1b4b 45%, #312e81 100%);
-      
+
       --radius-sm: 8px;
       --radius-md: 12px;
       --radius-lg: 16px;
       --radius-pill: 9999px;
-      
+
       --transition-fast: 0.15s ease;
       --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -70,29 +73,29 @@
       --primary-gradient: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
       --primary-subtle: #1e1b4b;
       --primary-text: #c7d2fe;
-      
+
       --secondary: #38bdf8;
       --secondary-subtle: #082f49;
-      
+
       --accent-success: #34d399;
       --accent-success-subtle: #064e3b;
       --accent-warning: #fbbf24;
       --accent-warning-subtle: #451a03;
       --accent-danger: #f87171;
       --accent-danger-subtle: #450a0a;
-      
+
       --bg-page: #090d16;
       --bg-surface: #111827;
       --bg-surface-elevated: #1f2937;
       --bg-input: #1a2234;
-      
+
       --text-main: #f8fafc;
       --text-secondary: #cbd5e1;
       --text-muted: #64748b;
-      
+
       --border-color: #242f44;
       --border-focus: #818cf8;
-      
+
       --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
       --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
       --header-bg: linear-gradient(135deg, #030712 0%, #0b1120 50%, #1e1b4b 100%);
@@ -117,7 +120,13 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, h4, h5, h6, .fw-title {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .fw-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: var(--text-main);
       letter-spacing: -0.02em;
@@ -230,9 +239,20 @@
     }
 
     @keyframes pulseGreen {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 7px rgba(16, 185, 129, 0);
+      }
+
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
     }
 
     .theme-toggle-btn {
@@ -543,6 +563,7 @@
     }
 
     @media (max-width: 767.98px) {
+
       /* Fixed 64px compact top bar with safe-area notch support */
       .header-banner {
         position: fixed;
@@ -688,7 +709,7 @@
         border-radius: 3px;
       }
 
-      .stat-cards-row > [class*="col-"] {
+      .stat-cards-row>[class*="col-"] {
         flex: 0 0 205px !important;
         max-width: 205px !important;
         width: 205px !important;
@@ -865,7 +886,8 @@
       flex-shrink: 0;
     }
 
-    .card-header-styled h5, .card-header-styled h6 {
+    .card-header-styled h5,
+    .card-header-styled h6 {
       margin: 0;
       font-weight: 700;
       font-size: 1.15rem;
@@ -891,7 +913,8 @@
       display: block;
     }
 
-    .form-control, .form-select {
+    .form-control,
+    .form-select {
       height: 48px;
       background-color: var(--bg-input);
       border: 1.5px solid var(--border-color);
@@ -903,7 +926,8 @@
       transition: all var(--transition-fast);
     }
 
-    .form-control:focus, .form-select:focus {
+    .form-control:focus,
+    .form-select:focus {
       background-color: var(--bg-surface);
       border-color: #6366f1;
       color: var(--text-main);
@@ -1171,10 +1195,25 @@
       white-space: nowrap;
     }
 
-    [data-theme="dark"] .year-badge-1 { color: #34d399; background: rgba(16, 185, 129, 0.2); }
-    [data-theme="dark"] .year-badge-2 { color: #38bdf8; background: rgba(14, 165, 233, 0.2); }
-    [data-theme="dark"] .year-badge-3 { color: #a5b4fc; background: rgba(99, 102, 241, 0.2); }
-    [data-theme="dark"] .year-badge-4 { color: #fcd34d; background: rgba(245, 158, 11, 0.2); }
+    [data-theme="dark"] .year-badge-1 {
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    [data-theme="dark"] .year-badge-2 {
+      color: #38bdf8;
+      background: rgba(14, 165, 233, 0.2);
+    }
+
+    [data-theme="dark"] .year-badge-3 {
+      color: #a5b4fc;
+      background: rgba(99, 102, 241, 0.2);
+    }
+
+    [data-theme="dark"] .year-badge-4 {
+      color: #fcd34d;
+      background: rgba(245, 158, 11, 0.2);
+    }
 
     .btn-icon-delete {
       width: 32px;
@@ -1209,8 +1248,15 @@
     }
 
     @keyframes tabFadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ==========================================================================
@@ -1295,13 +1341,15 @@
       .table-responsive-cards thead {
         display: none;
       }
-      .table-responsive-cards, 
-      .table-responsive-cards tbody, 
-      .table-responsive-cards tr, 
+
+      .table-responsive-cards,
+      .table-responsive-cards tbody,
+      .table-responsive-cards tr,
       .table-responsive-cards td {
         display: block;
         width: 100%;
       }
+
       .table-responsive-cards tr {
         background: var(--bg-surface);
         border: 1px solid var(--border-color);
@@ -1310,6 +1358,7 @@
         margin-bottom: 14px;
         box-shadow: var(--card-shadow);
       }
+
       .table-responsive-cards td {
         padding: 8px 0;
         border: none !important;
@@ -1318,6 +1367,7 @@
         align-items: center;
         font-size: 0.88rem;
       }
+
       .table-responsive-cards td::before {
         content: attr(data-label);
         font-weight: 700;
@@ -1326,29 +1376,38 @@
         letter-spacing: 0.05em;
         color: var(--text-muted);
       }
+
       .table-responsive-cards td.cell-student-name {
         justify-content: flex-start;
         border-bottom: 1px solid var(--border-color) !important;
         padding-bottom: 12px;
         margin-bottom: 8px;
       }
+
       .table-responsive-cards td.cell-student-name::before {
         display: none;
       }
+
       .table-responsive-cards td.cell-action {
         justify-content: flex-end;
         border-top: 1px solid var(--border-color) !important;
         padding-top: 12px;
         margin-top: 8px;
       }
+
       .table-responsive-cards td.cell-action::before {
         display: none;
       }
+
       .app-card {
         padding: 22px 18px;
         border-radius: 18px;
       }
-      .form-control, .form-select, .btn-brand-primary, .btn-brand-success {
+
+      .form-control,
+      .form-select,
+      .btn-brand-primary,
+      .btn-brand-success {
         height: 48px;
         min-height: 46px;
       }
@@ -1365,12 +1424,35 @@
       gap: 4px;
     }
 
-    .badge-primary-soft { background-color: var(--primary-subtle); color: var(--primary); }
-    .badge-success-soft { background-color: var(--accent-success-subtle); color: var(--accent-success); }
-    .badge-warning-soft { background-color: var(--accent-warning-subtle); color: var(--accent-warning); }
-    .badge-danger-soft { background-color: var(--accent-danger-subtle); color: var(--accent-danger); }
-    .badge-info-soft { background-color: var(--secondary-subtle); color: var(--secondary); }
-    .badge-neutral-soft { background-color: var(--bg-surface-elevated); color: var(--text-secondary); }
+    .badge-primary-soft {
+      background-color: var(--primary-subtle);
+      color: var(--primary);
+    }
+
+    .badge-success-soft {
+      background-color: var(--accent-success-subtle);
+      color: var(--accent-success);
+    }
+
+    .badge-warning-soft {
+      background-color: var(--accent-warning-subtle);
+      color: var(--accent-warning);
+    }
+
+    .badge-danger-soft {
+      background-color: var(--accent-danger-subtle);
+      color: var(--accent-danger);
+    }
+
+    .badge-info-soft {
+      background-color: var(--secondary-subtle);
+      color: var(--secondary);
+    }
+
+    .badge-neutral-soft {
+      background-color: var(--bg-surface-elevated);
+      color: var(--text-secondary);
+    }
 
     .progress-custom {
       height: 7px;
@@ -1431,11 +1513,19 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
+
 <body>
 
   <div class="app-layout">
@@ -1452,13 +1542,16 @@
           </div>
           <div class="sidebar-brand-text">
             <span class="fw-bold text-white d-block" style="font-size: 0.95rem; line-height: 1.2;">Smart Campus</span>
-            <span class="text-white-50" style="font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;">VCET IT Portal</span>
+            <span class="text-white-50"
+              style="font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;">VCET IT Portal</span>
           </div>
         </div>
-        <button class="sidebar-toggle-btn d-none d-md-flex" id="sidebarCollapseBtnTop" onclick="toggleSidebarCollapse()" title="Collapse / Expand Sidebar">
+        <button class="sidebar-toggle-btn d-none d-md-flex" id="sidebarCollapseBtnTop" onclick="toggleSidebarCollapse()"
+          title="Collapse / Expand Sidebar">
           <i class="fa-solid fa-angles-left"></i>
         </button>
-        <button class="sidebar-close-mobile-btn d-md-none" onclick="closeMobileSidebar()" aria-label="Close Navigation Menu">
+        <button class="sidebar-close-mobile-btn d-md-none" onclick="closeMobileSidebar()"
+          aria-label="Close Navigation Menu">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
@@ -1466,23 +1559,28 @@
       <!-- Sidebar Navigation Menu -->
       <nav class="sidebar-nav">
         <div class="sidebar-nav-title">MAIN NAVIGATION</div>
-        <button class="sidebar-nav-item active" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button" title="Students">
+        <button class="sidebar-nav-item active" id="students-tab" data-bs-toggle="tab" data-bs-target="#students"
+          type="button" title="Students">
           <i class="fa-solid fa-user-graduate"></i>
           <span class="nav-label">Students</span>
         </button>
-        <button class="sidebar-nav-item" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button" title="Campus Events">
+        <button class="sidebar-nav-item" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button"
+          title="Campus Events">
           <i class="fa-solid fa-calendar-check"></i>
           <span class="nav-label">Campus Events</span>
         </button>
-        <button class="sidebar-nav-item" id="reg-tab" data-bs-toggle="tab" data-bs-target="#registration" type="button" title="Event Registration">
+        <button class="sidebar-nav-item" id="reg-tab" data-bs-toggle="tab" data-bs-target="#registration" type="button"
+          title="Event Registration">
           <i class="fa-solid fa-id-card-clip"></i>
           <span class="nav-label">Event Registration</span>
         </button>
-        <button class="sidebar-nav-item" id="att-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button" title="Attendance & Feedback">
+        <button class="sidebar-nav-item" id="att-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button"
+          title="Attendance & Feedback">
           <i class="fa-solid fa-clipboard-user"></i>
           <span class="nav-label">Attendance & Feedback</span>
         </button>
-        <button class="sidebar-nav-item" id="rep-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" title="Reports & Live Visuals">
+        <button class="sidebar-nav-item" id="rep-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button"
+          title="Reports & Live Visuals">
           <i class="fa-solid fa-chart-pie"></i>
           <span class="nav-label">Reports & Live Visuals</span>
         </button>
@@ -1490,7 +1588,8 @@
 
       <!-- Sidebar Footer -->
       <div class="sidebar-footer">
-        <button class="sidebar-collapse-btn d-none d-md-flex" id="sidebarCollapseBtnBottom" onclick="toggleSidebarCollapse()" title="Collapse / Expand Sidebar">
+        <button class="sidebar-collapse-btn d-none d-md-flex" id="sidebarCollapseBtnBottom"
+          onclick="toggleSidebarCollapse()" title="Collapse / Expand Sidebar">
           <i class="fa-solid fa-angles-left" id="collapseIcon"></i>
           <span class="nav-label">Collapse Menu</span>
         </button>
@@ -1516,7 +1615,8 @@
           <!-- Left: Brand Info & Mobile Toggle -->
           <div class="header-left-group">
             <!-- Mobile Hamburger Toggle -->
-            <button class="mobile-toggle-btn d-md-none" id="mobileSidebarToggle" onclick="toggleMobileSidebar()" aria-label="Toggle Navigation Menu">
+            <button class="mobile-toggle-btn d-md-none" id="mobileSidebarToggle" onclick="toggleMobileSidebar()"
+              aria-label="Toggle Navigation Menu">
               <i class="fa-solid fa-bars"></i>
             </button>
 
@@ -1538,17 +1638,20 @@
                 <span class="badge bg-white bg-opacity-10 text-white-50 px-2 py-1 text-xs">Autonomous</span>
                 <span class="text-white-50 small">Department of Information Technology</span>
                 <span class="text-white-50 small d-none d-md-inline">•</span>
-                <span class="badge bg-indigo-500 bg-opacity-25 text-info px-2 py-1 text-xs d-none d-md-inline">Scenario 6: Smart Campus</span>
+                <span class="badge bg-indigo-500 bg-opacity-25 text-info px-2 py-1 text-xs d-none d-md-inline">Scenario
+                  6: Smart Campus</span>
               </div>
             </div>
           </div>
 
           <!-- Right: Controls (Theme Toggle & Live Badge) -->
           <div class="header-right-group">
-            <span class="badge bg-success bg-opacity-25 text-emerald border border-success border-opacity-25 px-3 py-2 text-xs d-none d-md-flex align-items-center header-live-badge">
+            <span
+              class="badge bg-success bg-opacity-25 text-emerald border border-success border-opacity-25 px-3 py-2 text-xs d-none d-md-flex align-items-center header-live-badge">
               <span class="pulse-dot"></span> System Live
             </span>
-            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle Dark/Light Mode">
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode"
+              aria-label="Toggle Dark/Light Mode">
               <i class="fa-solid fa-moon"></i> <span>Dark Mode</span>
             </button>
           </div>
@@ -1575,7 +1678,7 @@
                   </div>
                   <div class="stat-card-content">
                     <span class="stat-label">Total Enrolled</span>
-                    <h3 class="stat-value" id="statTotalStudents">20</h3>
+                    <h3 class="stat-value" id="statTotalStudents">23</h3>
                     <span class="stat-desc text-success"><i class="fa-solid fa-circle-check"></i> Active Profiles</span>
                   </div>
                 </div>
@@ -1587,7 +1690,7 @@
                   </div>
                   <div class="stat-card-content">
                     <span class="stat-label">Departments</span>
-                    <h3 class="stat-value" id="statTotalDepts">6</h3>
+                    <h3 class="stat-value" id="statTotalDepts">7</h3>
                     <span class="stat-desc text-secondary"><i class="fa-solid fa-layer-group"></i> Represented</span>
                   </div>
                 </div>
@@ -1600,7 +1703,8 @@
                   <div class="stat-card-content">
                     <span class="stat-label">Most Populated Year</span>
                     <h3 class="stat-value" id="statTopYear">Year 3</h3>
-                    <span class="stat-desc text-warning" id="statTopYearSub"><i class="fa-solid fa-chart-line"></i> 8 Students</span>
+                    <span class="stat-desc text-warning" id="statTopYearSub"><i class="fa-solid fa-chart-line"></i> 8
+                      Students</span>
                   </div>
                 </div>
               </div>
@@ -1684,6 +1788,7 @@
                         <option>Electronics and Communication</option>
                         <option>Mechanical Engineering</option>
                         <option>Civil Engineering</option>
+                        <option>Cybersecurity</option>
                       </select>
                     </div>
                     <div class="mb-3">
@@ -1715,8 +1820,10 @@
                     </div>
                     <p class="destructive-desc">Permanently remove an enrolled student record by Student ID:</p>
                     <div class="input-group">
-                      <input type="text" class="form-control" id="deleteStuIdInput" placeholder="Enter ID (e.g. 25IT001)">
-                      <button class="btn btn-outline-danger d-inline-flex align-items-center gap-1" type="button" onclick="deleteStudentByIdInput()">
+                      <input type="text" class="form-control" id="deleteStuIdInput"
+                        placeholder="Enter ID (e.g. 25IT001)">
+                      <button class="btn btn-outline-danger d-inline-flex align-items-center gap-1" type="button"
+                        onclick="deleteStudentByIdInput()">
                         <i class="fa-solid fa-trash-can"></i> Delete
                       </button>
                     </div>
@@ -1738,11 +1845,13 @@
                       </div>
                     </div>
                     <div class="d-flex align-items-center gap-2 flex-wrap">
-                      <span id="studentCountBadge" class="badge-modern badge-primary-soft">20 Students</span>
-                      <button class="btn-header-danger" onclick="deleteAllStudents()" title="Delete all enrolled student records">
+                      <span id="studentCountBadge" class="badge-modern badge-primary-soft">23 Students</span>
+                      <button class="btn-header-danger" onclick="deleteAllStudents()"
+                        title="Delete all enrolled student records">
                         <i class="fa-solid fa-trash-can"></i> Delete All
                       </button>
-                      <button class="btn-header-outline" onclick="resetStudentsDefault()" title="Restore default 20 student roster">
+                      <button class="btn-header-outline" onclick="resetStudentsDefault()"
+                        title="Restore default 23 student roster">
                         <i class="fa-solid fa-rotate-left"></i> Reset Defaults
                       </button>
                     </div>
@@ -1751,7 +1860,8 @@
                   <!-- Filter Search Toolbar -->
                   <div class="search-pill-group mb-3">
                     <i class="fa-solid fa-magnifying-glass search-pill-icon"></i>
-                    <input type="text" class="search-pill-input" id="searchStudentInput" placeholder="Filter enrolled students by Name, ID, or Department..." oninput="filterStudents()">
+                    <input type="text" class="search-pill-input" id="searchStudentInput"
+                      placeholder="Filter enrolled students by Name, ID, or Department..." oninput="filterStudents()">
                   </div>
 
                   <div class="table-container table-responsive" style="max-height: 480px;">
@@ -1801,7 +1911,8 @@
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Event Title</label>
-                      <input type="text" class="form-control" id="evName" placeholder="e.g. AI Prompt Challenge" required>
+                      <input type="text" class="form-control" id="evName" placeholder="e.g. AI Prompt Challenge"
+                        required>
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Category</label>
@@ -1826,7 +1937,8 @@
                     </div>
                     <div class="mb-4">
                       <label class="form-label">Description</label>
-                      <textarea class="form-control" id="evDesc" rows="2" placeholder="Brief overview of event"></textarea>
+                      <textarea class="form-control" id="evDesc" rows="2"
+                        placeholder="Brief overview of event"></textarea>
                     </div>
                     <button type="submit" class="btn-brand-primary w-100">
                       <i class="fa-solid fa-plus-circle"></i> Create Campus Event
@@ -1916,7 +2028,8 @@
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-2 flex-wrap">
-                  <select class="form-select form-select-sm" id="filterEventSelect" style="max-width: 280px;" onchange="renderRegistrations()"></select>
+                  <select class="form-select form-select-sm" id="filterEventSelect" style="max-width: 280px;"
+                    onchange="renderRegistrations()"></select>
                   <span id="regCountBadge" class="badge-modern badge-neutral-soft">0 Participants</span>
                 </div>
               </div>
@@ -1986,7 +2099,9 @@
                   </button>
                 </div>
                 <div class="col-12 mt-2">
-                  <input type="text" class="form-control" id="attRemarks" placeholder="Feedback remarks or reason for absence" value="Active participant in workshop sessions">
+                  <input type="text" class="form-control" id="attRemarks"
+                    placeholder="Feedback remarks or reason for absence"
+                    value="Active participant in workshop sessions">
                 </div>
               </form>
               <div id="attAlert" class="mt-3 d-none"></div>
@@ -2038,12 +2153,15 @@
                   </div>
                   <div>
                     <h5>Live Entry Simulator & Instant Chart Refresh</h5>
-                    <p class="card-subtitle">Simulate real-time student additions and watch all 6 charts update dynamically</p>
+                    <p class="card-subtitle">Simulate real-time student additions and watch all 6 charts update
+                      dynamically</p>
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-2 flex-wrap">
-                  <button class="btn-header-outline" onclick="exportCSV()"><i class="fa-solid fa-file-arrow-down text-primary"></i> Export CSV</button>
-                  <button class="btn-header-danger" onclick="resetData()"><i class="fa-solid fa-arrow-rotate-left"></i> Reset Defaults</button>
+                  <button class="btn-header-outline" onclick="exportCSV()"><i
+                      class="fa-solid fa-file-arrow-down text-primary"></i> Export CSV</button>
+                  <button class="btn-header-danger" onclick="resetData()"><i class="fa-solid fa-arrow-rotate-left"></i>
+                    Reset Defaults</button>
                 </div>
               </div>
 
@@ -2061,6 +2179,7 @@
                     <option>Electronics and Communication</option>
                     <option>Mechanical Engineering</option>
                     <option>Civil Engineering</option>
+                    <option>Cybersecurity</option>
                   </select>
                 </div>
                 <div class="col-md-1">
@@ -2094,7 +2213,8 @@
                   </select>
                 </div>
                 <div class="col-md-1">
-                  <button type="submit" class="btn-brand-primary w-100" title="Simulate entry and recalculate all 6 charts in real-time">
+                  <button type="submit" class="btn-brand-primary w-100"
+                    title="Simulate entry and recalculate all 6 charts in real-time">
                     <i class="fa-solid fa-bolt"></i> Add
                   </button>
                 </div>
@@ -2179,93 +2299,94 @@
                   <p class="card-subtitle">Real-time data telemetry powered by Chart.js & Plotly.js</p>
                 </div>
               </div>
-              <span class="badge-modern badge-success-soft"><i class="fa-solid fa-arrows-rotate"></i> Real-time Auto Refresh</span>
+              <span class="badge-modern badge-success-soft"><i class="fa-solid fa-arrows-rotate"></i> Real-time Auto
+                Refresh</span>
             </div>
 
-        <div class="row g-4 mb-5" id="interactiveGallery">
-          <!-- Chart 1: Department Participation -->
-          <div class="col-md-6 col-lg-4">
-            <div class="chart-box">
-              <div class="chart-header">
-                <span class="fw-bold small">1. Department Participation</span>
-                <span class="badge-modern badge-primary-soft">Chart.js Bar</span>
+            <div class="row g-4 mb-5" id="interactiveGallery">
+              <!-- Chart 1: Department Participation -->
+              <div class="col-md-6 col-lg-4">
+                <div class="chart-box">
+                  <div class="chart-header">
+                    <span class="fw-bold small">1. Department Participation</span>
+                    <span class="badge-modern badge-primary-soft">Chart.js Bar</span>
+                  </div>
+                  <div class="chart-body">
+                    <canvas id="chartDeptParticipation"></canvas>
+                  </div>
+                </div>
               </div>
-              <div class="chart-body">
-                <canvas id="chartDeptParticipation"></canvas>
-              </div>
-            </div>
-          </div>
 
-          <!-- Chart 2: Capacity vs Attendance -->
-          <div class="col-md-6 col-lg-4">
-            <div class="chart-box">
-              <div class="chart-header">
-                <span class="fw-bold small">2. Capacity vs Attendance</span>
-                <span class="badge-modern badge-success-soft">Grouped Bar</span>
+              <!-- Chart 2: Capacity vs Attendance -->
+              <div class="col-md-6 col-lg-4">
+                <div class="chart-box">
+                  <div class="chart-header">
+                    <span class="fw-bold small">2. Capacity vs Attendance</span>
+                    <span class="badge-modern badge-success-soft">Grouped Bar</span>
+                  </div>
+                  <div class="chart-body">
+                    <canvas id="chartCapacityAttendance"></canvas>
+                  </div>
+                </div>
               </div>
-              <div class="chart-body">
-                <canvas id="chartCapacityAttendance"></canvas>
-              </div>
-            </div>
-          </div>
 
-          <!-- Chart 3: Event Type Distribution -->
-          <div class="col-md-6 col-lg-4">
-            <div class="chart-box">
-              <div class="chart-header">
-                <span class="fw-bold small">3. Event Type Distribution</span>
-                <span class="badge-modern badge-info-soft">Donut Chart</span>
+              <!-- Chart 3: Event Type Distribution -->
+              <div class="col-md-6 col-lg-4">
+                <div class="chart-box">
+                  <div class="chart-header">
+                    <span class="fw-bold small">3. Event Type Distribution</span>
+                    <span class="badge-modern badge-info-soft">Donut Chart</span>
+                  </div>
+                  <div class="chart-body d-flex align-items-center justify-content-center">
+                    <div style="max-height: 260px; max-width: 260px; width: 100%;">
+                      <canvas id="chartEventType"></canvas>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="chart-body d-flex align-items-center justify-content-center">
-                <div style="max-height: 260px; max-width: 260px; width: 100%;">
-                  <canvas id="chartEventType"></canvas>
+
+              <!-- Chart 4: Year of Study Breakdown -->
+              <div class="col-md-6 col-lg-4">
+                <div class="chart-box">
+                  <div class="chart-header">
+                    <span class="fw-bold small">4. Year of Study Breakdown</span>
+                    <span class="badge-modern badge-warning-soft">Count Plot</span>
+                  </div>
+                  <div class="chart-body">
+                    <canvas id="chartYearBreakdown"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chart 5: Student Feedback Boxplot (Plotly.js) -->
+              <div class="col-md-6 col-lg-4">
+                <div class="chart-box">
+                  <div class="chart-header">
+                    <span class="fw-bold small">5. Student Feedback Scores</span>
+                    <span class="badge-modern badge-danger-soft">Plotly Box Plot</span>
+                  </div>
+                  <div class="chart-body p-1" id="chartFeedbackBoxplot"></div>
+                </div>
+              </div>
+
+              <!-- Chart 6: Feature Correlation Heatmap (Plotly.js) -->
+              <div class="col-md-6 col-lg-4">
+                <div class="chart-box">
+                  <div class="chart-header">
+                    <span class="fw-bold small">6. Feature Correlation Matrix</span>
+                    <span class="badge-modern badge-neutral-soft">Plotly Heatmap</span>
+                  </div>
+                  <div class="chart-body p-1" id="chartCorrelationHeatmap"></div>
                 </div>
               </div>
             </div>
+
           </div>
 
-          <!-- Chart 4: Year of Study Breakdown -->
-          <div class="col-md-6 col-lg-4">
-            <div class="chart-box">
-              <div class="chart-header">
-                <span class="fw-bold small">4. Year of Study Breakdown</span>
-                <span class="badge-modern badge-warning-soft">Count Plot</span>
-              </div>
-              <div class="chart-body">
-                <canvas id="chartYearBreakdown"></canvas>
-              </div>
-            </div>
-          </div>
-
-          <!-- Chart 5: Student Feedback Boxplot (Plotly.js) -->
-          <div class="col-md-6 col-lg-4">
-            <div class="chart-box">
-              <div class="chart-header">
-                <span class="fw-bold small">5. Student Feedback Scores</span>
-                <span class="badge-modern badge-danger-soft">Plotly Box Plot</span>
-              </div>
-              <div class="chart-body p-1" id="chartFeedbackBoxplot"></div>
-            </div>
-          </div>
-
-          <!-- Chart 6: Feature Correlation Heatmap (Plotly.js) -->
-          <div class="col-md-6 col-lg-4">
-            <div class="chart-box">
-              <div class="chart-header">
-                <span class="fw-bold small">6. Feature Correlation Matrix</span>
-                <span class="badge-modern badge-neutral-soft">Plotly Heatmap</span>
-              </div>
-              <div class="chart-body p-1" id="chartCorrelationHeatmap"></div>
-            </div>
-          </div>
         </div>
-
-      </div>
-
-    </div>
-  </main>
-</div><!-- /#mainWrapper -->
-</div><!-- /.app-layout -->
+      </main>
+    </div><!-- /#mainWrapper -->
+  </div><!-- /.app-layout -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -2322,7 +2443,10 @@
       { id: "25ME002", name: "Qadir Basha", dept: "Mechanical Engineering", year: 2, email: "qadir.me@vcet.ac.in", phone: "9876543226" },
       { id: "25CE001", name: "Roshini Balan", dept: "Civil Engineering", year: 3, email: "roshini.ce@vcet.ac.in", phone: "9876543227" },
       { id: "25CE002", name: "Siddharth Mani", dept: "Civil Engineering", year: 4, email: "siddharth.ce@vcet.ac.in", phone: "9876543228" },
-      { id: "25IT006", name: "Tharun Prasad", dept: "Information Technology", year: 2, email: "tharun.it@vcet.ac.in", phone: "9876543229" }
+      { id: "25IT006", name: "Tharun Prasad", dept: "Information Technology", year: 2, email: "tharun.it@vcet.ac.in", phone: "9876543229" },
+      { id: "25CY001", name: "Kavya Senthil", dept: "Cybersecurity", year: 2, email: "kavya.cy@vcet.ac.in", phone: "9876543230" },
+      { id: "25CY002", name: "Manoj Kumar", dept: "Cybersecurity", year: 3, email: "manoj.cy@vcet.ac.in", phone: "9876543231" },
+      { id: "25CY003", name: "Nandhini Ravi", dept: "Cybersecurity", year: 1, email: "nandhini.cy@vcet.ac.in", phone: "9876543232" }
     ];
 
     const initialEvents = [
@@ -2368,7 +2492,10 @@
       { regId: 31, studentId: "25ME001", eventId: "EVT104", date: "2026-10-03 16:00:00", status: "Confirmed" },
       { regId: 32, studentId: "25ME002", eventId: "EVT104", date: "2026-10-04 09:20:00", status: "Confirmed" },
       { regId: 33, studentId: "25CE001", eventId: "EVT104", date: "2026-10-04 10:50:00", status: "Confirmed" },
-      { regId: 34, studentId: "25CE002", eventId: "EVT104", date: "2026-10-04 11:40:00", status: "Confirmed" }
+      { regId: 34, studentId: "25CE002", eventId: "EVT104", date: "2026-10-04 11:40:00", status: "Confirmed" },
+      { regId: 35, studentId: "25CY001", eventId: "EVT106", date: "2026-11-03 09:30:00", status: "Confirmed" },
+      { regId: 36, studentId: "25CY002", eventId: "EVT101", date: "2026-09-05 14:15:00", status: "Confirmed" },
+      { regId: 37, studentId: "25CY003", eventId: "EVT106", date: "2026-11-03 11:00:00", status: "Confirmed" }
     ];
 
     const initialAttendance = [
@@ -2405,7 +2532,10 @@
       { regId: 31, status: "Present", rating: 4, remarks: "Dance face-off", date: "2026-10-18" },
       { regId: 32, status: "Absent", rating: null, remarks: "Sports tournament", date: "2026-10-18" },
       { regId: 33, status: "Present", rating: 5, remarks: "Creative talent showcased", date: "2026-10-18" },
-      { regId: 34, status: "Present", rating: 5, remarks: "Super fun", date: "2026-10-18" }
+      { regId: 34, status: "Present", rating: 5, remarks: "Super fun", date: "2026-10-18" },
+      { regId: 35, status: "Present", rating: 5, remarks: "Top forensic threat analysis in CTF challenge", date: "2026-11-12" },
+      { regId: 36, status: "Present", rating: 5, remarks: "Outstanding algorithmic defense solution", date: "2026-09-15" },
+      { regId: 37, status: "Present", rating: 4, remarks: "Active participation in incident response drill", date: "2026-11-12" }
     ];
 
     // LocalStorage State Management
@@ -2419,6 +2549,17 @@
       localStorage.setItem('smart_events', JSON.stringify(events));
       localStorage.setItem('smart_registrations', JSON.stringify(registrations));
       localStorage.setItem('smart_attendance', JSON.stringify(attendance));
+    }
+
+    // Ensure Cybersecurity department data is seeded even if client has older cached localStorage
+    if (!students.some(s => s.dept === 'Cybersecurity')) {
+      const cyStudents = initialStudents.filter(s => s.dept === 'Cybersecurity');
+      students = students.concat(cyStudents);
+      const cyRegs = initialRegistrations.filter(r => r.studentId && r.studentId.startsWith('25CY'));
+      registrations = registrations.concat(cyRegs);
+      const cyAtt = initialAttendance.filter(a => [35, 36, 37].includes(a.regId));
+      attendance = attendance.concat(cyAtt);
+      saveState();
     }
 
     // ========================================================================
@@ -2518,10 +2659,17 @@
 
       const deptLabels = Object.keys(deptCounts);
       const deptData = Object.values(deptCounts);
-      const deptColors = [
-        '#4f46e5', '#0ea5e9', '#10b981', '#f59e0b',
-        '#ec4899', '#8b5cf6', '#06b6d4', '#f97316'
-      ];
+      const deptColorMap = {
+        'Information Technology': '#4f46e5',
+        'Computer Science': '#0ea5e9',
+        'Electronics and Communication': '#10b981',
+        'Artificial Intelligence & Data Science': '#f59e0b',
+        'Mechanical Engineering': '#ec4899',
+        'Civil Engineering': '#8b5cf6',
+        'Cybersecurity': '#e11d48'
+      };
+      const fallbackColors = ['#06b6d4', '#f97316', '#14b8a6', '#64748b', '#84cc16'];
+      const sliceColors = deptLabels.map((d, i) => deptColorMap[d] || fallbackColors[i % fallbackColors.length]);
 
       const deptCanvas = document.getElementById('stuDeptChart');
       if (deptCanvas) {
@@ -2534,7 +2682,7 @@
             labels: deptLabels,
             datasets: [{
               data: deptData,
-              backgroundColor: deptColors.slice(0, deptLabels.length),
+              backgroundColor: sliceColors,
               borderColor: cardBg,
               borderWidth: 2,
               hoverOffset: 6
@@ -2555,7 +2703,7 @@
               },
               tooltip: {
                 callbacks: {
-                  label: function(ctx) {
+                  label: function (ctx) {
                     const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
                     const val = ctx.parsed;
                     const pct = total > 0 ? ((val / total) * 100).toFixed(1) : 0;
@@ -2606,7 +2754,7 @@
               legend: { display: false },
               tooltip: {
                 callbacks: {
-                  label: function(ctx) {
+                  label: function (ctx) {
                     return ` Enrolled: ${ctx.parsed.y} students`;
                   }
                 }
@@ -2689,7 +2837,7 @@
     }
 
     function resetStudentsDefault() {
-      if (!confirm("Restore the default roster of 20 enrolled students?")) {
+      if (!confirm("Restore the default roster of 23 enrolled students across 7 departments?")) {
         return;
       }
       students = JSON.parse(JSON.stringify(initialStudents));
@@ -2810,7 +2958,7 @@
       events.forEach(e => {
         const count = registrations.filter(r => r.eventId === e.id && r.status === 'Confirmed').length;
         const pct = Math.min(100, Math.round((count / e.max) * 100));
-        
+
         tbody.innerHTML += `
           <tr>
             <td data-label="ID" class="fw-bold font-monospace text-primary text-nowrap">${e.id}</td>
@@ -2889,13 +3037,13 @@
       list.forEach((a, idx) => {
         const reg = registrations.find(r => r.regId === a.regId);
         const stu = reg ? (students.find(s => s.id === reg.studentId) || { id: reg.studentId, name: reg.studentId }) : { id: 'N/A', name: 'N/A' };
-        
-        const badge = a.status === 'Present' 
-          ? '<span class="badge-modern badge-success-soft"><i class="fa-solid fa-check"></i> Present</span>' 
+
+        const badge = a.status === 'Present'
+          ? '<span class="badge-modern badge-success-soft"><i class="fa-solid fa-check"></i> Present</span>'
           : '<span class="badge-modern badge-danger-soft"><i class="fa-solid fa-xmark"></i> Absent</span>';
-        
-        const stars = a.rating 
-          ? `<span class="text-warning">${'★'.repeat(a.rating)}</span> <small class="text-muted">(${a.rating}/5)</small>` 
+
+        const stars = a.rating
+          ? `<span class="text-warning">${'★'.repeat(a.rating)}</span> <small class="text-muted">(${a.rating}/5)</small>`
           : '<span class="text-muted small">N/A</span>';
 
         tbody.innerHTML += `
@@ -2916,7 +3064,7 @@
     function renderReports() {
       const evTbody = document.getElementById('repEventTableBody');
       evTbody.innerHTML = '';
-      
+
       events.forEach(e => {
         const regs = registrations.filter(r => r.eventId === e.id);
         const regIds = regs.map(r => r.regId);
@@ -2950,7 +3098,7 @@
         const totalReg = registrations.filter(r => stuIds.includes(r.studentId)).length;
         const regIds = registrations.filter(r => stuIds.includes(r.studentId)).map(r => r.regId);
         const attCount = attendance.filter(a => regIds.includes(a.regId) && a.status === 'Present').length;
-        
+
         deptTbody.innerHTML += `
           <tr>
             <td data-label="Department" class="cell-student-name fw-semibold">${d}</td>
@@ -2981,7 +3129,8 @@
         "Artificial Intelligence & Data Science",
         "Electronics and Communication",
         "Mechanical Engineering",
-        "Civil Engineering"
+        "Civil Engineering",
+        "Cybersecurity"
       ];
 
       const deptRegCounts = depts.map(d => {
@@ -3001,6 +3150,7 @@
         if (d.includes("Artificial")) return "AI&DS";
         if (d.includes("Electronics")) return "ECE";
         if (d.includes("Mechanical")) return "MECH";
+        if (d.includes("Cyber")) return "CYBER";
         return "CIVIL";
       });
 
@@ -3197,7 +3347,7 @@
       // Chart 6: Feature Correlation Matrix (Plotly.js Heatmap)
       // ----------------------------------------------------------------------
       const corrFeatures = ['Year', 'Capacity', 'Attendance', 'Rating'];
-      
+
       // Build vectors from all registrations
       const vecYear = [];
       const vecCap = [];
@@ -3208,7 +3358,7 @@
         const stu = students.find(s => s.id === r.studentId) || { year: 2 };
         const ev = events.find(e => e.id === r.eventId) || { max: 15 };
         const att = attendance.find(a => a.regId === r.regId) || { status: 'Absent', rating: null };
-        
+
         vecYear.push(stu.year);
         vecCap.push(ev.max);
         vecAtt.push(att.status === 'Present' ? 1 : 0);
@@ -3513,4 +3663,5 @@
     };
   </script>
 </body>
+
 </html>

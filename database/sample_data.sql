@@ -27,7 +27,10 @@ INSERT INTO students (student_id, name, department, year_of_study, email, phone)
 ('25ME002', 'Qadir Basha', 'Mechanical Engineering', 2, 'qadir.me@vcet.ac.in', '9876543226'),
 ('25CE001', 'Roshini Balan', 'Civil Engineering', 3, 'roshini.ce@vcet.ac.in', '9876543227'),
 ('25CE002', 'Siddharth Mani', 'Civil Engineering', 4, 'siddharth.ce@vcet.ac.in', '9876543228'),
-('25IT006', 'Tharun Prasad', 'Information Technology', 2, 'tharun.it@vcet.ac.in', '9876543229');
+('25IT006', 'Tharun Prasad', 'Information Technology', 2, 'tharun.it@vcet.ac.in', '9876543229'),
+('25CY001', 'Kavya Senthil', 'Cybersecurity', 2, 'kavya.cy@vcet.ac.in', '9876543230'),
+('25CY002', 'Manoj Kumar', 'Cybersecurity', 3, 'manoj.cy@vcet.ac.in', '9876543231'),
+('25CY003', 'Nandhini Ravi', 'Cybersecurity', 1, 'nandhini.cy@vcet.ac.in', '9876543232');
 
 -- ----------------------------------------------------------------------------
 -- 2. Insert Events
@@ -100,7 +103,10 @@ INSERT INTO registrations (student_id, event_id, registration_date, status) VALU
 ('25IT004', 'EVT106', '2026-11-01 10:30:00', 'Confirmed'),
 ('25CS001', 'EVT106', '2026-11-01 11:15:00', 'Confirmed'),
 ('25CS003', 'EVT106', '2026-11-02 14:20:00', 'Confirmed'),
-('25AD002', 'EVT106', '2026-11-02 16:00:00', 'Confirmed');
+('25AD002', 'EVT106', '2026-11-02 16:00:00', 'Confirmed'),
+('25CY001', 'EVT106', '2026-11-03 09:30:00', 'Confirmed'),
+('25CY002', 'EVT101', '2026-09-05 14:15:00', 'Confirmed'),
+('25CY003', 'EVT106', '2026-11-03 11:00:00', 'Confirmed');
 
 -- ----------------------------------------------------------------------------
 -- 4. Insert Attendance and Feedback
@@ -166,4 +172,7 @@ INSERT INTO attendance (registration_id, attendance_status, feedback_score, rema
 (41, 'Present', 5, 'Deep dive into memory dump analysis with Volatility'),
 (42, 'Present', 4, 'Great hands-on network packet inspection with Wireshark'),
 (43, 'Present', 5, 'Hands-on reverse engineering was top quality'),
-(44, 'Absent', NULL, 'Lab exam scheduled on same afternoon');
+(44, 'Absent', NULL, 'Lab exam scheduled on same afternoon'),
+(45, 'Present', 5, 'Top forensic threat analysis in CTF challenge'),
+(46, 'Present', 5, 'Outstanding algorithmic defense solution'),
+(47, 'Present', 4, 'Active participation in incident response drill');
